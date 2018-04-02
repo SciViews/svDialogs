@@ -5,6 +5,7 @@
 README.md
 NEWS.md
 FAQ.md
+CONDUCT.md
 Makefile
 .Rprofile
 ^\.Rproj\.user$

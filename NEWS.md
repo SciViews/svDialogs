@@ -4,6 +4,15 @@
 
 * Moved to a Github repository.
 
+* snake_case versions of the function names (but camelCase name kept for
+  backward compatibility.
+
+* Documentation moved to ROxigen2, tests to testhat (bot no tests yet) and a
+  vignette with knitr are added.
+
+* A bug that imposed to load svDialogs on the search path for some dialog boxes
+  to be displayed under Windows should be solved.
+
 
 ## Changes in svDialogs 0.9-59
 

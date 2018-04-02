@@ -10,7 +10,7 @@ Description: Rapidly construct standard dialog boxes for your GUI, including
 Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
-Depends: R (>= 2.6.0), svGUI (>= 0.9-52)
+Depends: R (>= 2.6.0), svGUI (>= 1.0.0)
 Imports: utils, methods
 Suggests: covr, knitr, testthat
 SystemRequirements: zenity, yad
