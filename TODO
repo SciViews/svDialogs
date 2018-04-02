@@ -1,0 +1,14 @@
+= svDialogs To Do list
+
+* Fix messages where there are single and double quotes (' to be replaced by \\')
+
+* Several fixed dialog boxes still need to be done!
+
+* Menus for Mac OS X
+
+* dlgForm for Mac OS X and Windows
+
+* For the Mac one can also use:
+  - osascript -e 'tell application "Terminal" to choose color default color {12, 56, 78}' # Warning: 0-65535!
+
+* Translation into different languages.

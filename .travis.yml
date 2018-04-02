@@ -1,0 +1,39 @@
+language: r
+sudo: false
+cache: packages
+
+r:
+  - oldrel
+  - release
+  - devel
+
+os:
+  - linux
+# Disable MacOS X for now  - osx
+
+branches:
+  only:
+    - master
+
+# Be strict when checking our package, but don't build the manual
+warnings_are_errors: true
+# Note: can also add --no-build-vignettes to both
+r_build_args: --no-manual --no-resave-data
+r_check_args: --as-cran
+disable_homebrew: true
+
+# Email notifications
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+# covr is not a dependency for the package. So, install it explicitly
+# On MacOS X, suggested packages are not installed any more, so, force it here too:
+#r_binary_packages:
+#  - covr
+#  - knitr
+#  - testthat
+
+after_success:
+  - Rscript -e 'covr::codecov()'
