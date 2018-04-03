@@ -187,8 +187,13 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
 
 # Linux/Unix version
 .unix_dlg_dir <- function(default = getwd(), title = "") {
-  # zenity must be installed on this machine!
-  if (Sys.which("zenity") == "") return(NULL)
+  # Can use either yad (preferrably), or zenity
+  exec <- as.character(Sys.which("yad"))
+  if (exec == "")
+    exec <- as.character(Sys.which("zenity"))
+  if (exec == "") {
+    stop("'yad' or 'zenity' must be installed to use this function, see the documentation")
+  }
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")
   on.exit(options(warn = owarn))
@@ -208,8 +213,8 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   #    } # Else the wole title cannot be displayed!!
   #  }
   #}
-  msg <- paste("zenity --file-selection --title=\"", title,
-    "\" --directory --filename=\"", default, "\"", sep = "")
+  msg <- paste0("'", exec, "' --file-selection --title=\"", title,
+    "\" --directory --filename=\"", default, "\"")
   res <- system(msg, intern = TRUE)
   if (length(res))
     res <- path.expand(res)
