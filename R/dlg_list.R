@@ -72,8 +72,9 @@ dlgList.gui <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL, ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
-  msg <- paste("No workable method available to display a list dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "a list dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }

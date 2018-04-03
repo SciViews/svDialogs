@@ -4,7 +4,7 @@
 #'
 #' @param menuname A character string naming a menu.
 #' @param itemname A character string naming a menu item on an existing menu.
-#' @param action Acharacter string with the action to perform when the menu item
+#' @param action A character string with the action to perform when the menu item
 #' is selected, or `"none"` for no action. Use `"enable"` or `"disable"` to
 #' activate or deactivate an existing menu item.
 #' @return These function return `NULL` invisibly. They are used for their
@@ -131,7 +131,8 @@ menuAdd <- menu_add # Backward compatibility
 menu_add_item <- function(menuname, itemname, action) {
   menuname <- .check_menu_name(menuname)
 
-  if (.is_jgr()) return(invisible(.jgr_menu_add_item(menuname, itemname, action)))
+  if (.is_jgr())
+    return(invisible(.jgr_menu_add_item(menuname, itemname, action)))
   res <- switch(Sys.info()["sysname"],
     Windows = .winMenuAddItem(menuname, itemname, action),
     Darwin = .mac_menu_add_item(menuname, itemname, action),
@@ -493,7 +494,7 @@ menuDelItem <- menu_del_item # Backward compatibility
       items <- .jgr_menu_items(mnu)
       if (itemname %in% items) {
         # Delete and recreate it with the new action
-        idx <- (1:length(items))[items == itemname][1]
+        idx <- (seq_along(items))[items == itemname][1]
         .jgr.remove_menu_item(mnu, idx)
         if (action == "enable")
           action <- .jgr_menu_mem_get(mnu, itemname)
@@ -533,7 +534,7 @@ menuDelItem <- menu_del_item # Backward compatibility
     items <- .jgr_menu_items(mnu[1])
     if (mnu[2] %in% items) { # The submenu already exists...
       # Delete it and reconstruct it with the added or changed item
-      idx <- (1:length(items))[items == mnu[2]][1]
+      idx <- (seq_along(items))[items == mnu[2]][1]
       .jgr.remove_menu_item(mnu[1], idx)
       # Get the list of entries in the submenu from .jgr_menus
       # (how to get it otherwise???)
@@ -624,15 +625,17 @@ menuDelItem <- menu_del_item # Backward compatibility
       return(invisible(NULL))
     # Get the position of this menu and make sure it is not a default menu!
     allmnu <- .jgr.get_menu_names()
-    allpos <- 1:length(allmnu)
+    allpos <- seq_along(allmnu)
     pos <- allpos[allmnu == mnu]
     if (!length(pos))
       return(invisible(NULL)) # Not found
     pos <- rev(pos)[1]
     .jgr.remove_menu(pos)
   }
-  if (l == 2) # Remove a submenu (note, that for JGR, this is the same as removing a menu item!)
+  if (l == 2) {
+    # Remove a submenu (note for JGR, this is the same as removing a menu item!)
     .jgr_menu_del_item(mnu[1], mnu[2])
+  }
   # If there are more levels, do nothing because these submenus do not exist!
   invisible(NULL)
 }
@@ -651,7 +654,7 @@ menuDelItem <- menu_del_item # Backward compatibility
     items <- .jgr_menu_items(mnu)
     if (grepl("^-+$", itemname)) { # This must be a separator
       is_sep <- items == "-"
-      pos_sep <- (1:length(items))[is_sep]
+      pos_sep <- (seq_along(items))[is_sep]
       # Depending on the number of minus signs we try to remove
       # first, second, etc. separator
       n_sep <- nchar(itemname)
@@ -659,7 +662,7 @@ menuDelItem <- menu_del_item # Backward compatibility
         return(invisible(NULL))
       idx <- pos_sep[n_sep]
     } else {# This must be a menu entry
-      idx <- (1:length(items))[itemname == items]
+      idx <- (seq_along(items))[itemname == items]
     }
     if (!length(idx))
       return(invisible(NULL))
@@ -675,10 +678,10 @@ menuDelItem <- menu_del_item # Backward compatibility
     if (!mnu[2] %in% items) return(invisible(NULL)) # Submenu not there
     # Get the list of submenus currently defined from our cache version
     actions <- .jgr_menu_mem_get(mnu[1], mnu[2])
-    if (is.null(actions) || !itemname %in% names(actions)) # Apparently not there
-      return(invisible(NULL))
+    if (is.null(actions) || !itemname %in% names(actions))
+      return(invisible(NULL)) # Apparently not there
     # Delete and reconstruct the submenu without itemname
-    idx <- (1:length(items))[items == mnu[2]][1]
+    idx <- (seq_along(items))[items == mnu[2]][1]
     .jgr.remove_menu_item(mnu[1], idx)
     # Recreate the submenu after eliminating itemname
     actions <- actions[names(actions) != itemname]
@@ -870,7 +873,8 @@ menuDelItem <- menu_del_item # Backward compatibility
   # options(svDialogs.tmpfiles = TRUE)
   opt <- getOption("svDialogs.tmpfiles")
   if (is.null(opt)) {# Ask user interactively
-    if (ok_cancel_box("Install custom menu configuration files in ~/.ctxmenu/tmp/?")) {
+    if (ok_cancel_box(
+      "Install custom menu configuration files in ~/.ctxmenu/tmp/?")) {
       options(svDialogs.tmpfiles = TRUE)
       # Make sure to clear old menus, and to install new ones
       .menu_clear()
@@ -878,18 +882,21 @@ menuDelItem <- menu_del_item # Backward compatibility
       .ctx_menu_file_init()
       # Make sure that ctxmenu is installed
       if (Sys.which("ctxmenu") == "") {
-        warning("Menus will not be displayed if you do not install ctxmenu properly, see: http://www.sciviews.org/SciViews-R/ctxmenu.zip")
+        warning("Menus will not be displayed if you do not install ctxmenu",
+          " properly, see: http://www.sciviews.org/SciViews-R/ctxmenu.zip")
         return(FALSE)
       } else return(TRUE) # Everything should be ok!
     } else {
       options(svDialogs.tmpfiles = FALSE)
       # Indicate that it will not be possible to use custom menus before
       # allowed by the corresponding option
-      warning("Menus will not be displayed unless you agree to create config files using options(svDialogs.tmpfiles = TRUE)")
+      warning("Menus will not be displayed unless you agree to create config",
+        " files using options(svDialogs.tmpfiles = TRUE)")
       return(FALSE)
     }
   } else if (!isTRUE(opt)) {
-    warning("Menus will not be displayed unless you agree to create config files using options(svDialogs.tmpfiles = TRUE)")
+    warning("Menus will not be displayed unless you agree to create config",
+      " files using options(svDialogs.tmpfiles = TRUE)")
     return(FALSE)
   } else return(TRUE) # Note: we do not check again for ctxmenu here!
 }
@@ -990,7 +997,8 @@ menuDelItem <- menu_del_item # Backward compatibility
             # Create a new menu
             cat("\n", rep("\t", indent), "submenu=", item, "\n",
               sep = "", file = file, append = TRUE)
-            make_menu(lst[[i]], indent = indent + 1, file = file, ctxfile = NULL)
+            make_menu(lst[[i]], indent = indent + 1, file = file,
+              ctxfile = NULL)
           }
         } else {
           # Is this a separator?
@@ -1072,7 +1080,7 @@ menuDelItem <- menu_del_item # Backward compatibility
   }
   if (length(mnu) == 0) return(character(0))
   # Set all submenu items to NULL
-  for (i in 1:length(mnu))
+  for (i in seq_along(mnu))
     if (is.list(mnu[[i]])) mnu[[i]] <- NULL
   if (length(mnu) == 0) {
     character(0)
@@ -1135,16 +1143,19 @@ menuDelItem <- menu_del_item # Backward compatibility
     if (!is.null(itemname))
       mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]] <- action
   } else if (l == 5) {
-    if (!is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]])) {
+    if (!is.null(
+      mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]])) {
       # If this is not a list, we got an error
-      if (!is.list(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]]))
+      if (!is.list(
+        mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]]))
         stop(menuname, " is already defined and is not a menu")
     } else {# Create it
       mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]] <- list()
     }
     # Do we create an menu item there too?
     if (!is.null(itemname))
-      mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]][[itemname]] <- action
+      mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[
+        items[5]]][[itemname]] <- action
   } else if (l > 5) {
     stop("You cannot use more than 5 menu levels")
   }
@@ -1172,13 +1183,18 @@ menuDelItem <- menu_del_item # Backward compatibility
         attr(mnu[[items[1]]][[items[2]]][[itemname]], "state") <- action
     } else if (l == 3) {
       if (!is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[itemname]]))
-        attr(mnu[[items[1]]][[items[2]]][[items[3]]][[itemname]], "state") <- action
+        attr(mnu[[items[1]]][[items[2]]][[items[3]]][[itemname]],
+          "state") <- action
     } else if (l == 4) {
-      if (!is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]]))
-        attr(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]], "state") <- action
+      if (!is.null(
+        mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]]))
+        attr(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]],
+          "state") <- action
     } else if (l == 5) {
-      if (!is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]][[itemname]]))
-        attr(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]][[itemname]], "state") <- action
+      if (!is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[
+        items[5]]][[itemname]]))
+        attr(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[
+          items[5]]][[itemname]], "state") <- action
     } else if (l > 5) {
       stop("You cannot use more than 5 menu levels")
     }
@@ -1201,9 +1217,11 @@ menuDelItem <- menu_del_item # Backward compatibility
     mnu[[items[1]]][[items[2]]] <- NULL
   } else if (l == 3 && !is.null(mnu[[items[1]]][[items[2]]][[items[3]]])) {
     mnu[[items[1]]][[items[2]]][[items[3]]] <- NULL
-  } else if (l == 4 && !is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]])) {
+  } else if (l == 4 && !is.null(
+    mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]])) {
     mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]] <- NULL
-  } else if (l == 5 && !is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]])) {
+  } else if (l == 5 && !is.null(
+    mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]])) {
     mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]] <- NULL
   } else return(invisible(NULL))
   # Save these changes
@@ -1220,12 +1238,17 @@ menuDelItem <- menu_del_item # Backward compatibility
     mnu[[items[1]]][[itemname]] <- NULL
   } else if (l == 2 && !is.null(mnu[[items[1]]][[items[2]]][[itemname]])) {
     mnu[[items[1]]][[items[2]]][[itemname]] <- NULL
-  } else if (l == 3 && !is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[itemname]])) {
+  } else if (l == 3 && !is.null(
+    mnu[[items[1]]][[items[2]]][[items[3]]][[itemname]])) {
     mnu[[items[1]]][[items[2]]][[items[3]]][[itemname]] <- NULL
-  } else if (l == 4 && !is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]])) {
+  } else if (l == 4 && !is.null(
+    mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]])) {
     mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[itemname]] <- NULL
-  } else if (l == 5 && !is.null(mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]][[itemname]])) {
-    mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[items[5]]][[itemname]] <- NULL
+  } else if (l == 5 && !is.null(
+    mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[
+      items[5]]][[itemname]])) {
+    mnu[[items[1]]][[items[2]]][[items[3]]][[items[4]]][[
+      items[5]]][[itemname]] <- NULL
   } else return(invisible(NULL))
   # Save these changes
   .unix_menu_save(mnu)

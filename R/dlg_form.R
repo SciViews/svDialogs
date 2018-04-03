@@ -133,8 +133,9 @@ dlgForm.gui <- function(form, title = "Fill the form", message = NULL,
 columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
-  msg <- paste("No workable method available to display a form dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "a form dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }
@@ -159,7 +160,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Do we strip type?
   if (strip.type)
     res <- form
-  for (i in 1:length(form)) {
+  for (i in seq_along(form)) {
   if (is_check[i]) {
     if (isTRUE(as.logical(form[[i]])[1])) {
       def <- "[Y]/n"
@@ -254,7 +255,8 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Add the definition of the various fields
   fields <- paste0("--field=", shQuote(names(form)), collapse = " ")
   # Add the default values
-  default <- paste(shQuote(sapply(form, paste, collapse = "&&&")), collapse = " ")
+  default <- paste(shQuote(sapply(form, paste, collapse = "&&&")),
+    collapse = " ")
   # Display the dialog box
   res <- system(paste(msg, fields, default), intern = TRUE)
   # Did the user cancelled the dialog box
@@ -263,7 +265,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Reformat the result
   res <- strsplit(res, "@@@", fixed = TRUE)[[1]]
   # Replace results in initial form
-  for (i in 1:length(form))
+  for (i in seq_along(form))
     form[[i]] <- as(strsplit(res[i], "&&&", fixed = TRUE)[[1]],
       class(form[[i]])[1])
   # Do we strip type?

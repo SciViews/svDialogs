@@ -60,7 +60,7 @@ describe("dlg_dir works in non-interactive sessions", {
   #it("runs dlgDir.gui in \"forced\" interactive mode", {
   #  options(SciViews.force.interactive = TRUE) # DON'T use this is real life!
   #  expect_error(dlg_dir(default = wd, gui = NONE),
-  #    "No workable method available to display a dir selection dialog box using: ",
+  #    "No workable method available to display a dir selection dialog box",
   #    fixed = FALSE)
   #  expect_identical(NONE$res, NA)
   #  expect_equivalent(NONE$status, "error")
@@ -68,7 +68,7 @@ describe("dlg_dir works in non-interactive sessions", {
   #  expect_identical(NONE$args$title, "Choose a directory")
   #  expect_identical(NONE$args$default, wd)
   #  expect_error(dlg_dir(default = wd, title = "test", gui = NONE),
-  #    "No workable method available to display a dir selection dialog box using: ",
+  #    "No workable method available to display a dir selection dialog box",
   #    fixed = FALSE)
   #  expect_identical(NONE$res, NA)
   #  expect_equivalent(NONE$status, "error")

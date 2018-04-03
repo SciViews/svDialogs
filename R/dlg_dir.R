@@ -57,8 +57,9 @@ dlgDir <- dlg_dir # Backward compatibility
 dlgDir.gui <- function(default = getwd(), title, ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
-  msg <- paste("No workable method available to display a dir selection dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "a dir selection dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }
@@ -69,7 +70,8 @@ dlgDir.textCLI <- function(default = getwd(), title, ..., gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
   # Ask for the directory
-  res <- readline(paste0(gui$args$title, " [", gui$args$default, "] or 0 to cancel: "))
+  res <- readline(paste0(gui$args$title,
+    " [", gui$args$default, "] or 0 to cancel: "))
   if (res == "0") {
     res <- character(0) # User cancelled the action
   } else {
@@ -194,7 +196,8 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   if (exec == "")
     exec <- as.character(Sys.which("zenity"))
   if (exec == "") {
-    warning("The native directory selection dialog box is available only if you install 'yad' (preferrably), or 'zenity'")
+    warning("The native directory selection dialog box is available",
+      " only if you install 'yad' (preferrably), or 'zenity'")
     return(NULL) # Try next method...
   }
   # Avoid displaying warning message in case user clicks on Cancel

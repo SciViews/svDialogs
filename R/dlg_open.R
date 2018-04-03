@@ -12,7 +12,7 @@
 #' on MacOS, since such kind of filter is defined differently there.
 #' @param ... Pass further arguments to methods.
 #' @param gui The 'gui' object concerned by this dialog box.
-#' @return The modified 'gui' object is returned invisibly. The choosen file(s),
+#' @return The modified 'gui' object is returned invisibly. The chosen file(s),
 #' or an empty string if the "cancel" button was clicked is found in `gui$res`
 #' (see example).
 #' @export
@@ -124,8 +124,9 @@ dlgOpen.gui <- function(default, title, multiple = FALSE,
 filters = dlg_filters["All", ], ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for an usable method
   # in the current context
-  msg <- paste("No workable method available to display a file open dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "a file open dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }

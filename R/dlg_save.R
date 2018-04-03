@@ -10,7 +10,7 @@
 #' one is the filter. See `dlg_filters` for examples. This is currently ignored
 #' on MacOS, since such kind of filter is defined differently there.
 #' @param ... Pass further arguments to methods.
-#' @param gui The modified 'gui' object is returned invisibly. The choosen file,
+#' @param gui The modified 'gui' object is returned invisibly. The chosen file,
 #' or an empty string (if the "cancel" button was clicked or confirmation was
 #' cancelled) is placed in `gui$res` (see example). For existing files,
 #' confirmation is always asked!
@@ -92,8 +92,9 @@ dlgSave.gui <- function(default, title, filters = dlg_filters["All", ], ...,
 gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
-  msg <- paste("No workable method available to display a file save dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "a file save dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }
@@ -258,7 +259,8 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
         gsub(";", " ", filters[i, 2]), "\"")
   msg <- paste0("zenity --file-selection --save --title=\"", title,
     "\" --filename=\"", default, "\" ", fcmd)
-  res <- system(msg, intern = TRUE, ignore.stderr = TRUE) # Because error if file not found!
+  # ignore.stderr = TRUE because error if file not found!
+  res <- system(msg, intern = TRUE, ignore.stderr = TRUE)
   if (!length(res)) {
     return(character(0))
   } else if (file.exists(res)) {# Ask for confirmation!

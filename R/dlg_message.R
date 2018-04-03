@@ -1,4 +1,4 @@
-#' Dispaly a modal message box.
+#' Display a modal message box.
 #'
 #' A message box with icon, text, and one to three buttons.
 #'
@@ -89,8 +89,9 @@ dlgMessage.gui <- function(message, type = c("ok", "okcancel", "yesno",
 "yesnocancel"), ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
-  msg <- paste("No workable method available to display a message dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "a message dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }

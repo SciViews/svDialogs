@@ -1,6 +1,6 @@
 #' Modal dialog to input a string or a value.
 #'
-#' Prompt for some data in a modal dialg box.
+#' Prompt for some data in a modal dialog box.
 #'
 #' @param message The message to display in the dialog box. Use `\\n` for
 #' line break, or provide a vector of character strings, one for each line.
@@ -25,7 +25,8 @@
 #'   cat("Hello", user, "\n")
 #' }
 #' }
-dlg_input <- function(message = "Enter a value", default = "", ..., gui = .GUI) {
+dlg_input <- function(message = "Enter a value", default = "", ...,
+gui = .GUI) {
   # Define the S3 method
   if (!gui$startUI("dlgInput", call = match.call(), default = default,
     msg = "Displaying a modal input dialog box",
@@ -57,8 +58,9 @@ dlgInput.gui <- function(message = "Enter a value", default = "", ...,
 gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
-  msg <- paste("No workable method available to display an input dialog box using:",
-    paste(guiWidgets(gui), collapse = ", "))
+  msg <- paste("No workable method available to display",
+    "an input dialog box using:")
+  msg <- paste(msg, paste(guiWidgets(gui), collapse = ", "))
   gui$setUI(status = "error", msg = msg, widgets = "none")
   stop(msg)
 }
