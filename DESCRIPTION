@@ -13,6 +13,7 @@ Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends: R (>= 2.6.0), svGUI (>= 1.0.0)
 Imports: utils, methods
 Suggests: covr, knitr, testthat
+Remotes: SciViews/svGUI
 SystemRequirements: zenity, yad
 License: GPL-2
 URL: https://github.com/SciViews/svDialogs, http://www.sciviews.org/SciViews-R
