@@ -216,7 +216,8 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   msg <- paste0("'", exec, "' --file-selection --title=\"", title,
     "\" --directory --filename=\"", default, "\"")
   res <- system(msg, intern = TRUE)
-  if (length(res))
+  if (length(res)) {
     res <- path.expand(res)
+  } else res <- character(0)
   res
 }
