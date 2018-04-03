@@ -187,12 +187,15 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
 
 # Linux/Unix version
 .unix_dlg_dir <- function(default = getwd(), title = "") {
+  if (!capabilities("X11"))
+    return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
   if (exec == "")
     exec <- as.character(Sys.which("zenity"))
   if (exec == "") {
-    stop("'yad' or 'zenity' must be installed to use this function, see the documentation")
+    warning("The native directory selection dialog box is available only if you install 'yad' (preferrably), or 'zenity'")
+    return(NULL) # Try next method...
   }
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")

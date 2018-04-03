@@ -16,6 +16,7 @@ gui_add("CLI", widgets = "textCLI", ask = TRUE)
 # Tested 2018-04-03 on R 3.4.4 Windows 10 RGui.exe & RTerm.exe & RStudio Desktop 1.1.442
 #        Default directory is not always honored! See ?choose.dir
 # Tested 2018-04-03 on R 3.4.4 svBox2018b preview terminal & RStudio Server 1.1.442
+#        + ssh session with and without X11 (-Y argument)
 dlg_dir()$res
 dlg_dir(default = tempdir(), title = "Select a temporary directory")$res
 dlg_dir(title = "Click CANCEL to check it")$res
