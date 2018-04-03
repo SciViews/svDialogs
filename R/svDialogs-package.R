@@ -15,5 +15,6 @@
 #'
 #' @import utils
 #' @importFrom methods as
+#' @import rstudioapi
 #' @import svGUI
 NULL

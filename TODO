@@ -2,13 +2,15 @@
 
 * Fix messages where there are single and double quotes (' to be replaced by \\')
 
-* Several fixed dialog boxes still need to be done!
+* Several dialog boxes still need to be done!
 
-* Menus for Mac OS X
+* Menus for MacOS
 
-* dlgForm for Mac OS X and Windows
+* dlgForm for MacOS and Windows
 
 * For the Mac one can also use:
   - osascript -e 'tell application "Terminal" to choose color default color {12, 56, 78}' # Warning: 0-65535!
+
+* rstudioapi provides askForPassword() => implement it, including other versions.
 
 * Translation into different languages.

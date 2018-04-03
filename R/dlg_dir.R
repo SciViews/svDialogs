@@ -22,7 +22,7 @@
 #' }
 dlg_dir <- function(default = getwd(), title, ..., gui = .GUI) {
   # Define the S3 method
-  if (!gui$startUI("dlgDir", call = match.call(), default = default,
+  if (!gui$startUI("dlg_dir", call = match.call(), default = default,
     msg = "Displaying a modal dir selection dialog box",
     msg.no.ask = "A modal dir selection dialog box was by-passed"))
     return(invisible(gui))
@@ -69,30 +69,34 @@ dlgDir.textCLI <- function(default = getwd(), title, ..., gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
   # Ask for the directory
-  res <- readline(paste(gui$args$title, " [", gui$args$default, "]: ",
-    sep = ""))
-  if (res == "") res <- gui$args$default else res <- res
-  # In case we pasted a string with single, or double quotes, or spaces
-  # eliminate them
-  res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
-  # To get the same behaviour as the GUI equivalents, we must make sure
-  # it is a directory, or try to create it (possibly recursively, if it
-  # does not exist). Also return absolute path
-  if (file.exists(res)) {
-    # Check that this is a directory, not a file!
-    if (!file.info(res)$isdir) {
-      warning(res, " is not a directory")
-      res <- character(0) # Same as if the user did cancel the dialog box
-    }
+  res <- readline(paste0(gui$args$title, " [", gui$args$default, "] or 0 to cancel: "))
+  if (res == "0") {
+    res <- character(0) # User cancelled the action
   } else {
-    # The directory does not exists, try to create it now...
-    dir.create(res, recursive = TRUE)
-    if (!file.exists(res) || !file.info(res)$isdir) {
-      warning("Error while creating the directory ", res)
-      res <- character(0)
+    if (res == "") res <- gui$args$default else res <- res
+    # In case we pasted a string with single, or double quotes, or spaces
+    # eliminate them
+    res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
+    res <- path.expand(res)
+    # To get the same behaviour as the GUI equivalents, we must make sure
+    # it is a directory, or try to create it (possibly recursively, if it
+    # does not exist). Also return absolute path
+    if (file.exists(res)) {
+      # Check that this is a directory, not a file!
+      if (!file.info(res)$isdir) {
+        warning(res, " is not a directory")
+        res <- character(0) # Same as if the user did cancel the dialog box
+      }
+    } else {
+      # The directory does not exists, try to create it now...
+      dir.create(res, recursive = TRUE)
+      if (!file.exists(res) || !file.info(res)$isdir) {
+        warning("Error while creating the directory ", res)
+        res <- character(0)
+      }
     }
+    if (length(res)) res <- gsub("\\\\", "/", normalizePath(res))
   }
-  if (length(res)) res <- normalizePath(res)
   gui$setUI(res = res, status = NULL)
   invisible(gui)
 }
@@ -107,11 +111,11 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   # The argument default indicates the initial directory
   # If cancelled, then return character(0)
   # This dialog box is always modal
-  #
-  # Replacement for choose.dir(), tk_choose.dir() & tkchooseDirectory()
-  res <- switch(Sys.info()["sysname"],
+  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  res <- switch(syst,
+    RStudio = .rstudio_dlg_dir(gui$args$default, gui$args$title),
     Windows = .win_dlg_dir(gui$args$default, gui$args$title),
-    Darwin = .mac_dlg_dir(gui$args$default, gui$args$title),
+    Darwin  = .mac_dlg_dir(gui$args$default, gui$args$title),
     .unix_dlg_dir(gui$args$default, gui$args$title)
   )
 
@@ -122,10 +126,25 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   }
 }
 
+# RStudio version
+.rstudio_dlg_dir <- function(default = getwd(), title = "") {
+  res <- rstudioapi::selectDirectory(caption = title, path = default)
+  if (is.null(res)) {
+    res <- character(0)
+  } else{
+    res <-  path.expand(gsub("\\\\", "/", res))
+  }
+  res
+}
+
 # Windows version
 .win_dlg_dir <- function(default = getwd(), title = "") {
 	res <- choose.dir(default = default, caption = title)
-  if (is.na(res)) res <- character(0) else res <-  gsub("\\\\", "/", res)
+  if (is.na(res)) {
+    res <- character(0)
+  } else {
+    res <-  path.expand(gsub("\\\\", "/", res))
+  }
 	res
 }
 
@@ -163,7 +182,7 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
     return(character(0))
   if (res > 0)
     return(character(0)) # User cancelled input
-  readLines(tfile)
+  path.expand(readLines(tfile))
 }
 
 # Linux/Unix version
@@ -191,5 +210,8 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   #}
   msg <- paste("zenity --file-selection --title=\"", title,
     "\" --directory --filename=\"", default, "\"", sep = "")
-  system(msg, intern = TRUE)
+  res <- system(msg, intern = TRUE)
+  if (length(res))
+    res <- path.expand(res)
+  res
 }

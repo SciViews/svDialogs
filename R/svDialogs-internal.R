@@ -1,4 +1,4 @@
-.onLoad <- function(lib, pkg) {
+.onLoad <- function(lib, pkg) { # nocov start
   if (.tmpfiles_allowed()) {
     # Clear menus
     .menu_clear()
@@ -16,9 +16,13 @@
   if (interactive()) try(.menu_clear())
 }
 
-.packageName <- "svDialogs"
+.GUI <- .GUI # The default .GUI object should be created by svGUI
+
+.packageName <- "svDialogs"  # nocov end
 
 .is_jgr <- function() "package:JGR" %in% search()
+
+.is_rstudio <- function() rstudioapi::isAvailable()
 
 # Avoid dependency on svMisc for those three functions
 .temp_env <- function() {

@@ -11,7 +11,7 @@ Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends: R (>= 2.6.0), svGUI (>= 1.0.0)
-Imports: utils, methods
+Imports: utils, methods, rstudioapi (>= 0.7)
 Suggests: covr, knitr, testthat
 Remotes: SciViews/svGUI
 SystemRequirements: zenity, yad
