@@ -10,7 +10,7 @@
 \alias{dlgMessage.gui}
 \alias{dlgMessage.textCLI}
 \alias{dlgMessage.nativeGUI}
-\title{Dispaly a modal message box.}
+\title{Display a modal message box.}
 \usage{
 dlg_message(message, type = c("ok", "okcancel", "yesno", "yesnocancel"), ...,
   gui = .GUI)

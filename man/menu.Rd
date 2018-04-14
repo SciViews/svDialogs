@@ -45,7 +45,7 @@ menuDelItem(menuname, itemname)
 
 \item{itemname}{A character string naming a menu item on an existing menu.}
 
-\item{action}{Acharacter string with the action to perform when the menu item
+\item{action}{A character string with the action to perform when the menu item
 is selected, or \code{"none"} for no action. Use \code{"enable"} or \code{"disable"} to
 activate or deactivate an existing menu item.}
 }

@@ -34,7 +34,7 @@ on MacOS, since such kind of filter is defined differently there.}
 
 \item{...}{Pass further arguments to methods.}
 
-\item{gui}{The modified 'gui' object is returned invisibly. The choosen file,
+\item{gui}{The modified 'gui' object is returned invisibly. The chosen file,
 or an empty string (if the "cancel" button was clicked or confirmation was
 cancelled) is placed in \code{gui$res} (see example). For existing files,
 confirmation is always asked!}

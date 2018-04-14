@@ -2,7 +2,7 @@
 % Please edit documentation in R/dlg_input.R
 \name{dlg_input}
 \alias{dlg_input}
-\alias{dlgInsput}
+\alias{dlgInput}
 \alias{dlgInput.gui}
 \alias{dlgInput.textCLI}
 \alias{dlgInput.nativeGUI}
@@ -10,13 +10,15 @@
 \usage{
 dlg_input(message = "Enter a value", default = "", ..., gui = .GUI)
 
-dlgInsput(message = "Enter a value", default = "", ..., gui = .GUI)
+dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
 
-dlgInput.gui(message = "Enter a value", default = "", ..., gui = .GUI)
+\method{dlgInput}{gui}(message = "Enter a value", default = "", ...,
+  gui = .GUI)
 
-dlgInput.textCLI(message = "Enter a value", default = "", ..., gui = .GUI)
+\method{dlgInput}{textCLI}(message = "Enter a value", default = "", ...,
+  gui = .GUI)
 
-dlgInput.nativeGUI(message = "Enter a value", default = "", ...,
+\method{dlgInput}{nativeGUI}(message = "Enter a value", default = "", ...,
   gui = .GUI)
 }
 \arguments{
@@ -35,7 +37,7 @@ the user at the input box, or an empty string if the dialog box was cancelled
 can be obtained from \code{gui$res} (see example).
 }
 \description{
-Prompt for some data in a modal dialg box.
+Prompt for some data in a modal dialog box.
 }
 \examples{
 \dontrun{

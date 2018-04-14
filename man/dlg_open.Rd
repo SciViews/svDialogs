@@ -49,7 +49,7 @@ on MacOS, since such kind of filter is defined differently there.}
 \item{gui}{The 'gui' object concerned by this dialog box.}
 }
 \value{
-The modified 'gui' object is returned invisibly. The choosen file(s),
+The modified 'gui' object is returned invisibly. The chosen file(s),
 or an empty string if the "cancel" button was clicked is found in \code{gui$res}
 (see example).
 }
