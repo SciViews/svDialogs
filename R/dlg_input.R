@@ -50,7 +50,7 @@ gui = .GUI) {
 
 #' @export
 #' @rdname dlg_input
-dlgInsput <- dlg_input # Backward compatibility
+dlgInput <- dlg_input # Backward compatibility
 
 #' @export
 #' @rdname dlg_input
