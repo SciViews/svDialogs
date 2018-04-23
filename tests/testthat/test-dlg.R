@@ -56,6 +56,11 @@ describe("dlg_dir works in non-interactive sessions", {
     expect_identical(dlg_dir(gui = NONE)$res, wd)
   })
 
+  it("proposes to create a new directory", {
+    newdir <- file.path(tempdir(), "test_directory")
+    expect_identical(dlg_dir(default = newdir)$res, newdir)
+  })
+
   # TODO: this works well on MacOS, but not on Linux or Windows, why???
   #it("runs dlgDir.gui in \"forced\" interactive mode", {
   #  options(SciViews.force.interactive = TRUE) # DON'T use this is real life!

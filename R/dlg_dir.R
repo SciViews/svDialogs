@@ -128,8 +128,10 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   }
 }
 
-# RStudio version
+# RStudio version (need at least version 1.1.287)
 .rstudio_dlg_dir <- function(default = getwd(), title = "") {
+  if (rstudioapi::getVersion() < '1.1.287')
+    return(NULL)
   res <- rstudioapi::selectDirectory(caption = title, path = default)
   if (is.null(res)) {
     res <- character(0)
@@ -175,7 +177,7 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   # (deadlock situation?), but I can in R run in a terminal. system2() also
   # works, but this preclue of using svDialogs on R < 2.12.0.
   # The hack is thus to redirect output to a file, then, to read the content
-  # of that file and to desctroy it
+  # of that file and to destroy it
   tfile <- tempfile()
   on.exit(unlink(tfile))
   res <- try(system(paste("osascript", cmd, ">", tfile), wait = TRUE,

@@ -31,10 +31,6 @@ dlg_open <- function(default, title, multiple = FALSE,
 filters = dlg_filters["All", ], ..., gui = .GUI) {
   # Define the S3 method
   # An 'open file(s)' dialog box
-  # title is used as caption of the dialog box
-  # defaultFile allows to preselect a file
-  # defaultDir opens the dialog box in that directory
-  # multi indicates if multiple selection is allowed
   # filters is a n x 2 matrix of characters with description and filter
   # for instance: "R or S files (*.R, *.q)"       "*.R;*.q"
   # It could be also an even number of character strings that will be
@@ -46,7 +42,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
 
   if (missing(default) || !length(default))
     default <- character(0)
-  if (!gui$startUI("dlgOpen", call = match.call(), default = default,
+  if (!gui$startUI("dlg_open", call = match.call(), default = default,
     msg = "Displaying a modal open file dialog box",
     msg.no.ask = "A modal open file dialog box was by-passed"))
     return(invisible(gui))
@@ -140,7 +136,10 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # and then, issues a warning that the file does not exist!
   gui$setUI(widgets = "textCLI")
   # Ask for the file
-  res <- readline(paste0(gui$args$title, " [", gui$args$default, "]: "))
+  res <- readline(paste0(gui$args$title,
+    " [", gui$args$default, "] or 0 to cancel: "))
+  if (res == "0")
+    res <- character(0) # User cancelled the action
   if (res == "") {
     res <- gui$args$default
   } else {
@@ -186,7 +185,10 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # This dialog box is always modal
   #
   # Replacement for choose.files(), tkgetOpenFile() & file.choose(new=FALSE)
-  res <- switch(Sys.info()["sysname"],
+  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  res <- switch(syst,
+    RStudio = .rstudio_dlg_open(gui$args$default, gui$args$title,
+      gui$args$multiple, gui$args$filters),
     Windows = .win_dlg_open(gui$args$default, gui$args$title,
       gui$args$multiple, gui$args$filters),
     Darwin = .mac_dlg_open(gui$args$default, gui$args$title,
@@ -203,6 +205,35 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
     invisible(gui)
 	}
 }
+
+# RStudio version (need at least version 1.1.287)
+.rstudio_dlg_open <- function(default, title, multiple = FALSE,
+  filters = dlg_filters["All", ]) {
+  if (rstudioapi::getVersion() < '1.1.287')
+    return(NULL)
+  if (multiple == TRUE)
+    warning("RStudio currently does not allow multiple files selection!")
+  # RStudio dialog box can only use first item for filters
+  if (is.matrix(filters)) {
+    filters <- filters[[1, 1]]
+  } else {
+    filters <- filters[[1]]
+  }
+  if (filters == "*.*") {# Do NOT use filters
+    res <- rstudioapi::selectFile(caption = title, path = default,
+      label = "Open", existing = TRUE)
+  } else {
+    res <- rstudioapi::selectFile(caption = title, path = default,
+      label = "Open", filter = filters, existing = TRUE)
+  }
+  if (is.null(res) || res == "") {
+    res <- character(0)
+  } else{
+    res <-  path.expand(gsub("\\\\", "/", res))
+  }
+  res
+}
+
 
 # Windows version
 .win_dlg_open <- function(default, title, multiple = FALSE,
@@ -272,7 +303,7 @@ filters = dlg_filters["All", ]) {
   # (deadlock situation?), but I can in R run in a terminal. system2() also
   # works, but this preclue of using svDialogs on R < 2.12.0.
   # The hack is thus to redirect output to a file, then, to read the content
-  # of that file and to desctroy it
+  # of that file and to destroy it
   tfile <- tempfile()
   on.exit(unlink(tfile))
   res <- try(system(paste("osascript", cmd, ">", tfile), wait = TRUE,
@@ -291,9 +322,17 @@ filters = dlg_filters["All", ]) {
 filters = dlg_filters["All", ]) {
   # Note: only existing filenames can be selected as default, otherwise, the
   # argument is ignored!
-  # zenity must be installed on this machine!
-  if (Sys.which("zenity") == "")
-    return(NULL)
+  if (!capabilities("X11"))
+    return(NULL) # Try next method
+  # Can use either yad (preferrably), or zenity
+  exec <- as.character(Sys.which("yad"))
+  if (exec == "")
+    exec <- as.character(Sys.which("zenity"))
+  if (exec == "") {
+    warning("The native file open dialog box is available",
+      " only if you install 'yad' (preferrably), or 'zenity'")
+    return(NULL) # Try next method...
+  }
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")
   on.exit(options(warn = owarn))
@@ -312,12 +351,12 @@ filters = dlg_filters["All", ]) {
     for (i in 1:nf)
       fcmd <- paste0(fcmd, " --file-filter=\"", filters[i, 1], " | ",
         gsub(";", " ", filters[i, 2]), "\"")
-  msg <- paste0("zenity --file-selection --title=\"", title,
+  msg <- paste0("'", exec, "' --file-selection --title=\"", title,
     "\" --filename=\"", default, "\" ", fcmd)
   res <- system(msg, intern = TRUE)
-  if (!length(res)) {
-    character(0)
-  } else {
+  if (length(res)) {
     strsplit(res, "|", fixed = TRUE)[[1]]
+  } else {
+    character(0)
   }
 }

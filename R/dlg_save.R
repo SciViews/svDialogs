@@ -37,8 +37,8 @@ gui = .GUI) {
   # It could be also an even number of character strings that will be
   # reorganized into a n x 2 matrix.
   if (missing(default) || !length(default))
-    default <- character(0)
-  if (!gui$startUI("dlgSave", call = match.call(), default = default,
+    default <- "untitled"
+  if (!gui$startUI("dlg_save", call = match.call(), default = default,
     msg = "Displaying a modal save file dialog box",
     msg.no.ask = "A modal save file dialog box was by-passed"))
     return(invisible(gui))
@@ -106,7 +106,10 @@ gui = .GUI) {
   # The pure textual version used as fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
   # Ask for the file
-  res <- readline(paste0(gui$args$title, " [", gui$args$default, "]: "))
+  res <- readline(paste0(gui$args$title,
+    " [", gui$args$default, "] or 0 to cancel: "))
+  if (res == "0")
+    res <- character(0) # User cancelled the action
   if (res == "") {
     res <- gui$args$default
   } else {
@@ -142,7 +145,10 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
   #
   # It is a replacement for choose.files(), tkgetSaveFile()
   # & file.choose(new = TRUE), not implemented yet in R 2.14, by the way
-  res <- switch(Sys.info()["sysname"],
+  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  res <- switch(syst,
+    RStudio = .rstudio_dlg_save(gui$args$default, gui$args$title,
+      gui$args$filters),
     Windows = .win_dlg_save(gui$args$default, gui$args$title, gui$args$filters),
     Darwin = .mac_dlg_save(gui$args$default, gui$args$title, gui$args$filters),
     .unix_dlg_save(gui$args$default, gui$args$title, gui$args$filters)
@@ -155,6 +161,32 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
     gui$setUI(res = res, status = NULL)
     invisible(gui)
   }
+}
+
+# RStudio version (need at least version 1.1.287)
+.rstudio_dlg_save <- function(default = file.path(getwd(), "untitled"),
+  title = "", filters = dlg_filters["All", ]) {
+  if (rstudioapi::getVersion() < '1.1.287')
+    return(NULL)
+  # RStudio dialog box can only use first item for filters
+  if (is.matrix(filters)) {
+    filters <- filters[[1, 1]]
+  } else {
+    filters <- filters[[1]]
+  }
+  if (filters == "*.*") {# Do NOT use filters
+    res <- rstudioapi::selectFile(caption = title, path = default,
+      label = "Save", existing = FALSE)
+  } else {
+    res <- rstudioapi::selectFile(caption = title, path = default,
+      label = "Save", filter = filters, existing = FALSE)
+  }
+  if (is.null(res)) {
+    res <- character(0)
+  } else{
+    res <-  path.expand(gsub("\\\\", "/", res))
+  }
+  res
 }
 
 # Windows version
@@ -240,9 +272,17 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
 .unix_dlg_save <- function(default, title, filters = dlg_filters["All", ]) {
   # Note: only existing filenames can be selected as default, otherwise, the
   # argument is ignored!
-  # zenity must be installed on this machine!
-  if (Sys.which("zenity") == "")
-    return(NULL)
+  if (!capabilities("X11"))
+    return(NULL) # Try next method
+  # Can use either yad (preferrably), or zenity
+  exec <- as.character(Sys.which("yad"))
+  if (exec == "")
+    exec <- as.character(Sys.which("zenity"))
+  if (exec == "") {
+    warning("The native file save dialog box is available",
+      " only if you install 'yad' (preferrably), or 'zenity'")
+    return(NULL) # Try next method...
+  }
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")
   on.exit(options(warn = owarn))
@@ -257,14 +297,14 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
     for (i in 1:nf)
       fcmd <- paste0(fcmd, " --file-filter=\"", filters[i, 1], " | ",
         gsub(";", " ", filters[i, 2]), "\"")
-  msg <- paste0("zenity --file-selection --save --title=\"", title,
+  msg <- paste0("'", exec, "' --file-selection --save --title=\"", title,
     "\" --filename=\"", default, "\" ", fcmd)
   # ignore.stderr = TRUE because error if file not found!
   res <- system(msg, intern = TRUE, ignore.stderr = TRUE)
   if (!length(res)) {
     return(character(0))
   } else if (file.exists(res)) {# Ask for confirmation!
-    msg <- paste0("zenity --question --text=\"",
+    msg <- paste0("'", exec, "' --question --text=\"",
       "This file already exists. It will be replaced!",
       "\" --ok-label=\"OK\" --cancel-label=\"Cancel\"",
       " --title=\"Question\"")

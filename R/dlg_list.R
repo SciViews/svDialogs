@@ -43,7 +43,7 @@ dlg_list <- function(choices, preselect = NULL, multiple = FALSE, title = NULL,
     preselect <- choices[1] # Select first item by default
 
   # Start a GUI action... or by-pass it
-  if (!gui$startUI("dlgList", call = match.call(), default = preselect,
+  if (!gui$startUI("dlg_list", call = match.call(), default = preselect,
     msg = "Displaying a modal list dialog box",
     msg.no.ask = "A modal list dialog box was by-passed"))
     return(invisible(gui))

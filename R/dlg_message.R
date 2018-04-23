@@ -42,7 +42,7 @@
 dlg_message <- function(message, type = c("ok", "okcancel", "yesno",
 "yesnocancel"), ..., gui = .GUI) {
   # Define the S3 method
-  if (!gui$startUI("dlgMessage", call = match.call(), default = "ok",
+  if (!gui$startUI("dlg_message", call = match.call(), default = "ok",
     msg = "Displaying a modal message dialog box",
     msg.no.ask = "A modal message dialog box was by-passed"))
     return(invisible(gui))

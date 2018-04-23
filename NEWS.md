@@ -13,6 +13,9 @@
 * A bug that imposed to load svDialogs on the search path for some dialog boxes
   to be displayed under Windows should be solved.
 
+* RStudio version for many dialog boxes: dir, open (but no multiple selections),
+  save.
+
 
 ## Changes in svDialogs 0.9-59
 

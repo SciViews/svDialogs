@@ -12,13 +12,13 @@
 #' @details On Windows, the function manages custom menus in RGui the same way
 #' as `winMenuAdd()` and similar function do. Menus are added to the right and
 #' new menu entries are added to the bottom of the menu. It is currently not
-#' possible to add menus for **Rterm.exe** under Windows.
+#' possible to add menus for **'Rterm.exe'** under Windows.
 #'
 #' On Unix/Linux, under Gnome, you must install a little Gtk2 program called
 #' `ctxmenu`, as well as a few other utilities to manage the menu actions. You
 #' can download corresponding files (GPL-2 license) and get further instructions
 #' at the bottom of http://www.sciviews.org/SciViews-R/. The \R code in
-#' **svDialogs** only creates menu configuration files in `~/.ctxmenu/tmp/` and
+#' **'svDialogs'** only creates menu configuration files in `~/.ctxmenu/tmp/` and
 #' only in interactive \R session and after the user agrees to do so (unless
 #' `options(svDialogs.tmpfiles = TRUE)`).
 #' Once you installed these files, you can access the menus by setting up
@@ -26,7 +26,7 @@
 #' commands are `ctxmenu-main` and `ctxmenu-context` and you can use the
 #' preference panel to assign, e.g., `<shift-menu>` and `<ctrl-menu>`, or other
 #' keyboard shortcuts to these commands. Once everything is set up, you should
-#' see your menus appearing when a console where \R + **svDialogs** runs is the
+#' see your menus appearing when a console where \R + **'svDialogs'** runs is the
 #' active window and you hit these shortcuts (after you have defined at least
 #' one custom menu). Note also that you can define custom context menus for
 #' other applications too, see the `README` file in the `ctxmenu` download.

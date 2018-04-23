@@ -28,7 +28,7 @@
 dlg_input <- function(message = "Enter a value", default = "", ...,
 gui = .GUI) {
   # Define the S3 method
-  if (!gui$startUI("dlgInput", call = match.call(), default = default,
+  if (!gui$startUI("dlg_input", call = match.call(), default = default,
     msg = "Displaying a modal input dialog box",
     msg.no.ask = "A modal input dialog box was by-passed"))
     return(invisible(gui))

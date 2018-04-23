@@ -60,13 +60,13 @@ Create, populate and rework custom R menus.
 On Windows, the function manages custom menus in RGui the same way
 as \code{winMenuAdd()} and similar function do. Menus are added to the right and
 new menu entries are added to the bottom of the menu. It is currently not
-possible to add menus for \strong{Rterm.exe} under Windows.
+possible to add menus for \strong{'Rterm.exe'} under Windows.
 
 On Unix/Linux, under Gnome, you must install a little Gtk2 program called
 \code{ctxmenu}, as well as a few other utilities to manage the menu actions. You
 can download corresponding files (GPL-2 license) and get further instructions
 at the bottom of http://www.sciviews.org/SciViews-R/. The \R code in
-\strong{svDialogs} only creates menu configuration files in \code{~/.ctxmenu/tmp/} and
+\strong{'svDialogs'} only creates menu configuration files in \code{~/.ctxmenu/tmp/} and
 only in interactive \R session and after the user agrees to do so (unless
 \code{options(svDialogs.tmpfiles = TRUE)}).
 Once you installed these files, you can access the menus by setting up
@@ -74,7 +74,7 @@ keyboard shortcuts to activate main and context menus. The respective
 commands are \code{ctxmenu-main} and \code{ctxmenu-context} and you can use the
 preference panel to assign, e.g., \code{<shift-menu>} and \code{<ctrl-menu>}, or other
 keyboard shortcuts to these commands. Once everything is set up, you should
-see your menus appearing when a console where \R + \strong{svDialogs} runs is the
+see your menus appearing when a console where \R + \strong{'svDialogs'} runs is the
 active window and you hit these shortcuts (after you have defined at least
 one custom menu). Note also that you can define custom context menus for
 other applications too, see the \code{README} file in the \code{ctxmenu} download.

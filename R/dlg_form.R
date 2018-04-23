@@ -91,7 +91,7 @@
 dlg_form <- function(form, title = "Fill the form", message = NULL,
 columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Define the S3 method
-  if (!gui$startUI("dlgForm", call = match.call(),
+  if (!gui$startUI("dlg_form", call = match.call(),
     default = lapply(form, "[", 1),
     msg = "Displaying a modal form dialog box",
     msg.no.ask = "A modal form dialog box was by-passed"))
