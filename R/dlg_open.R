@@ -336,8 +336,11 @@ filters = dlg_filters["All", ], zenity = FALSE) {
     return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
-  if (exec == "" || zenity)# yad not found, or force for zenity
+  is_yad <- TRUE
+  if (exec == "" || zenity) {# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
+    is_yad <- FALSE
+  }
   if (exec == "") {
     warning("The native file open dialog box is available",
       " only if you install 'yad' (preferrably), or 'zenity'")
@@ -363,6 +366,8 @@ filters = dlg_filters["All", ], zenity = FALSE) {
         gsub(";", " ", filters[i, 2]), "\"")
   msg <- paste0("'", exec, "' --file-selection --title=\"", title,
     "\" --filename=\"", default, "\" ", fcmd)
+  if (is_yad)
+    msg <- paste(msg, "--on-top --skip-taskbar")
   res <- system(msg, intern = TRUE)
   if (length(res)) {
     strsplit(res, "|", fixed = TRUE)[[1]]

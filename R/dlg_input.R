@@ -72,9 +72,12 @@ gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
   # Ask for the input with readline()
-  res <- readline(paste0(gui$args$message, " [", gui$args$default, "]: "))
+  res <- readline(paste0(gui$args$message,
+    " [", gui$args$default, "] or 00 to Cancel: "))
   if (res == "")
     res <- gui$args$default
+  if (res == "00")
+    res <- character(0)
   gui$setUI(res = res, status = NULL)
   invisible(gui)
 }
@@ -174,8 +177,11 @@ gui = .GUI) {
     return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
-  if (exec == "" || zenity)# yad not found, or force for zenity
+  is_yad <- TRUE
+  if (exec == "" || zenity) {# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
+    is_yad <- FALSE
+  }
   if (exec == "") {
     warning("The native file save dialog box is available",
       " only if you install 'yad' (preferrably), or 'zenity'")
@@ -188,5 +194,9 @@ gui = .GUI) {
   # Use zenity to display the prompt box
   msg <- paste0("'", exec, "' --entry --title=\"Question\" --text=\"", message,
     "\" --entry-text=\"", default, "\"")
-  system(msg, intern = TRUE)
+  if (is_yad)
+    msg <- paste(msg, "--on-top --skip-taskbar")
+  res <- system(msg, intern = TRUE)
+  attr(res, "status") <- NULL
+  res
 }

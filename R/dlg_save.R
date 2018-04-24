@@ -305,6 +305,8 @@ zenity = FALSE) {
         gsub(";", " ", filters[i, 2]), "\"")
   msg <- paste0("'", exec, "' --file-selection --save --title=\"", title,
     "\" --filename=\"", default, "\" ", fcmd)
+  if (is_yad)
+    msg <- paste(msg, "--on-top --skip-taskbar")
   # ignore.stderr = TRUE because error if file not found!
   res <- system(msg, intern = TRUE, ignore.stderr = TRUE)
   if (!length(res)) {
@@ -313,7 +315,8 @@ zenity = FALSE) {
     if (is_yad) {
       msg <- paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
         "This file already exists. It will be replaced!",
-        "\" --button=Cancel:1 --button=OK:0 --title=\"Question\"")
+        "\" --button=Cancel:1 --button=OK:0 --title=\"Question\"",
+        " --on-top --skip-taskbar")
     } else {
       msg <- paste0("'", exec, "' --question --text=\"",
         "This file already exists. It will be replaced!",

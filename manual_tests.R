@@ -83,10 +83,26 @@ dlg_message(message = "My message", type = "okcancel", gui = CLI)$res
 dlg_message(message = "My message", type = "yesno", gui = CLI)$res
 dlg_message(message = "My message", type = "yesnocancel", gui = CLI)$res
 dlg_message(zenity = TRUE)$res
+dlg_message(message = "My message", type = "yesnocancel", zenity = TRUE)$res
+# zenity does not have three-button boxes, so, we need to work in two passes
+msg_box("A message (click OK)")
+msg_box("A message (close the window)")
+ok_cancel_box("A message (click OK)")
+ok_cancel_box("A message (click Cancel)")
+ok_cancel_box("A message (close the window)")
 
 
 # dlg_input() ---------------------------------------------------------------
-#.rs.api.showPrompt(title = "Title", message = "Message", default = "Default")
+dlg_input()$res
+dlg_input(message = "Enter nothing, click OK")$res
+dlg_input(message = "Enter nothing, click Cancel")$res
+dlg_input(message = "Enter something, click Cancel")$res
+dlg_input(message = "There is a default value (apple)", default = "apple")$res
+dlg_input(zenity = TRUE)$res
+dlg_input(message = "Enter something, click Enter", gui = CLI)$res
+dlg_input(message = "Enter nothing, click Enter", gui = CLI)$res
+dlg_input(message = "Use default click Enter", default = "apple", gui = CLI)$res
+dlg_input(message = "Cancel this", gui = CLI)$res
 
 
 # dlg_list() ---------------------------------------------------------------

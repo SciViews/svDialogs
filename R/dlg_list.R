@@ -216,8 +216,11 @@ title = NULL, zenity = FALSE) {
     return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
-  if (exec == "" || zenity)# yad not found, or force for zenity
+  is_yad <- TRUE
+  if (exec == "" || zenity) {# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
+    is_yad - FALSE
+  }
   if (exec == "") {
     warning("The native directory selection dialog box is available",
       " only if you install 'yad' (preferrably), or 'zenity'")
@@ -254,6 +257,8 @@ title = NULL, zenity = FALSE) {
   cmd <- paste0("'", exec, "' --list --text=\"", title, "\" ", kind,
     " --hide-header --title=\"Make your choice\" --separator=\"@@@\" --height=",
     80 + 25 * length(choices), " ", items)
+  if (is_yad)
+    msg <- paste(msg, "--on-top --skip-taskbar")
   res <- system(cmd, intern = TRUE)
   res <- unlist(strsplit(res, "@@@", fixed = TRUE))
   if (is.null(res)) {

@@ -284,7 +284,8 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
     alarm()
     if (is_yad) {
       msg <- paste("'", exec, "' --image=gtk-dialog-info --text=\"", message,
-        "\" --title=\"Information\" --button=OK:0", sep = "")
+        "\" --title=\"Information\" --button=OK:0 --on-top --skip-taskbar",
+        sep = "")
     } else {# zenity
       msg <- paste("'", exec, "' --info --text=\"", message,
         "\" --title=\"Information\"", sep = "")
@@ -294,12 +295,14 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
   } else if (is_yad) {
     msg <- switch(type,
       yesno = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
-        message, "\" --button=No:1 --button=Yes:0 --title=\"Question\""),
+        message, "\" --button=No:1 --button=Yes:0 --title=\"Question\"",
+        "--on-top --skip-taskbar"),
       okcancel = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
-        message, "\" --button=Cancel:1 --button=OK:0 --title=\"Question\""),
+        message, "\" --button=Cancel:1 --button=OK:0 --title=\"Question\"",
+        "--on-top --skip-taskbar"),
       yesnocancel = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
         message, "\" --button=Cancel:2 --button=No:1 --button=Yes:0",
-        " --title=\"Question\""),
+        " --title=\"Question\" --on-top --skip-taskbar"),
       stop("unknown type"))
     results <- switch(type,
       yesno = c("yes", "no"),
@@ -330,8 +333,8 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
     res <- results[res + 1]
     # Do we ask to continue (if was yesnocancel)?
     if (confirm) {
-      conf <- system(paste("'", exec, "' --question --text=\"Continue?\"",
-        "--ok-label=\"OK\" --cancel-label=\"Cancel\" --title=\"Confirm\""))
+      conf <- system(paste0("'", exec, "' --question --text=\"Continue?\"",
+        " --ok-label=\"OK\" --cancel-label=\"Cancel\" --title=\"Confirm\""))
       if (conf == 1)
         res <- "cancel"
     }
