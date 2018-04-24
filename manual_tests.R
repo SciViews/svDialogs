@@ -106,6 +106,20 @@ dlg_input(message = "Cancel this", gui = CLI)$res
 
 
 # dlg_list() ---------------------------------------------------------------
-
+dlg_list(month.name)$res
+dlg_list(month.name, title = "June preselected", preselect = month.name[6])$res
+dlg_list(month.name, title = "Click Cancel")$res
+dlg_list(month.name, title = "Close the window")$res
+dlg_list(month.name, title = "Close the window", multiple = TRUE)$res
+dlg_list(month.name, title = "Select multiple items", multiple = TRUE)$res
+dlg_list(month.name, title = "Preselection (Mar, Jun, Nov)",
+  preselect = month.name[c(3, 6, 11)], multiple = TRUE)$res
+dlg_list(month.name, gui = CLI)$res
+dlg_list(month.name, multiple = TRUE, gui = CLI)$res
+dlg_list(month.name, title = "Enter 0 to cancel", gui = CLI)$res
+dlg_list(month.name, title = "Jun & Nov preselected",
+  preselect = month.name[c(6, 11)], multiple = TRUE, gui = CLI)$res
+dlg_list(month.name, title = "zenity version", zenity = TRUE)$res
+dlg_list(month.name, title = "zenity version", multiple = TRUE, zenity = TRUE)$res
 
 # dlg_form() ----------------------------------------------------------------

@@ -18,7 +18,10 @@
 #' @note RStudio does not provide (yet) a graphical list selector (as of version
 #' 1.1.447). Consequently, a textual version at the R Console is used even in
 #' the case of `'nativeGUI'` as a temporary workaround (should be implemented in
-#' Shiny later on).
+#' Shiny later on). Also note that the textual version only reports preselection
+#' when `multiple == TRUE`, and they are not used automatically if you do not
+#' respecify them in your feedback (limitation of
+#' `utils::select.list(graphics = FALSE)`).
 #' @export
 #' @name dlg_list
 #' @seealso [dlg_form()], [dlg_input()]
@@ -92,8 +95,14 @@ title = NULL, ..., gui = .GUI) {
   # Ask a selection in a textual menu
   choices <- gui$args$choices
   multiple <- gui$args$multiple
+  if (multiple) {
+    title2 <- "- Select one or more or 0 to cancel"
+  } else {
+    title2 <- "- Select one or 0 to cancel"
+  }
   res <- select.list(choices = choices, preselect = gui$args$preselect,
-    multiple = multiple, title = gui$args$title, graphics = FALSE)
+    multiple = multiple, title = paste(gui$args$title, title2),
+    graphics = FALSE)
   # When multiple is FALSE and user cancelled, returns "" instead of
   # character(0) => change this for consistency
   if (!multiple && res == "" && !"" %in% choices)
@@ -134,8 +143,14 @@ title = NULL, ..., gui = .GUI) {
 # RStudio version (not yet, so, currently uses the non-graphical version)
 .rstudio_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL) {
+  if (multiple) {
+    title2 <- "- Select one or more or 0 to cancel"
+  } else {
+    title2 <- "- Select one or 0 to cancel"
+  }
   res <- select.list(choices = choices, preselect = preselect,
-    multiple = multiple, title = title, graphics = FALSE)
+    multiple = multiple, title = paste(title, title2),
+    graphics = FALSE)
   if (length(res) == 1 && res == "") {
     character(0)
   } else {
@@ -219,7 +234,7 @@ title = NULL, zenity = FALSE) {
   is_yad <- TRUE
   if (exec == "" || zenity) {# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
-    is_yad - FALSE
+    is_yad <- FALSE
   }
   if (exec == "") {
     warning("The native directory selection dialog box is available",
@@ -254,12 +269,13 @@ title = NULL, zenity = FALSE) {
   on.exit(options(warn = owarn))
   options(warn = -1)
   # Construct the command to send to zenity
-  cmd <- paste0("'", exec, "' --list --text=\"", title, "\" ", kind,
+  msg <- paste0("'", exec, "' --list --text=\"", title, "\" ", kind,
     " --hide-header --title=\"Make your choice\" --separator=\"@@@\" --height=",
     80 + 25 * length(choices), " ", items)
   if (is_yad)
-    msg <- paste(msg, "--on-top --skip-taskbar")
-  res <- system(cmd, intern = TRUE)
+    msg <- paste(msg, "--on-top --skip-taskbar --no-headers --print-column=2",
+      "--search-column=2")
+  res <- system(msg, intern = TRUE)
   res <- unlist(strsplit(res, "@@@", fixed = TRUE))
   if (is.null(res)) {
     character(0)
