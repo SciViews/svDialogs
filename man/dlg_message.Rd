@@ -57,6 +57,14 @@ was clicked.
 \description{
 A message box with icon, text, and one to three buttons.
 }
+\note{
+On 'RStudio' or with 'zenity' under Linux, only two buttons are
+available. So, when using \code{type = "yesnocancel"}, two successive dialog boxes
+are displayed: one with the message and \code{'yes'}/\code{'no'} buttons, and a second
+one asking to continue, and if the user clicks \code{'no'}, the function returns
+\code{"cancel"}. This is clearly sub-optimal. So, for a clean experience on all
+supported platforms, try to avoid \code{'yesnocancel'} as much as possible.
+}
 \examples{
 \dontrun{
 # A simple information box

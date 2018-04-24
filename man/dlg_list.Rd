@@ -48,6 +48,12 @@ available from \code{gui$res} (see examples).
 Display a list and allow user to select either one, or multiple items in that
 list.
 }
+\note{
+RStudio does not provide (yet) a graphical list selector (as of version
+1.1.447). Consequently, a textual version at the R Console is used even in
+the case of \code{'nativeGUI'} as a temporary workaround (should be implemented in
+Shiny later on).
+}
 \examples{
 \dontrun{
 # Select one or several months

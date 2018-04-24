@@ -42,6 +42,11 @@ confirmation is always asked!}
 \description{
 Select an existing file, or create a new one to save data.
 }
+\note{
+In case the file already exists, the user is prompted to confirm he
+wants to overwrite the existing file. If he clicks \code{'Cancel'}, then the
+return is an empty string.
+}
 \examples{
 \dontrun{
 # Choose one R filename to save some R script into it

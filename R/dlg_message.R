@@ -14,6 +14,12 @@
 #' `msg_box()` just returns the name of the button (`"ok"`), while
 #' `ok_cancel_box()` returns `TRUE` if "ok" was clicked or `FALSE` if "cancel"
 #' was clicked.
+#' @note On 'RStudio' or with 'zenity' under Linux, only two buttons are
+#' available. So, when using `type = "yesnocancel"`, two successive dialog boxes
+#' are displayed: one with the message and `'yes'`/`'no'` buttons, and a second
+#' one asking to continue, and if the user clicks `'no'`, the function returns
+#' `"cancel"`. This is clearly sub-optimal. So, for a clean experience on all
+#' supported platforms, try to avoid `'yesnocancel'` as much as possible.
 #' @export
 #' @name dlg_message
 #' @seealso [dlg_list()], [dlg_input()]
@@ -131,10 +137,12 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
   # type can be 'ok' (info), 'okcancel', 'yesno', 'yesnocancel' (question)
   # This dialog box is always modal
   # Returns invisibly a character with the button that was pressed
-  res <- switch(Sys.info()["sysname"],
+  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  res <- switch(syst,
+    RStudio = .rstudio_dlg_message(gui$args$message, gui$args$type),
     Windows = .win_dlg_message(gui$args$message, gui$args$type),
     Darwin = .mac_dlg_message(gui$args$message, gui$args$type),
-    .unix_dlg_message(gui$args$message, gui$args$type)
+    .unix_dlg_message(gui$args$message, gui$args$type, ...)
   )
 
   # Do we need to further dispatch?
@@ -144,6 +152,41 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
     gui$setUI(res = res, status = NULL)
     invisible(gui)
 	}
+}
+
+# RStudio version (need at least version 1.1.67)
+# No yesnocancel box => ask in two stages (ugly, but what to do?)
+.rstudio_dlg_message <- function(message, type = c("ok", "okcancel", "yesno",
+"yesnocancel")) {
+  if (rstudioapi::getVersion() < '1.1.67')
+    return(NULL)
+  type <- match.arg(type)
+  if (type == "ok") {
+    alarm()
+    rstudioapi::showDialog(title = "R Message", message = message,
+      url = "")
+    return(invisible("ok"))
+  } else if (type == "yesnocancel") {
+    type <- "yesno"
+    confirm <- TRUE
+  } else confirm <- FALSE
+  # Now, we have only "okcancel" or "yesno"
+  if (type == "okcancel") {
+    res <- rstudioapi::showQuestion(title = "R Question", message = message,
+      ok = "OK", cancel = "Cancel")
+    if (res) res <- "ok" else res <- "cancel"
+  } else {
+    res <- rstudioapi::showQuestion(title = "R Question", message = message,
+      ok = "Yes", cancel = "No")
+    if (res) res <- "yes" else res <- "no"
+  }
+  # Do we ask to continue (if was yesnocancel)?
+  if (confirm) {
+    res2 <- rstudioapi::showQuestion(title = "R Question", message = "Continue?",
+      ok = "Yes", cancel = "No")
+    if (!res2) res <- "cancel"
+  }
+  res
 }
 
 # Windows version
@@ -220,48 +263,87 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
 
 # Linux/Unix version
 .unix_dlg_message <- function(message, type = c("ok", "okcancel", "yesno",
-"yesnocancel")) {
+"yesnocancel"), zenity = FALSE) {
   # TODO: escape single and double quotes in message
-  # zenity must be installed on this machine!
-  if (Sys.which("zenity") == "")
-    return(NULL)
+  if (!capabilities("X11"))
+    return(NULL) # Try next method
+  # Can use either yad (preferrably), or zenity
+  exec <- as.character(Sys.which("yad"))
+  is_yad <- TRUE
+  if (exec == "" || zenity) {# yad not found, or force for zenity
+    exec <- as.character(Sys.which("zenity"))
+    is_yad <- FALSE
+  }
+  if (exec == "") {
+    warning("The native directory selection dialog box is available",
+      " only if you install 'yad' (preferrably), or 'zenity'")
+    return(NULL) # Try next method...
+  }
   type <- match.arg(type)
   if (type == "ok") {
     alarm()
-    msg <- paste("zenity --info --text=\"", message,
-      "\" --title=\"Information\"", sep = "")
+    if (is_yad) {
+      msg <- paste("'", exec, "' --image=gtk-dialog-info --text=\"", message,
+        "\" --title=\"Information\"", sep = "")
+    } else {# zenity
+      msg <- paste("'", exec, "' --info --text=\"", message,
+        "\" --title=\"Information\"", sep = "")
+    }
     res <- system(msg)
     if (res > 0) {
       return(NULL)
     } else {
-      return(invisible("ok"))
+      return("ok")
     }
-  } else if (type == "yesnocancel") {
-    type <- "yesno"
-    confirm <- TRUE
-  } else confirm <- FALSE
-  # Now, we have only "okcancel" or "yesno"
-  if (type == "okcancel") {
-    msg <- paste0("zenity --question --text=\"", message,
-      "\" --ok-label=\"OK\" --cancel-label=\"Cancel\" --title=\"Question\"")
+  } else if (is_yad) {
+    msg <- switch(type,
+      yesno = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
+        message, "\" --button=No:1 --button=Yes:0 --title=\"Question\""),
+      okcancel = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
+        message, "\" --button=Cancel:1 --button=OK:0 --title=\"Question\""),
+      yesnocancel = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
+        message, "\" --button:Cancel:2 --button=No:1 --button=Yes:0",
+        " --title=\"Question\""),
+      stop("unknown type"))
+    results <- switch(type,
+      yesno = c("yes", "no"),
+      okcancel = c("ok", "cancel"),
+      yesnocancel = c("yes", "no", "cancel"),
+      stop("unknown type"))
+    res <- system(msg)
+    if (res > length(results) - 1) {
+      return(NULL)
+    } else {
+      res <- results[res + 1]
+    }
+  } else {# This is zenity
+    if (type == "yesnocancel") {
+      type <- "yesno"
+      confirm <- TRUE
+    } else confirm <- FALSE
+    # Now, we have only "okcancel" or "yesno"
+    if (type == "okcancel") {
+      msg <- paste0("'", exec, "' --question --text=\"", message,
+        "\" --ok-label=\"OK\" --cancel-label=\"Cancel\" --title=\"Question\"")
       results <- c("ok", "cancel")
-  } else {
-    msg <- paste0("zenity --question --text=\"", message,
-      "\" --ok-label=\"Yes\" --cancel-label=\"No\" --title=\"Question\"")
-    results <- c("yes", "no")
-  }
-  res <- system(msg)
-  if (res > 1) {
-    return(NULL)
-  } else {
-    res <- results[res + 1]
-  }
-  # Do we ask to continue (if was yesnocancel)?
-  if (confirm) {
-    conf <- system(paste("zenity --question --text=\"Continue?\"",
-      "--ok-label=\"OK\" --cancel-label=\"Cancel\" --title=\"Confirm\""))
-    if (conf == 1)
-      return("cancel")
+    } else {
+      msg <- paste0("'", exec, "' --question --text=\"", message,
+        "\" --ok-label=\"Yes\" --cancel-label=\"No\" --title=\"Question\"")
+      results <- c("yes", "no")
+    }
+    res <- system(msg)
+    if (res > 1) {
+      return(NULL)
+    } else {
+      res <- results[res + 1]
+    }
+    # Do we ask to continue (if was yesnocancel)?
+    if (confirm) {
+      conf <- system(paste("'", exec, "' --question --text=\"Continue?\"",
+        "--ok-label=\"OK\" --cancel-label=\"Cancel\" --title=\"Confirm\""))
+      if (conf == 1)
+        res <- "cancel"
+    }
   }
   res
 }

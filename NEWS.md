@@ -14,7 +14,8 @@
   to be displayed under Windows should be solved.
 
 * RStudio version for many dialog boxes: dir, open (but no multiple selections),
-  save.
+  save, input & message. List dialog box is handled correctly under RStudio,
+  although a text version at the R console is used instead (no GUI dialog yet.)
 
 
 ## Changes in svDialogs 0.9-59

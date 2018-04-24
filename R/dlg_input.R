@@ -87,10 +87,12 @@ gui = .GUI) {
   gui$setUI(widgets = "nativeGUI")
   # A simple text input box using native window
   # Return either a string, or character(0) if 'Cancel' clicked
-  res <- switch(Sys.info()["sysname"],
+  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  res <- switch(syst,
+    RStudio = .rstudio_dlg_input(gui$args$message, gui$args$default),
     Windows = .win_dlg_input(gui$args$message, gui$args$default),
     Darwin = .mac_dlg_input(gui$args$message, gui$args$default),
-    .unix_dlg_input(gui$args$message, gui$args$default)
+    .unix_dlg_input(gui$args$message, gui$args$default, ...)
   )
 
   # Do we need to further dispatch?
@@ -99,6 +101,19 @@ gui = .GUI) {
   } else {
     gui$setUI(res = res, status = NULL)
     invisible(gui)
+  }
+}
+
+# RStudio version (need at least version 1.1.67)
+.rstudio_dlg_input <- function(message, default) {
+  if (rstudioapi::getVersion() < '1.1.67')
+    return(NULL)
+  res <- rstudioapi::showPrompt(title = "R prompt", message = message,
+    default = default)
+  if (is.null(res)) {
+    character(0)
+  } else{
+    res
   }
 }
 
@@ -154,15 +169,24 @@ gui = .GUI) {
 }
 
 # Linux/Unix version
-.unix_dlg_input <- function(message, default) {
-  # zenity must be installed on this machine!
-  if (Sys.which("zenity") == "") return(NULL)
+.unix_dlg_input <- function(message, default, zenity = FALSE) {
+  if (!capabilities("X11"))
+    return(NULL) # Try next method
+  # Can use either yad (preferrably), or zenity
+  exec <- as.character(Sys.which("yad"))
+  if (exec == "" || zenity)# yad not found, or force for zenity
+    exec <- as.character(Sys.which("zenity"))
+  if (exec == "") {
+    warning("The native file save dialog box is available",
+      " only if you install 'yad' (preferrably), or 'zenity'")
+    return(NULL) # Try next method...
+  }
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")
   on.exit(options(warn = owarn))
   options(warn = -1)
   # Use zenity to display the prompt box
-  msg <- paste0("zenity --entry --title=\"Question\" --text=\"", message,
+  msg <- paste0("'", exec, "' --entry --title=\"Question\" --text=\"", message,
     "\" --entry-text=\"", default, "\"")
   system(msg, intern = TRUE)
 }

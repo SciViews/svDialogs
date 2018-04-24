@@ -15,6 +15,10 @@
 #' @return The modified 'gui' object is returned invisibly. The chosen file(s),
 #' or an empty string if the "cancel" button was clicked is found in `gui$res`
 #' (see example).
+#' @note On RStudio, `multiple = TRUE` cannot be honored. So, for now, you can
+#' only select one file there. Also, the textual version is painful to indicate
+#' the full path of several files. So, it should use globbing, and/or indication
+#' of a path followed by a selection in a list (to be done in further versions).
 #' @export
 #' @name dlg_open
 #' @seealso [dlg_save()], [dlg_dir()]
@@ -136,40 +140,46 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # and then, issues a warning that the file does not exist!
   gui$setUI(widgets = "textCLI")
   # Ask for the file
-  res <- readline(paste0(gui$args$title,
-    " [", gui$args$default, "] or 0 to cancel: "))
-  if (res == "0")
+  if (isTRUE(multiple)) {
+    res <- readline(paste0(gui$args$title,
+      " [", gui$args$default,
+      "] separate multiple entries with a ',' or 0 to cancel: "))
+  } else {
+    res <- readline(paste0(gui$args$title,
+      " [", gui$args$default, "] or 0 to cancel: "))
+  }
+  if (res == "0") {
     res <- character(0) # User cancelled the action
-  if (res == "") {
-    res <- gui$args$default
   } else {
-    res <- res
+    if (res == "") {
+      res <- gui$args$default
+    }
+    # Multiple files are separated by commas
+    res <- strsplit(res, ",")[[1]]
+    # In case we pasted a string with single, or double quotes, or spaces
+    # eliminate them
+    res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
+    res <- res[res != ""]
+    # If we have serveral files returned, but multiple is FALSE, keep only
+    # first one with a warning
+    if (!gui$args$multiple && length(res) > 1) {
+      warning("Only one file was expected... using only the first one")
+      res <- res[1]
+    }
+    # Check that the file(s) exist
+    is_there <- file.exists(res)
+    if (!any(is_there)) {
+      warning("File(s) do not exist")
+      res <- character(0) # Same as if the user did cancel the dialog box
+    } else {
+      # Keep only existing files
+      if (!all(is_there))
+        warning("There are inexistent files that will be ignored")
+      res <- res[is_there]
+    }
+    if (length(res))
+      res <- normalizePath(res)
   }
-  # Multiple files are separated by commas
-  res <- strsplit(res, ",")[[1]]
-  # In case we pasted a string with single, or double quotes, or spaces
-  # eliminate them
-  res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
-  res <- res[res != ""]
-  # If we have serveral files returned, but multiple is FALSE, keep only
-  # first one with a warning
-  if (!gui$args$multiple && length(res) > 1) {
-    warning("Only one file was expected... using only the first one")
-    res <- res[1]
-  }
-  # Check that the file(s) exist
-  is_there <- file.exists(res)
-  if (!any(is_there)) {
-    warning("File(s) do not exist")
-    res <- character(0) # Same as if the user did cancel the dialog box
-  } else {
-    # Keep only existing files
-    if (!all(is_there))
-      warning("There are inexistent files that will be ignored")
-    res <- res[is_there]
-  }
-  if (length(res))
-    res <- normalizePath(res)
   gui$setUI(res = res, status = NULL)
   invisible(gui)
 }
@@ -194,7 +204,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
     Darwin = .mac_dlg_open(gui$args$default, gui$args$title,
       gui$args$multiple, gui$args$filters),
     .unix_dlg_open(gui$args$default, gui$args$title,
-      gui$args$multiple, gui$args$filters)
+      gui$args$multiple, gui$args$filters, ...)
   )
 
   # Do we need to further dispatch?
@@ -319,14 +329,14 @@ filters = dlg_filters["All", ]) {
 
 # Linux/Unix version
 .unix_dlg_open <- function(default, title, multiple = FALSE,
-filters = dlg_filters["All", ]) {
+filters = dlg_filters["All", ], zenity = FALSE) {
   # Note: only existing filenames can be selected as default, otherwise, the
   # argument is ignored!
   if (!capabilities("X11"))
     return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
-  if (exec == "")
+  if (exec == "" || zenity)# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
   if (exec == "") {
     warning("The native file open dialog box is available",

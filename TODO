@@ -1,16 +1,27 @@
 = svDialogs To Do list
 
-* Fix messages where there are single and double quotes (' to be replaced by \\')
+* Find a solution for dlg_open(multiple = TRUE) on RStudio (not supported yet).
 
-* Several dialog boxes still need to be done!
+* Find a better solution for textual dlg_open(multiple = TRUE): allow for
+  globbing and for folder indication followed by a list selector of files in
+  that directory that match filters.
 
-* Menus for MacOS
+* Find a better solution for dlg_message(type = "yesnocancel") on RStudio (since
+  I can only display two button, we first ask 'yes'/'no', then ask to confirm).
+  This is the same with zenity, but since yad is advised on Linux, we don't care
+  much.
 
-* dlgForm for MacOS and Windows
+* Fix messages where there are single or double quotes (' to be replaced by \\')
 
-* For the Mac one can also use:
-  - osascript -e 'tell application "Terminal" to choose color default color {12, 56, 78}' # Warning: 0-65535!
+* Menus for MacOS, RStudio, and RTerm.exe under Windows
 
-* rstudioapi provides askForPassword() => implement it, including other versions.
+* dlgForm for MacOS, Windows and RStudio
+
+* For MacOS one can also use:
+  - osascript -e 'tell application "Terminal" to choose color default color
+  {12, 56, 78}' # Warning: 0-65535!
+
+* rstudioapi provides askForPassword() => implement it, including other versions
+  (use a yad form in Linux).
 
 * Translation into different languages.

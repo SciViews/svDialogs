@@ -15,6 +15,9 @@
 #' cancelled) is placed in `gui$res` (see example). For existing files,
 #' confirmation is always asked!
 #' @export
+#' @note In case the file already exists, the user is prompted to confirm he
+#' wants to overwrite the existing file. If he clicks `'Cancel'`, then the
+#' return is an empty string.
 #' @name dlg_save
 #' @seealso [dlg_open()], [dlg_dir()]
 #' @keywords misc
@@ -108,25 +111,24 @@ gui = .GUI) {
   # Ask for the file
   res <- readline(paste0(gui$args$title,
     " [", gui$args$default, "] or 0 to cancel: "))
-  if (res == "0")
+  if (res == "0") {
     res <- character(0) # User cancelled the action
-  if (res == "") {
-    res <- gui$args$default
   } else {
-    res <- res
-  }
-  # In case we pasted a string with single, or double quotes, or spaces
-  # eliminate them
-  res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
-  if (length(res)) {
-    res <- normalizePath(res)
-    # If file already exists => ask for confirmation...
-    if (file.exists(res)) {
-      choices <- c("ok", "cancel")
-      ret <- select.list(choices,
-        title = "Confirm you want to replace this file", graphics = FALSE)
-      if (ret == "" || ret == "cancel")
-        res <- character(0) # Cancelled
+    if (res == "")
+      res <- gui$args$default
+    # In case we pasted a string with single, or double quotes, or spaces
+    # eliminate them
+    res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
+    if (length(res)) {
+      res <- suppressWarnings(normalizePath(res))# Warning when no path is given
+      # If file already exists => ask for confirmation...
+      if (file.exists(res)) {
+        choices <- c("ok", "cancel")
+        ret <- select.list(choices,
+          title = "Confirm you want to replace this file", graphics = FALSE)
+        if (ret == "" || ret == "cancel")
+          res <- character(0) # Cancelled
+      }
     }
   }
   gui$setUI(res = res, status = NULL)
@@ -151,7 +153,7 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
       gui$args$filters),
     Windows = .win_dlg_save(gui$args$default, gui$args$title, gui$args$filters),
     Darwin = .mac_dlg_save(gui$args$default, gui$args$title, gui$args$filters),
-    .unix_dlg_save(gui$args$default, gui$args$title, gui$args$filters)
+    .unix_dlg_save(gui$args$default, gui$args$title, gui$args$filters, ...)
   )
 
   # Do we need to further dispatch?
@@ -269,15 +271,19 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
 
 # Linux/Unix version
 # TODO: if no extension provided, displays '.' => make sure to change this!
-.unix_dlg_save <- function(default, title, filters = dlg_filters["All", ]) {
+.unix_dlg_save <- function(default, title, filters = dlg_filters["All", ],
+zenity = FALSE) {
   # Note: only existing filenames can be selected as default, otherwise, the
   # argument is ignored!
   if (!capabilities("X11"))
     return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
-  if (exec == "")
+  is_yad <- TRUE
+  if (exec == "" || zenity) {# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
+    is_yad <- FALSE
+  }
   if (exec == "") {
     warning("The native file save dialog box is available",
       " only if you install 'yad' (preferrably), or 'zenity'")
@@ -304,10 +310,16 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
   if (!length(res)) {
     return(character(0))
   } else if (file.exists(res)) {# Ask for confirmation!
-    msg <- paste0("'", exec, "' --question --text=\"",
-      "This file already exists. It will be replaced!",
-      "\" --ok-label=\"OK\" --cancel-label=\"Cancel\"",
-      " --title=\"Question\"")
+    if (is_yad) {
+      msg <- paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
+        "This file already exists. It will be replaced!",
+        "\" --button=Cancel:1 --button=OK:0 --title=\"Question\"")
+    } else {
+      msg <- paste0("'", exec, "' --question --text=\"",
+        "This file already exists. It will be replaced!",
+        "\" --ok-label=\"OK\" --cancel-label=\"Cancel\"",
+        " --title=\"Question\"")
+    }
     if (system(msg) > 0)
       return(character(0)) # Cancelled, or another error
   }

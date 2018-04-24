@@ -15,6 +15,10 @@
 #' @return The modified 'gui' object is returned invisibly. A list with selected
 #' items, or a character vector of length 0 if the dialog box was cancelled is
 #' available from `gui$res` (see examples).
+#' @note RStudio does not provide (yet) a graphical list selector (as of version
+#' 1.1.447). Consequently, a textual version at the R Console is used even in
+#' the case of `'nativeGUI'` as a temporary workaround (should be implemented in
+#' Shiny later on).
 #' @export
 #' @name dlg_list
 #' @seealso [dlg_form()], [dlg_input()]
@@ -106,13 +110,16 @@ title = NULL, ..., gui = .GUI) {
   gui$setUI(widgets = "nativeGUI")
   # This is a simple 'select in the list' dialog box
   # It follows the syntax of the select.list() function
-  res <- switch(Sys.info()["sysname"],
+  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  res <- switch(syst,
+    RStudio = .rstudio_dlg_list(gui$args$choices, gui$args$preselect,
+      gui$args$multiple, gui$args$title),
     Windows = .win_dlg_list(gui$args$choices, gui$args$preselect,
       gui$args$multiple, gui$args$title),
     Darwin = .mac_dlg_list(gui$args$choices, gui$args$preselect,
       gui$args$multiple, gui$args$title),
     .unix_dlg_list(gui$args$choices, gui$args$preselect,
-      gui$args$multiple, gui$args$title)
+      gui$args$multiple, gui$args$title, ...)
   )
 
   # Do we need to further dispatch?
@@ -124,6 +131,19 @@ title = NULL, ..., gui = .GUI) {
 	}
 }
 
+# RStudio version (not yet, so, currently uses the non-graphical version)
+.rstudio_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
+title = NULL) {
+  res <- select.list(choices = choices, preselect = preselect,
+    multiple = multiple, title = title, graphics = FALSE)
+  if (length(res) == 1 && res == "") {
+    character(0)
+  } else {
+    res
+  }
+}
+
+# Windows version
 .win_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL) {
   # Windows version
@@ -191,7 +211,18 @@ title = NULL) {
 
 # Linux/Unix version
 .unix_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
-title = NULL) {
+title = NULL, zenity = FALSE) {
+  if (!capabilities("X11"))
+    return(NULL) # Try next method
+  # Can use either yad (preferrably), or zenity
+  exec <- as.character(Sys.which("yad"))
+  if (exec == "" || zenity)# yad not found, or force for zenity
+    exec <- as.character(Sys.which("zenity"))
+  if (exec == "") {
+    warning("The native directory selection dialog box is available",
+      " only if you install 'yad' (preferrably), or 'zenity'")
+    return(NULL) # Try next method...
+  }
   # We don't use the ugly (on Linux) Tk version tk_select.list()
   # In zenity, the normal list mode do not allow for preselections
   # => switch to --checklist (multiple) or --radiolist (single) in this case
@@ -220,7 +251,7 @@ title = NULL) {
   on.exit(options(warn = owarn))
   options(warn = -1)
   # Construct the command to send to zenity
-  cmd <- paste0("zenity --list --text=\"", title, "\" ", kind,
+  cmd <- paste0("'", exec, "' --list --text=\"", title, "\" ", kind,
     " --hide-header --title=\"Make your choice\" --separator=\"@@@\" --height=",
     80 + 25 * length(choices), " ", items)
   res <- system(cmd, intern = TRUE)

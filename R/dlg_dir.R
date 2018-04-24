@@ -118,7 +118,7 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
     RStudio = .rstudio_dlg_dir(gui$args$default, gui$args$title),
     Windows = .win_dlg_dir(gui$args$default, gui$args$title),
     Darwin  = .mac_dlg_dir(gui$args$default, gui$args$title),
-    .unix_dlg_dir(gui$args$default, gui$args$title)
+    .unix_dlg_dir(gui$args$default, gui$args$title, ...)
   )
 
   # Do we need to further dispatch?
@@ -128,10 +128,8 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   }
 }
 
-# RStudio version (need at least version 1.1.287)
+# RStudio version
 .rstudio_dlg_dir <- function(default = getwd(), title = "") {
-  if (rstudioapi::getVersion() < '1.1.287')
-    return(NULL)
   res <- rstudioapi::selectDirectory(caption = title, path = default)
   if (is.null(res)) {
     res <- character(0)
@@ -177,7 +175,7 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   # (deadlock situation?), but I can in R run in a terminal. system2() also
   # works, but this preclue of using svDialogs on R < 2.12.0.
   # The hack is thus to redirect output to a file, then, to read the content
-  # of that file and to destroy it
+  # of that file and to desctroy it
   tfile <- tempfile()
   on.exit(unlink(tfile))
   res <- try(system(paste("osascript", cmd, ">", tfile), wait = TRUE,
@@ -190,12 +188,12 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
 }
 
 # Linux/Unix version
-.unix_dlg_dir <- function(default = getwd(), title = "") {
+.unix_dlg_dir <- function(default = getwd(), title = "", zenity = FALSE) {
   if (!capabilities("X11"))
     return(NULL) # Try next method
   # Can use either yad (preferrably), or zenity
   exec <- as.character(Sys.which("yad"))
-  if (exec == "")
+  if (exec == "" || zenity)# yad not found, or force for zenity
     exec <- as.character(Sys.which("zenity"))
   if (exec == "") {
     warning("The native directory selection dialog box is available",

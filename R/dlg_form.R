@@ -236,8 +236,10 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
  # Linux/Unix version
 .unix_dlg_form <- function(form, title, message, columns, strip.type) {
   # yad must be installed on this machine!
-  if (Sys.which("yad") == "")
+  if (Sys.which("yad") == "") {
+    warning("The native form dialog box is available only if you install 'yad'")
     return(NULL)
+  }
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")
   on.exit(options(warn = owarn))

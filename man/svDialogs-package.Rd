@@ -10,10 +10,26 @@ message boxes, input boxes, list, file or dir selection, ... In case R cannot
 display GUI dialog boxes, a simpler command line version of these interactive
 elements is also provided as fallback solution.
 }
+\note{
+Under Linux, you should install \strong{'yad'} (preferably), or
+\strong{'zenity'}. If you use 'zenity', you cannot build more complex \code{\link[=dlg_form]{dlg_form()}}
+dialog boxes, and some versions trigger a warning like: "Gtk-Message:
+GtkDialog mapped without a transient parent. This is discouraged." You do not
+get these inconveniences if you use 'yad' (default choice in case both
+programs are installed simultaneously).
+}
 \section{Important functions}{
 
 \itemize{
+\item \code{\link[=dlg_message]{dlg_message()}} dispaly a message box,
+\item \code{\link[=dlg_input]{dlg_input()}} prompt for textual input,
+\item \code{\link[=dlg_list]{dlg_list()}} select one or more items in a list,
+\item \code{\link[=dlg_open]{dlg_open()}} open one or more existing file(s),
+\item \code{\link[=dlg_save]{dlg_save()}} prompt for a file to save to (and ask confirmation if the file
+already exists),
 \item \code{\link[=dlg_dir]{dlg_dir()}} select a directory,
+\item \code{\link[=dlg_form]{dlg_form()}} display a complex dialog box with textual areas, password,
+checkboxes, comboboxes, font and size, color, etc.
 }
 }
 
