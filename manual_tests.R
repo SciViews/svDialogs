@@ -67,6 +67,22 @@ dlg_save(zenity = TRUE)$res
 
 # dlg_message() -------------------------------------------------------------
 dlg_message()$res
+dlg_message(message = "My message", type = "ok")$res
+dlg_message(message = "My message (hit OK)", type = "okcancel")$res
+dlg_message(message = "My message (hit Cancel)", type = "okcancel")$res
+dlg_message(message = "My message (close the window)", type = "okcancel")$res
+dlg_message(message = "My message (hit Yes)", type = "yesno")$res
+dlg_message(message = "My message (hit No)", type = "yesno")$res
+dlg_message(message = "My message (close the window)", type = "yesno")$res
+dlg_message(message = "My message (hit Yes)", type = "yesnocancel")$res
+dlg_message(message = "My message (hit No)", type = "yesnocancel")$res
+dlg_message(message = "My message (hit Cancel)", type = "yesnocancel")$res
+dlg_message(message = "My message (close the window)", type = "yesnocancel")$res
+dlg_message(message = "My message", type = "ok", gui = CLI)$res
+dlg_message(message = "My message", type = "okcancel", gui = CLI)$res
+dlg_message(message = "My message", type = "yesno", gui = CLI)$res
+dlg_message(message = "My message", type = "yesnocancel", gui = CLI)$res
+dlg_message(zenity = TRUE)$res
 
 
 # dlg_input() ---------------------------------------------------------------

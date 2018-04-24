@@ -7,7 +7,7 @@
 * snake_case versions of the function names (but camelCase name kept for
   backward compatibility.
 
-* Documentation moved to ROxigen2, tests to testhat (bot no tests yet) and a
+* Documentation moved to Roxygen2, tests to testhat (bot no tests yet) and a
   vignette with knitr are added.
 
 * A bug that imposed to load svDialogs on the search path for some dialog boxes
@@ -16,6 +16,9 @@
 * RStudio version for many dialog boxes: dir, open (but no multiple selections),
   save, input & message. List dialog box is handled correctly under RStudio,
   although a text version at the R console is used instead (no GUI dialog yet.)
+
+* In case both 'zenity' and 'yad' are available under Linux, 'yad' is used in
+  priority for all dialog boxes (and it is the only alternative for dlg_form()).
 
 
 ## Changes in svDialogs 0.9-59

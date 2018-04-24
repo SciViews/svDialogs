@@ -284,17 +284,13 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
     alarm()
     if (is_yad) {
       msg <- paste("'", exec, "' --image=gtk-dialog-info --text=\"", message,
-        "\" --title=\"Information\"", sep = "")
+        "\" --title=\"Information\" --button=OK:0", sep = "")
     } else {# zenity
       msg <- paste("'", exec, "' --info --text=\"", message,
         "\" --title=\"Information\"", sep = "")
     }
-    res <- system(msg)
-    if (res > 0) {
-      return(NULL)
-    } else {
-      return("ok")
-    }
+    system(msg)
+    return("ok")
   } else if (is_yad) {
     msg <- switch(type,
       yesno = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
@@ -302,7 +298,7 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
       okcancel = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
         message, "\" --button=Cancel:1 --button=OK:0 --title=\"Question\""),
       yesnocancel = paste0("'", exec, "' --image=gtk-dialog-question --text=\"",
-        message, "\" --button:Cancel:2 --button=No:1 --button=Yes:0",
+        message, "\" --button=Cancel:2 --button=No:1 --button=Yes:0",
         " --title=\"Question\""),
       stop("unknown type"))
     results <- switch(type,
@@ -311,11 +307,9 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
       yesnocancel = c("yes", "no", "cancel"),
       stop("unknown type"))
     res <- system(msg)
-    if (res > length(results) - 1) {
-      return(NULL)
-    } else {
-      res <- results[res + 1]
-    }
+    if (res > length(results) - 1)
+      res <- length(results) - 1 # Use last item by default
+    res <- results[res + 1]
   } else {# This is zenity
     if (type == "yesnocancel") {
       type <- "yesno"
@@ -332,11 +326,8 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
       results <- c("yes", "no")
     }
     res <- system(msg)
-    if (res > 1) {
-      return(NULL)
-    } else {
-      res <- results[res + 1]
-    }
+    if (res > 1) res <- 1
+    res <- results[res + 1]
     # Do we ask to continue (if was yesnocancel)?
     if (confirm) {
       conf <- system(paste("'", exec, "' --question --text=\"Continue?\"",
