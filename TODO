@@ -15,7 +15,7 @@
 
 * Menus for MacOS, RStudio, and RTerm.exe under Windows
 
-* dlgForm for MacOS, Windows and RStudio
+* dlg_form() for MacOS, Windows and RStudio, as well as, a text version
 
 * For MacOS one can also use:
   - osascript -e 'tell application "Terminal" to choose color default color

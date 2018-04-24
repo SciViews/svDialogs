@@ -84,7 +84,7 @@
 #'   "Name:TXT" = "John Smith",
 #'   "Age:NUM" = 25,
 #'   "Sex:CB" = c("male", "female"),
-#'   "Married:CHK"=FALSE
+#'   "Married:CHK" = FALSE
 #' )
 #' dlg_form(form, "My data")$res
 #' }

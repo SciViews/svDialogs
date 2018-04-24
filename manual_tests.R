@@ -123,3 +123,11 @@ dlg_list(month.name, title = "zenity version", zenity = TRUE)$res
 dlg_list(month.name, title = "zenity version", multiple = TRUE, zenity = TRUE)$res
 
 # dlg_form() ----------------------------------------------------------------
+# Only for graphical version under Linux, currently
+form <- list(
+  "Name:TXT" = "John Smith",
+  "Age:NUM" = 25,
+  "Sex:CB" = c("male", "female"),
+  "Married:CHK" = FALSE
+)
+dlg_form(form, title = "My form", message = "An example free form")$res
