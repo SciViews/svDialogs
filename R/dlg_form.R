@@ -257,7 +257,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Add the definition of the various fields
   fields <- paste0("--field=", shQuote(names(form)), collapse = " ")
   # Add the default values
-  default <- paste(shQuote(sapply(form, paste, collapse = "&&&")),
+  default <- paste(shQuote(vapply(form, paste, character(1), collapse = "&&&")),
     collapse = " ")
   # Display the dialog box
   res <- system(paste(msg, fields, default), intern = TRUE)

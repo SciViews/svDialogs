@@ -7,7 +7,7 @@
 #'
 #' @section Important functions:
 #'
-#'- [dlg_message()] dispaly a message box,
+#'- [dlg_message()] display a message box,
 #'- [dlg_input()] prompt for textual input,
 #'- [dlg_list()] select one or more items in a list,
 #'- [dlg_open()] open one or more existing file(s),

@@ -227,20 +227,11 @@ title = NULL) {
 # Linux/Unix version
 .unix_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL, zenity = FALSE) {
-  if (!capabilities("X11"))
+  exec <- .get_yad_or_zenity(zenity)
+  if (exec == "")
     return(NULL) # Try next method
-  # Can use either yad (preferrably), or zenity
-  exec <- as.character(Sys.which("yad"))
-  is_yad <- TRUE
-  if (exec == "" || zenity) {# yad not found, or force for zenity
-    exec <- as.character(Sys.which("zenity"))
-    is_yad <- FALSE
-  }
-  if (exec == "") {
-    warning("The native directory selection dialog box is available",
-      " only if you install 'yad' (preferrably), or 'zenity'")
-    return(NULL) # Try next method...
-  }
+  is_yad <- attr(exec, "is_yad")
+  exec <- as.character(exec)
   # We don't use the ugly (on Linux) Tk version tk_select.list()
   # In zenity, the normal list mode do not allow for preselections
   # => switch to --checklist (multiple) or --radiolist (single) in this case

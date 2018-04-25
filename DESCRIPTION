@@ -1,7 +1,6 @@
 Package: svDialogs
 Type: Package
 Version: 1.0.0
-Date: 2018-04-02
 Title: SciViews - Standard Dialog Boxes for Windows, MacOS and Linuxes
 Description: Rapidly construct standard dialog boxes for your GUI, including 
   message boxes, input boxes, list, file or dir selection, ... In case R cannot
@@ -10,8 +9,8 @@ Description: Rapidly construct standard dialog boxes for your GUI, including
 Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
-Depends: R (>= 2.6.0), svGUI (>= 1.0.0)
-Imports: utils, methods, rstudioapi (>= 0.7)
+Depends: R (>= 2.6.0)
+Imports: svGUI (>= 1.0.0), utils, methods, rstudioapi (>= 0.7)
 Suggests: covr, knitr, testthat
 SystemRequirements: zenity, yad
 License: GPL-2

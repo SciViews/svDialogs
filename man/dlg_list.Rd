@@ -52,7 +52,10 @@ list.
 RStudio does not provide (yet) a graphical list selector (as of version
 1.1.447). Consequently, a textual version at the R Console is used even in
 the case of \code{'nativeGUI'} as a temporary workaround (should be implemented in
-Shiny later on).
+Shiny later on). Also note that the textual version only reports preselection
+when \code{multiple == TRUE}, and they are not used automatically if you do not
+respecify them in your feedback (limitation of
+\code{utils::select.list(graphics = FALSE)}).
 }
 \examples{
 \dontrun{

@@ -14,10 +14,9 @@
 #                      RStudio Server 1.1.447
 #        + ssh session with and without X11 (-Y argument)
 
-library(svGUI)
 library(svDialogs)
 # We use the default .GUI with nativeGUI, but also, a text-only version:
-gui_add("CLI", widgets = "textCLI", ask = TRUE)
+svGUI::gui_add("CLI", widgets = "textCLI", ask = TRUE)
 
 
 # dlg_dir() -----------------------------------------------------------------

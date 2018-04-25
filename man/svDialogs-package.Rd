@@ -21,7 +21,7 @@ programs are installed simultaneously).
 \section{Important functions}{
 
 \itemize{
-\item \code{\link[=dlg_message]{dlg_message()}} dispaly a message box,
+\item \code{\link[=dlg_message]{dlg_message()}} display a message box,
 \item \code{\link[=dlg_input]{dlg_input()}} prompt for textual input,
 \item \code{\link[=dlg_list]{dlg_list()}} select one or more items in a list,
 \item \code{\link[=dlg_open]{dlg_open()}} open one or more existing file(s),

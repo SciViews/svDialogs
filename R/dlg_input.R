@@ -173,20 +173,11 @@ gui = .GUI) {
 
 # Linux/Unix version
 .unix_dlg_input <- function(message, default, zenity = FALSE) {
-  if (!capabilities("X11"))
+  exec <- .get_yad_or_zenity(zenity)
+  if (exec == "")
     return(NULL) # Try next method
-  # Can use either yad (preferrably), or zenity
-  exec <- as.character(Sys.which("yad"))
-  is_yad <- TRUE
-  if (exec == "" || zenity) {# yad not found, or force for zenity
-    exec <- as.character(Sys.which("zenity"))
-    is_yad <- FALSE
-  }
-  if (exec == "") {
-    warning("The native file save dialog box is available",
-      " only if you install 'yad' (preferrably), or 'zenity'")
-    return(NULL) # Try next method...
-  }
+  is_yad <- attr(exec, "is_yad")
+  exec <- as.character(exec)
   # Avoid displaying warning message in case user clicks on Cancel
   owarn <- getOption("warn")
   on.exit(options(warn = owarn))
