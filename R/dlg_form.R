@@ -72,6 +72,10 @@
 #' For the moment, the form dialog box is only supported on Linux. You have to
 #' install **yad** to get access to it. On Ubuntu, you do so by
 #' `sudo apt-get install yad`. For other system, look at the documentation.
+#' @note `dlg_form()` can use strings with embedded quotes, but you have to
+#' escape them (and need to double the backslash escape sign). Currently,
+#' this is not done automatically, on the contrary to the other `dlg_xxx()`
+#' functions!
 #' @export
 #' @name dlg_form
 #' @seealso [dlg_input()], [dlg_list()]

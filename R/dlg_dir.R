@@ -202,17 +202,9 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   # There is no message area here, but one can set the title
   if (title == "") {
     title <- "Choose a directory" # Default title
-  } #else {
-  #  # Determine if the title is multiline...
-  #  if (regexpr("\n", title) > 0) {
-  #    # Try to use a notification instead
-  #    if (Sys.which("notify-send") != "") {
-  #      system(paste("notify-send --category=\"R\"",
-  #      " \"R message\" \"", title, "\"", sep = ""), wait = FALSE)
-  #      title <- "Choose folder"
-  #    } # Else the wole title cannot be displayed!!
-  #  }
-  #}
+  } else {
+    title <- .escape_quotes(title)
+  }
   msg <- paste0("'", exec, "' --file-selection --title=\"", title,
     "\" --directory --filename=\"", default, "\"")
   if (is_yad)

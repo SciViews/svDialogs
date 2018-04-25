@@ -81,6 +81,8 @@ dlg_message(message = "My message", type = "ok", gui = CLI)$res
 dlg_message(message = "My message", type = "okcancel", gui = CLI)$res
 dlg_message(message = "My message", type = "yesno", gui = CLI)$res
 dlg_message(message = "My message", type = "yesnocancel", gui = CLI)$res
+dlg_message(message = "A message with embedded quotes: \" and ' inside")$res
+dlg_message(message = "Embedded quotes \" and ' with zenity", zenity = TRUE)$res
 dlg_message(zenity = TRUE)$res
 dlg_message(message = "My message", type = "yesnocancel", zenity = TRUE)$res
 # zenity does not have three-button boxes, so, we need to work in two passes
@@ -98,6 +100,10 @@ dlg_input(message = "Enter nothing, click Cancel")$res
 dlg_input(message = "Enter something, click Cancel")$res
 dlg_input(message = "There is a default value (apple)", default = "apple")$res
 dlg_input(zenity = TRUE)$res
+dlg_input(message = "Text with quotes \"  and ':",
+  default = "Quotes \" and '...")$res
+dlg_input(message = "Text with quotes \"  and ':",
+  default = "Quotes \" and '...", zenity = TRUE)$res
 dlg_input(message = "Enter something, click Enter", gui = CLI)$res
 dlg_input(message = "Enter nothing, click Enter", gui = CLI)$res
 dlg_input(message = "Use default click Enter", default = "apple", gui = CLI)$res
@@ -113,6 +119,11 @@ dlg_list(month.name, title = "Close the window", multiple = TRUE)$res
 dlg_list(month.name, title = "Select multiple items", multiple = TRUE)$res
 dlg_list(month.name, title = "Preselection (Mar, Jun, Nov)",
   preselect = month.name[c(3, 6, 11)], multiple = TRUE)$res
+dlg_list(c("no quote", "single quote (')", "doube quote (\")"),
+  preselect = c("single quote (')", "doube quote (\")"), multiple = TRUE)$res
+dlg_list(c("no quote", "single quote (')", "doube quote (\")"),
+  preselect = c("single quote (')", "doube quote (\")"), multiple = TRUE,
+  zenity = TRUE)$res
 dlg_list(month.name, gui = CLI)$res
 dlg_list(month.name, multiple = TRUE, gui = CLI)$res
 dlg_list(month.name, title = "Enter 0 to cancel", gui = CLI)$res

@@ -264,7 +264,7 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
 # Linux/Unix version
 .unix_dlg_message <- function(message, type = c("ok", "okcancel", "yesno",
 "yesnocancel"), zenity = FALSE) {
-  # TODO: escape single and double quotes in message
+  message <- .escape_quotes(message)
   exec <- .get_yad_or_zenity(zenity)
   if (exec == "")
     return(NULL) # Try next method

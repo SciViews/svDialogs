@@ -173,6 +173,8 @@ gui = .GUI) {
 
 # Linux/Unix version
 .unix_dlg_input <- function(message, default, zenity = FALSE) {
+  message <- .escape_quotes(message)
+  default <- .escape_quotes(default)
   exec <- .get_yad_or_zenity(zenity)
   if (exec == "")
     return(NULL) # Try next method

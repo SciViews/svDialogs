@@ -275,6 +275,7 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
 zenity = FALSE) {
   # Note: only existing filenames can be selected as default, otherwise, the
   # argument is ignored!
+  title <- .escape_quotes(title)
   exec <- .get_yad_or_zenity(zenity)
   if (exec == "")
     return(NULL) # Try next method

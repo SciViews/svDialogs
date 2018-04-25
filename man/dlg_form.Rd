@@ -78,6 +78,12 @@ For the moment, the form dialog box is only supported on Linux. You have to
 install \strong{yad} to get access to it. On Ubuntu, you do so by
 \code{sudo apt-get install yad}. For other system, look at the documentation.
 }
+\note{
+\code{dlg_form()} can use strings with embedded quotes, but you have to
+escape them (and need to double the backslash escape sign). Currently,
+this is not done automatically, on the contrary to the other \code{dlg_xxx()}
+functions!
+}
 \examples{
 \dontrun{
 # Ask a series of items at once in a dialog box

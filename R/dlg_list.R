@@ -227,6 +227,9 @@ title = NULL) {
 # Linux/Unix version
 .unix_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL, zenity = FALSE) {
+  choices <- .escape_quotes(as.character(choices))
+  if (!is.null(preselect))
+    preselect <- .escape_quotes(as.character(preselect))
   exec <- .get_yad_or_zenity(zenity)
   if (exec == "")
     return(NULL) # Try next method

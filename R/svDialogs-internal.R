@@ -24,8 +24,13 @@
 
 .is_rstudio <- function() rstudioapi::isAvailable()
 
+.escape_quotes <- function(str) {
+  # For yad messages, we need to escape double quotes **inside** messages
+  gsub('"', '\\"', str, fixed = TRUE)
+}
+
 # Get the path to yad or zenity, or return "" otherwise
-.get_yad_or_zenity <- function(zenity = FALSE){
+.get_yad_or_zenity <- function(zenity = FALSE) {
   if (!capabilities("X11"))
     return("")
   # Can use either yad (preferrably), or zenity
