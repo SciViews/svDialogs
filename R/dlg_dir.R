@@ -97,7 +97,8 @@ dlgDir.textCLI <- function(default = getwd(), title, ..., gui = .GUI) {
         res <- character(0)
       }
     }
-    if (length(res)) res <- gsub("\\\\", "/", normalizePath(res))
+    if (length(res))
+      res <- gsub("\\\\", "/", normalizePath(res))
   }
   gui$setUI(res = res, status = NULL)
   invisible(gui)

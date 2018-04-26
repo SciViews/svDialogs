@@ -122,6 +122,7 @@ gui = .GUI) {
     res <- sub("^['\" ]+", "", sub("['\" ]+$", "", res))
     if (length(res)) {
       res <- suppressWarnings(normalizePath(res))# Warning when no path is given
+      res <- gsub("\\\\", "/", res)
       # If file already exists => ask for confirmation...
       if (file.exists(res)) {
         choices <- c("ok", "cancel")

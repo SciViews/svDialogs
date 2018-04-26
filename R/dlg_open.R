@@ -180,7 +180,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
       res <- res[is_there]
     }
     if (length(res))
-      res <- normalizePath(res)
+      res <- gsub("\\\\", "/", normalizePath(res))
   }
   gui$setUI(res = res, status = NULL)
   invisible(gui)
