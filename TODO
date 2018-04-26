@@ -1,5 +1,15 @@
 = svDialogs To Do list
 
+* Create as many tests (testthat) as possible, given most of the code is
+  supposed to be used interactively, and thus, is not (easily) testable
+  automatically.
+
+* A complete vignette, with rationate, explanation of mechanism to dispatch
+  dialog boxes, example of input dialog box on all supported platforms, and
+  further explanation for all supported dialog boxes.
+
+* Reexpose useful svGUI functions.
+
 * Find a solution for dlg_open(multiple = TRUE) on RStudio (not supported yet).
 
 * Find a better solution for textual dlg_open(multiple = TRUE): allow for

@@ -8,10 +8,10 @@
 # Tested 2018-04-26 on R 3.4.4 MacOS High Sierra R.app & Terminal &
 #                      RStudio Desktop 1.1.447
 # Tested 2018-04-26 on R 3.4.4 Windows 10 RGui.exe & RTerm.exe &
-#                      RStudio Desktop 1.1.447
+#                      RStudio Desktop 1.1.442
 #        Default directory is not always honored in dlg_dir()! See ?choose.dir
 # Tested 2018-04-26 on R 3.4.4 svBox2018b (Ubuntu Bionic Beaver) terminal &
-#                      RStudio Server 1.1.447
+#                      RStudio Server 1.1.442
 #        + ssh session with and without X11 (-Y argument)
 
 library(svDialogs)
