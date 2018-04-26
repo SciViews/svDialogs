@@ -17,6 +17,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-Simple modal dialog boxes are available in R, but they are not implemented on all platforms the same way. In **svDialogs**, we provide functions that operate consistently through all the platforms supported by R, and a fallback mechanisms is also implemented in cas not GUI is available (question or menu selection in a textual terminal window).
+Simple modal dialog boxes are available in R, but they are not implemented on all platforms the same way. In **svDialogs**, we provide functions that operate consistently through all the platforms supported by R, and a fallback mechanisms is also implemented in case no GUI is available (question or menu selection in a textual terminal window).
 
 **TODO: exmplain the bases of svDialogs boxes here...**

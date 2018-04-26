@@ -19,6 +19,8 @@
 #' only select one file there. Also, the textual version is painful to indicate
 #' the full path of several files. So, it should use globbing, and/or indication
 #' of a path followed by a selection in a list (to be done in further versions).
+#' Finally, the 'RStudio' version of this dialog box currently ignores the
+#' `filters =` argument.
 #' @export
 #' @name dlg_open
 #' @seealso [dlg_save()], [dlg_dir()]
@@ -223,19 +225,10 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
     return(NULL)
   if (multiple == TRUE)
     warning("RStudio currently does not allow multiple files selection!")
-  # RStudio dialog box can only use first item for filters
-  if (is.matrix(filters)) {
-    filters <- filters[[1, 1]]
-  } else {
-    filters <- filters[[1]]
-  }
-  if (filters == "*.*") {# Do NOT use filters
-    res <- rstudioapi::selectFile(caption = title, path = default,
+  # I cannot manage to understand how filter is used by selectFile(). So, I
+  # prefer **not** to use it for now!
+  res <- rstudioapi::selectFile(caption = title, path = default,
       label = "Open", existing = TRUE)
-  } else {
-    res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Open", filter = filters, existing = TRUE)
-  }
   if (is.null(res) || res == "") {
     res <- character(0)
   } else{
@@ -264,6 +257,7 @@ filters = dlg_filters["All", ]) {
 # MacOS version
 .mac_dlg_open <- function(default, title, multiple = FALSE,
 filters = dlg_filters["All", ]) {
+  title <- .replace_quotes(title)
   # TODO: filters are implemented differently on the Mac => how to do this???
   if (!is.matrix(filters))
     filters <- matrix(filters, ncol = 2, byrow = TRUE)

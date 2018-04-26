@@ -6,16 +6,16 @@
   globbing and for folder indication followed by a list selector of files in
   that directory that match filters.
 
+* Manage filters = for dlg_open()/dlg_save().
+
 * Find a better solution for dlg_message(type = "yesnocancel") on RStudio (since
   I can only display two button, we first ask 'yes'/'no', then ask to confirm).
   This is the same with zenity, but since yad is advised on Linux, we don't care
   much.
 
-* Fix messages where there are single or double quotes (' to be replaced by \\')
+* Menus for MacOS, RStudio, and RTerm.exe under Windows.
 
-* Menus for MacOS, RStudio, and RTerm.exe under Windows
-
-* dlg_form() for MacOS, Windows and RStudio, as well as, a text version
+* dlg_form() for MacOS, Windows and RStudio, as well as, a better text version.
 
 * For MacOS one can also use:
   - osascript -e 'tell application "Terminal" to choose color default color

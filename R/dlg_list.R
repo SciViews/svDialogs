@@ -22,6 +22,12 @@
 #' when `multiple == TRUE`, and they are not used automatically if you do not
 #' respecify them in your feedback (limitation of
 #' `utils::select.list(graphics = FALSE)`).
+#' On MacOS, and outside of R(64.app) which has his own list selection dialog
+#' box, single and double quotes are temporarilly replaced by their slanted
+#' versions (unicode characters u3032 and u2033, respectively) because the
+#' command that triggers the dialog box does not allow quotes inside strings.
+#' Regular quotes are reset on the output. This is the only hack we found that
+#' was working. Better solutions are welcome!
 #' @export
 #' @name dlg_list
 #' @seealso [dlg_form()], [dlg_input()]
@@ -192,6 +198,11 @@ title = NULL) {
     app <- "Terminal"
   }
   # Use osascript to display the list box
+  # The command does not allow quotes in string, so, temporailly replaced by
+  # similar unicode characters...
+  choices <- .replace_quotes(as.character(choices))
+  if (!is.null(preselect))
+    preselect <- .replace_quotes(as.character(preselect))
   # Make sure to keep only first preselection if !multiple
   if (!multiple)
     preselect <- preselect[1]
@@ -220,7 +231,8 @@ title = NULL) {
   if (res == "false") {
     character(0)
   } else {
-    unlist(strsplit(sub("  $", "", res), "  , ", fixed = TRUE))
+    res <- unlist(strsplit(sub("  $", "", res), "  , ", fixed = TRUE))
+    res <- .reset_quotes(res)
   }
 }
 

@@ -167,7 +167,7 @@ dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI) {
   on.exit(options(warn = owarn))
   options(warn = -1)
   if (title == "") mcmd <- "" else mcmd <- paste("with prompt \"",
-    title, "\" ", sep = "")
+    .replace_quotes(title), "\" ", sep = "")
   cmd <- paste0("-e 'tell application ", app,
     " to set foldername to choose folder ", mcmd, "default location \"",
     default , "\"' -e 'POSIX path of foldername'")

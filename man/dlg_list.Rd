@@ -56,6 +56,12 @@ Shiny later on). Also note that the textual version only reports preselection
 when \code{multiple == TRUE}, and they are not used automatically if you do not
 respecify them in your feedback (limitation of
 \code{utils::select.list(graphics = FALSE)}).
+On MacOS, and outside of R(64.app) which has his own list selection dialog
+box, single and double quotes are temporarilly replaced by their slanted
+versions (unicode characters u3032 and u2033, respectively) because the
+command that triggers the dialog box does not allow quotes inside strings.
+Regular quotes are reset on the output. This is the only hack we found that
+was working. Better solutions are welcome!
 }
 \examples{
 \dontrun{

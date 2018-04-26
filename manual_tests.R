@@ -5,12 +5,12 @@
 # Copyright (c) 2018, Ph. Grosjean <phgrosjean@sciviews.org>
 # License: see the license for the repo at https://github.com/SciViews/svDialogs
 
-# Tested 2018-04-24 on R 3.4.4 MacOS High Sierra R.app & Terminal &
+# Tested 2018-04-26 on R 3.4.4 MacOS High Sierra R.app & Terminal &
 #                      RStudio Desktop 1.1.447
-# Tested 2018-04-24 on R 3.4.4 Windows 10 RGui.exe & RTerm.exe &
+# Tested 2018-04-26 on R 3.4.4 Windows 10 RGui.exe & RTerm.exe &
 #                      RStudio Desktop 1.1.447
 #        Default directory is not always honored in dlg_dir()! See ?choose.dir
-# Tested 2018-04-24 on R 3.4.4 svBox2018b preview terminal &
+# Tested 2018-04-26 on R 3.4.4 svBox2018b (Ubuntu Bionic Beaver) terminal &
 #                      RStudio Server 1.1.447
 #        + ssh session with and without X11 (-Y argument)
 
@@ -119,10 +119,10 @@ dlg_list(month.name, title = "Close the window", multiple = TRUE)$res
 dlg_list(month.name, title = "Select multiple items", multiple = TRUE)$res
 dlg_list(month.name, title = "Preselection (Mar, Jun, Nov)",
   preselect = month.name[c(3, 6, 11)], multiple = TRUE)$res
-dlg_list(c("no quote", "single quote (')", "doube quote (\")"),
-  preselect = c("single quote (')", "doube quote (\")"), multiple = TRUE)$res
-dlg_list(c("no quote", "single quote (')", "doube quote (\")"),
-  preselect = c("single quote (')", "doube quote (\")"), multiple = TRUE,
+dlg_list(c("no quote", "single quote (')", "double quote (\")"),
+  preselect = c("single quote (')", "double quote (\")"), multiple = TRUE)$res
+dlg_list(c("no quote", "single quote (')", "double quote (\")"),
+  preselect = c("single quote (')", "double quote (\")"), multiple = TRUE,
   zenity = TRUE)$res
 dlg_list(month.name, gui = CLI)$res
 dlg_list(month.name, multiple = TRUE, gui = CLI)$res
@@ -130,7 +130,8 @@ dlg_list(month.name, title = "Enter 0 to cancel", gui = CLI)$res
 dlg_list(month.name, title = "Jun & Nov preselected",
   preselect = month.name[c(6, 11)], multiple = TRUE, gui = CLI)$res
 dlg_list(month.name, title = "zenity version", zenity = TRUE)$res
-dlg_list(month.name, title = "zenity version", multiple = TRUE, zenity = TRUE)$res
+dlg_list(month.name, title = "zenity version", multiple = TRUE,
+  zenity = TRUE)$res
 
 # dlg_form() ----------------------------------------------------------------
 # Only for graphical version under Linux, currently

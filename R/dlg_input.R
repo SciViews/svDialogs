@@ -10,6 +10,14 @@
 #' @return The modified 'gui' object is returned invisibly. The text entered by
 #' the user at the input box, or an empty string if the dialog box was cancelled
 #' can be obtained from `gui$res` (see example).
+#' @note The 'RStudio' version of this dialog box does not allow for an empty
+#' string. So, for better portability, try never to expect an empty string from
+#' the user (the `'Cancel'` button is there to dismiss the dialog box).
+#' On MacOS, single and double quotes are temporarilly replaced by their slanted
+#' versions (unicode characters u3032 and u2033, respectively) because the
+#' command that triggers the dialog box does not allow quotes inside strings.
+#' Regular quotes are reset on the output. This is the only hack we found that
+#' was working. Better solutions are welcome!
 #' @export
 #' @name dlg_input
 #' @seealso [dlg_list()], [dlg_form()], [dlg_message()]
@@ -133,6 +141,8 @@ gui = .GUI) {
 # MacOS version
 .mac_dlg_input <- function(message, default) {
   # Display a modal message with native Mac dialog box
+  message <- .replace_quotes(message)
+  default <- .replace_quotes(default)
   #if (.Platform$GUI == "AQUA") app <- "(name of application \"R\")" else
   # This works from Mac OS X 10.5 Leopard:
   if (.Platform$GUI == "AQUA") {
@@ -168,6 +178,7 @@ gui = .GUI) {
   res <- sub(", button returned:.*$", "", res)
   # This is for an alternate return string on El Capitain
   res <- sub("^.*text returned:", "", res)
+  res <- .reset_quotes(res)
 	paste(res, collapse = " ")
 }
 

@@ -45,7 +45,8 @@ Select an existing file, or create a new one to save data.
 \note{
 In case the file already exists, the user is prompted to confirm he
 wants to overwrite the existing file. If he clicks \code{'Cancel'}, then the
-return is an empty string.
+return is an empty string. The 'RStudio' version of this dialog box currently
+ignores the \code{filters =} argument.
 }
 \examples{
 \dontrun{

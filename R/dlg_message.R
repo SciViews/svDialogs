@@ -204,6 +204,7 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
 # MacOS version
 .mac_dlg_message <- function(message, type= c("ok", "okcancel", "yesno",
 "yesnocancel")) {
+  message <- .replace_quotes(message)
   # Display a modal message with native Mac dialog box
   #if (.Platform$GUI == "AQUA") app <- "(name of application \"R\")" else
   # This works from Mac OS X 10.5 Leopard:
@@ -220,7 +221,7 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
     okcancel = "\"Cancel\",\"OK\"",
     yesno = "\"No\",\"Yes\"",
     yesnocancel = ",\"Cancel\",\"No\",\"Yes\"",
-    stop("type can only be 'ok'n 'okcancel', 'yesno', 'yesnocancel'"))
+    stop("type can only be 'ok', 'okcancel', 'yesno', 'yesnocancel'"))
 
   if (type == "ok") {
     beep <- " -e 'beep'"

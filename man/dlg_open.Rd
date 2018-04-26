@@ -61,6 +61,8 @@ On RStudio, \code{multiple = TRUE} cannot be honored. So, for now, you can
 only select one file there. Also, the textual version is painful to indicate
 the full path of several files. So, it should use globbing, and/or indication
 of a path followed by a selection in a list (to be done in further versions).
+Finally, the 'RStudio' version of this dialog box currently ignores the
+\code{filters =} argument.
 }
 \examples{
 \dontrun{

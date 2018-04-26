@@ -24,9 +24,25 @@
 
 .is_rstudio <- function() rstudioapi::isAvailable()
 
+# With yad or zenity, I cannot have double quotes inside strings: escape them
 .escape_quotes <- function(str) {
   # For yad messages, we need to escape double quotes **inside** messages
   gsub('"', '\\"', str, fixed = TRUE)
+}
+
+# With MacOS, I cannot escape quotes: it does not work with dlg commands
+# So, I temporarilly replace them: U+2032 instead of ' and U+2033 for "
+.replace_quotes <- function(str) {
+  # Need to force toward UTF8
+  str <- enc2utf8(str)
+  str <- gsub("'", "\u2032", str, fixed = TRUE)
+  gsub('"', "\u2033", str, fixed = TRUE)
+}
+
+# Do the opposite to .replace_quotes()
+.reset_quotes <- function(str) {
+  str <- gsub("\u2032", "'", str, fixed = TRUE)
+  gsub("\u2033", '"', str, fixed = TRUE)
 }
 
 # Get the path to yad or zenity, or return "" otherwise

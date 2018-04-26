@@ -17,7 +17,8 @@
 #' @export
 #' @note In case the file already exists, the user is prompted to confirm he
 #' wants to overwrite the existing file. If he clicks `'Cancel'`, then the
-#' return is an empty string.
+#' return is an empty string. The 'RStudio' version of this dialog box currently
+#' ignores the `filters =` argument.
 #' @name dlg_save
 #' @seealso [dlg_open()], [dlg_dir()]
 #' @keywords misc
@@ -170,19 +171,10 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
   title = "", filters = dlg_filters["All", ]) {
   if (rstudioapi::getVersion() < '1.1.287')
     return(NULL)
-  # RStudio dialog box can only use first item for filters
-  if (is.matrix(filters)) {
-    filters <- filters[[1, 1]]
-  } else {
-    filters <- filters[[1]]
-  }
-  if (filters == "*.*") {# Do NOT use filters
-    res <- rstudioapi::selectFile(caption = title, path = default,
+  # I don't understand how filter is used in selectFile(). So, I prefer **not**
+  # to use it for now!
+  res <- rstudioapi::selectFile(caption = title, path = default,
       label = "Save", existing = FALSE)
-  } else {
-    res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Save", filter = filters, existing = FALSE)
-  }
   if (is.null(res)) {
     res <- character(0)
   } else{
@@ -213,6 +205,7 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
 
 # MacOS version
 .mac_dlg_save <- function(default, title, filters = dlg_filters["All", ]) {
+  title <- .replace_quotes(title)
   # TODO: filters are implemented differently on the Mac => how to do this???
   if (!is.matrix(filters))
     filters <- matrix(filters, ncol = 2, byrow = TRUE)
