@@ -186,10 +186,11 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   invisible(gui)
 }
 
+#' @inheritParams get_syst
 #' @export
 #' @rdname dlg_open
 dlgOpen.nativeGUI <- function(default, title, multiple = FALSE,
-filters = dlg_filters["All", ], ..., gui = .GUI) {
+filters = dlg_filters["All", ], ..., gui = .GUI, rstudio = TRUE) {
   # The native version of the file open box
   gui$setUI(widgets = "nativeGUI")
   # An 'open file' dialog box
@@ -197,7 +198,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # This dialog box is always modal
   #
   # Replacement for choose.files(), tkgetOpenFile() & file.choose(new=FALSE)
-  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  syst <- get_syst(rstudio)
   res <- switch(syst,
     RStudio = .rstudio_dlg_open(gui$args$default, gui$args$title,
       gui$args$multiple, gui$args$filters),

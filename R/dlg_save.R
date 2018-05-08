@@ -137,10 +137,11 @@ gui = .GUI) {
   invisible(gui)
 }
 
+#' @inheritParams get_syst
 #' @export
 #' @rdname dlg_save
 dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
-..., gui = .GUI) {
+..., gui = .GUI, rstudio = TRUE) {
   # The native version of the file save dialog box
   gui$setUI(widgets = "nativeGUI")
   # A 'save file' dialog box
@@ -149,7 +150,7 @@ dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
   #
   # It is a replacement for choose.files(), tkgetSaveFile()
   # & file.choose(new = TRUE), not implemented yet in R 2.14, by the way
-  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  syst <- get_syst(rstudio)
   res <- switch(syst,
     RStudio = .rstudio_dlg_save(gui$args$default, gui$args$title,
       gui$args$filters),

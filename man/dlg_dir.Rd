@@ -16,7 +16,8 @@ dlgDir(default = getwd(), title, ..., gui = .GUI)
 
 \method{dlgDir}{textCLI}(default = getwd(), title, ..., gui = .GUI)
 
-\method{dlgDir}{nativeGUI}(default = getwd(), title, ..., gui = .GUI)
+\method{dlgDir}{nativeGUI}(default = getwd(), title, ..., gui = .GUI,
+  rstudio = TRUE)
 }
 \arguments{
 \item{default}{The path to the default directory that is proposed (e.g.,
@@ -27,6 +28,8 @@ current working directory).}
 \item{...}{Pass further arguments to methods.}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
+
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if available?}
 }
 \value{
 The modified 'gui' object is returned invisibly. Use its \code{gui$res}

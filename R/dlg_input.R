@@ -90,15 +90,16 @@ gui = .GUI) {
   invisible(gui)
 }
 
+#' @inheritParams get_syst
 #' @export
 #' @rdname dlg_input
 dlgInput.nativeGUI <- function(message = "Enter a value", default = "", ...,
-gui = .GUI) {
+gui = .GUI, rstudio = TRUE) {
   # The native version of the input box
   gui$setUI(widgets = "nativeGUI")
   # A simple text input box using native window
   # Return either a string, or character(0) if 'Cancel' clicked
-  if (.is_rstudio()) syst <- "RStudio" else syst <- Sys.info()["sysname"]
+  syst <- get_syst(rstudio)
   res <- switch(syst,
     RStudio = .rstudio_dlg_input(gui$args$message, gui$args$default),
     Windows = .win_dlg_input(gui$args$message, gui$args$default),
