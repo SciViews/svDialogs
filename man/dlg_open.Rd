@@ -48,7 +48,8 @@ on MacOS, since such kind of filter is defined differently there.}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
 
-\item{rstudio}{Logical. Should RStudio dialog automatically be used if available?}
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \value{
 The modified 'gui' object is returned invisibly. The chosen file(s),

@@ -7,7 +7,8 @@
 get_syst(rstudio = TRUE)
 }
 \arguments{
-\item{rstudio}{Logical. Should RStudio dialog automatically be used if available?}
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \value{
 A character scalar giving either "RStudio" or the result of

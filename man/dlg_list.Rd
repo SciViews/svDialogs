@@ -39,7 +39,8 @@ instead.}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
 
-\item{rstudio}{Logical. Should RStudio dialog automatically be used if available?}
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \value{
 The modified 'gui' object is returned invisibly. A list with selected
