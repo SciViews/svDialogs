@@ -20,7 +20,7 @@ get_syst <- function(rstudio = TRUE) {
     }
   } else {
     syst <- Sys.info()["sysname"]
-    if (!rstudio) {
+    if (all(!is_rstudio, !rstudio)) {
       message(paste("rstudio = FALSE only applicable when using RStudio.",
         "Treating as TRUE."))
     }
