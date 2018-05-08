@@ -8,6 +8,8 @@ dlg_dir(title = "Sample Dir")$res
 dlg_dir(title = "Sample Dir", rstudio = FALSE)$res
 dlg_dir(title = "Sample Dir", rstudio = FALSE, zenity = TRUE)$res
 
+# dlg_form (No Changes) ---------------------------------------------------
+
 # dlg_input ---------------------------------------------------------------
 
 dlg_input("Sample Input", "Sample Default")$res
@@ -52,5 +54,4 @@ dlg_save(title = "Sample Save")$res
 dlg_save(title = "Sample Save", rstudio = FALSE)$res
 dlg_save(title = "Sample Save", rstudio = FALSE, zenity = TRUE)$res
 
-## MENU (No Changes)
-
+# menu (No Changes) -------------------------------------------------------
