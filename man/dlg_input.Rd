@@ -18,8 +18,8 @@ dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
 \method{dlgInput}{textCLI}(message = "Enter a value", default = "", ...,
   gui = .GUI)
 
-\method{dlgInput}{nativeGUI}(message = "Enter a value", default = "", ...,
-  gui = .GUI, rstudio = TRUE)
+\method{dlgInput}{nativeGUI}(message = "Enter a value", default = "",
+  rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for

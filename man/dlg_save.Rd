@@ -19,7 +19,7 @@ dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
   gui = .GUI)
 
 \method{dlgSave}{nativeGUI}(default, title, filters = dlg_filters["All", ],
-  ..., gui = .GUI, rstudio = TRUE)
+  rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to

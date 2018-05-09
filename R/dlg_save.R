@@ -140,8 +140,7 @@ gui = .GUI) {
 #' @inheritParams get_syst
 #' @export
 #' @rdname dlg_save
-dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ],
-..., gui = .GUI, rstudio = TRUE) {
+dlgSave.nativeGUI <- function(default, title, filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI) {
   # The native version of the file save dialog box
   gui$setUI(widgets = "nativeGUI")
   # A 'save file' dialog box

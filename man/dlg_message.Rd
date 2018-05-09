@@ -33,7 +33,7 @@ okCancelBox(message)
   "yesnocancel"), ..., gui = .GUI)
 
 \method{dlgMessage}{nativeGUI}(message, type = c("ok", "okcancel", "yesno",
-  "yesnocancel"), ..., gui = .GUI, rstudio = TRUE)
+  "yesnocancel"), rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for line

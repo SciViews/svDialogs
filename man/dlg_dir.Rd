@@ -16,8 +16,8 @@ dlgDir(default = getwd(), title, ..., gui = .GUI)
 
 \method{dlgDir}{textCLI}(default = getwd(), title, ..., gui = .GUI)
 
-\method{dlgDir}{nativeGUI}(default = getwd(), title, ..., gui = .GUI,
-  rstudio = TRUE)
+\method{dlgDir}{nativeGUI}(default = getwd(), title, rstudio = TRUE, ...,
+  gui = .GUI)
 }
 \arguments{
 \item{default}{The path to the default directory that is proposed (e.g.,

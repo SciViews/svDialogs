@@ -190,7 +190,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
 #' @export
 #' @rdname dlg_open
 dlgOpen.nativeGUI <- function(default, title, multiple = FALSE,
-filters = dlg_filters["All", ], ..., gui = .GUI, rstudio = TRUE) {
+filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI) {
   # The native version of the file open box
   gui$setUI(widgets = "nativeGUI")
   # An 'open file' dialog box

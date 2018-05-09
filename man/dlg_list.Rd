@@ -21,7 +21,7 @@ dlgList(choices, preselect = NULL, multiple = FALSE, title = NULL, ...,
   title = NULL, ..., gui = .GUI)
 
 \method{dlgList}{nativeGUI}(choices, preselect = NULL, multiple = FALSE,
-  title = NULL, ..., gui = .GUI, rstudio = TRUE)
+  title = NULL, rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{choices}{The list of items. It is coerced to character strings.}

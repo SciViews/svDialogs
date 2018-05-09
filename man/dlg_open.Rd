@@ -29,7 +29,7 @@ dlgFilters
   filters = dlg_filters["All", ], ..., gui = .GUI)
 
 \method{dlgOpen}{nativeGUI}(default, title, multiple = FALSE,
-  filters = dlg_filters["All", ], ..., gui = .GUI, rstudio = TRUE)
+  filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to

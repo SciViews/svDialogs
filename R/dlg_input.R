@@ -93,8 +93,7 @@ gui = .GUI) {
 #' @inheritParams get_syst
 #' @export
 #' @rdname dlg_input
-dlgInput.nativeGUI <- function(message = "Enter a value", default = "", ...,
-gui = .GUI, rstudio = TRUE) {
+dlgInput.nativeGUI <- function(message = "Enter a value", default = "", rstudio = TRUE, ..., gui = .GUI) {
   # The native version of the input box
   gui$setUI(widgets = "nativeGUI")
   # A simple text input box using native window

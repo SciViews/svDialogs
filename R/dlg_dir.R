@@ -107,7 +107,7 @@ dlgDir.textCLI <- function(default = getwd(), title, ..., gui = .GUI) {
 #' @inheritParams get_syst
 #' @export
 #' @rdname dlg_dir
-dlgDir.nativeGUI <- function(default = getwd(), title, ..., gui = .GUI, rstudio = TRUE) {
+dlgDir.nativeGUI <- function(default = getwd(), title, rstudio = TRUE, ..., gui = .GUI) {
   # The native version of the dir select box
   gui$setUI(widgets = "nativeGUI")
   # A 'choose a directory' dialog box
