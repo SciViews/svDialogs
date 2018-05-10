@@ -9,18 +9,18 @@
 #' @param filters A specification of file filters as a `nx2` matrix, or a
 #' character string with even number of items. First items is the label, second
 #' one is the filter. See `dlg_filters` for examples. This is currently ignored
-#' on MacOS, since such kind of filter is defined differently there.
+#' on MacOS and RStudio, since such kind of filter is defined differently there.
 #' @param ... Pass further arguments to methods.
 #' @param gui The 'gui' object concerned by this dialog box.
 #' @return The modified 'gui' object is returned invisibly. The chosen file(s),
 #' or an empty string if the "cancel" button was clicked is found in `gui$res`
 #' (see example).
-#' @note On RStudio, `multiple = TRUE` cannot be honored. So, for now, you can
-#' only select one file there. Also, the textual version is painful to indicate
+#' @note On 'RStudio Server', `multiple = TRUE` cannot be honored for now. So,
+#' you can only select one file there, and a warning is issued to remind you
+#' that. On 'RStudio Desktop', the OS-native dialog box is used instead in case
+#' of `multiple = TRUE`. Also, the textual version is painful to indicate
 #' the full path of several files. So, it should use globbing, and/or indication
 #' of a path followed by a selection in a list (to be done in further versions).
-#' Finally, the 'RStudio' version of this dialog box currently ignores the
-#' `filters =` argument.
 #' @export
 #' @name dlg_open
 #' @seealso [dlg_save()], [dlg_dir()]
@@ -223,12 +223,26 @@ filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI) {
   filters = dlg_filters["All", ]) {
   if (rstudioapi::getVersion() < '1.1.287')
     return(NULL)
-  if (multiple == TRUE)
-    warning("RStudio currently does not allow multiple files selection!")
-  # I cannot manage to understand how filter is used by selectFile(). So, I
-  # prefer **not** to use it for now!
-  res <- rstudioapi::selectFile(caption = title, path = default,
+  if (multiple == TRUE) {
+    if (.is_rstudio_desktop()) {
+      # We use the OS native dialog box instead (temporary workaround)
+      res <- switch(get_system(rstudio = FALSE),
+        Windows = .win_dlg_open(default, title, multiple, filters),
+        Darwin = .mac_dlg_open(default, title, multiple, filters),
+        .unix_dlg_open(default, title, multiple, filters)
+      )
+    } else {# RStudio Server
+      warning(
+        "RStudio Server currently does not allow multiple files selection!")
+      res <- rstudioapi::selectFile(caption = title, path = default,
+        label = "Open", existing = TRUE)
+    }
+  } else {# Single file
+    # I cannot manage to understand how filter is used by selectFile(). So, I
+    # prefer **not** to use it for now!
+    res <- rstudioapi::selectFile(caption = title, path = default,
       label = "Open", existing = TRUE)
+  }
   if (is.null(res) || res == "") {
     res <- character(0)
   } else{

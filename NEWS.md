@@ -5,6 +5,14 @@
 * Argument `rstudio=` to allow by-pass RStudio dialog boxes in native version
   when RStudio Desktop is used (thanks to Paul Hibbins).
 
+* In the case of 'RStudio Desktop', a Tk version of the list selection dialog
+  box is used by default.
+
+* For `dlg_open(multiple = TRUE)` an OS-native dialog box is used instead of the
+  'RStudio' version that is limited to one file only in 'RStudio Desktop'. For
+  'RStudio Server' we have not found a solution yet. So, a warning indicates
+  that only one file can be selected there for the moment.
+
 
 ## Changes in svDialogs 1.0.0
 

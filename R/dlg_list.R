@@ -16,18 +16,19 @@
 #' items, or a character vector of length 0 if the dialog box was cancelled is
 #' available from `gui$res` (see examples).
 #' @note RStudio does not provide (yet) a graphical list selector (as of version
-#' 1.1.447). Consequently, a textual version at the R Console is used even in
-#' the case of `'nativeGUI'` as a temporary workaround (should be implemented in
+#' 1.1.447). Consequently, a Tk version is used (if 'tcltk' is available) for
+#' 'RStudio Desktop' and a textual version at the R Console is used in the other
+#' cases, for `'nativeGUI'` as a temporary workaround (should be implemented in
 #' Shiny later on). Also note that the textual version only reports preselection
 #' when `multiple == TRUE`, and they are not used automatically if you do not
 #' respecify them in your feedback (limitation of
 #' `utils::select.list(graphics = FALSE)`).
-#' On MacOS, and outside of R(64.app) which has his own list selection dialog
+#' On MacOS, and outside of R(64).app, which has his own list selection dialog
 #' box, single and double quotes are temporarilly replaced by their slanted
 #' versions (unicode characters u3032 and u2033, respectively) because the
 #' command that triggers the dialog box does not allow quotes inside strings.
 #' Regular quotes are reset on the output. This is the only hack we found that
-#' was working. Better solutions are welcome!
+#' was working. Better solutions are welcome, of course!
 #' @export
 #' @name dlg_list
 #' @seealso [dlg_form()], [dlg_input()]
@@ -150,13 +151,16 @@ title = NULL, rstudio = TRUE, ..., gui = .GUI) {
 .rstudio_dlg_list <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL) {
   if (multiple) {
-    title2 <- "- Select one or more or 0 to cancel"
+    title2 <- "- Select one or more"
   } else {
-    title2 <- "- Select one or 0 to cancel"
+    title2 <- "- Select one"
   }
+  graphics <- .is_rstudio_desktop()
+  if (!graphics)
+    title2 <- paste(title2, "or 0 to cancel")
   res <- select.list(choices = choices, preselect = preselect,
     multiple = multiple, title = paste(title, title2),
-    graphics = FALSE)
+    graphics = graphics)
   if (length(res) == 1 && res == "") {
     character(0)
   } else {
