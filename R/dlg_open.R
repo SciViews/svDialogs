@@ -190,7 +190,8 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
 #' @export
 #' @rdname dlg_open
 dlgOpen.nativeGUI <- function(default, title, multiple = FALSE,
-filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI) {
+filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio", TRUE),
+..., gui = .GUI) {
   # The native version of the file open box
   gui$setUI(widgets = "nativeGUI")
   # An 'open file' dialog box
@@ -226,6 +227,9 @@ filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI) {
   if (multiple == TRUE) {
     if (.is_rstudio_desktop()) {
       # We use the OS native dialog box instead (temporary workaround)
+      # TODO: consider using tcltk::tk_choose.files(multi = TRUE), at least on
+      # MacOS because of the 'Terminal activation bug', but need to make sure
+      # tcltk is available => more complex than just calling the function!
       res <- switch(get_system(rstudio = FALSE),
         Windows = .win_dlg_open(default, title, multiple, filters),
         Darwin = .mac_dlg_open(default, title, multiple, filters),

@@ -4,12 +4,13 @@
 \alias{get_system}
 \title{Determine the appropriate GUI to instantiate}
 \usage{
-get_system(rstudio = TRUE)
+get_system(rstudio = getOption("svDialogs.rstudio", TRUE))
 }
 \arguments{
 \item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
 if available? If \code{FALSE}, force using OS dialog boxes, but only in
-'RStudio Desktop' (ignored in 'RStudio Server').}
+'RStudio Desktop' (ignored in 'RStudio Server'). Can be changed globally
+with \code{options(svDialogs.rstudio = TRUE|FALSE)}. \code{TRUE} by default.}
 }
 \value{
 A character scalar giving either "RStudio" or the result of

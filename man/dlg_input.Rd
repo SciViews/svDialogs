@@ -19,7 +19,7 @@ dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
   gui = .GUI)
 
 \method{dlgInput}{nativeGUI}(message = "Enter a value", default = "",
-  rstudio = TRUE, ..., gui = .GUI)
+  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for
@@ -33,7 +33,8 @@ line break, or provide a vector of character strings, one for each line.}
 
 \item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
 if available? If \code{FALSE}, force using OS dialog boxes, but only in
-'RStudio Desktop' (ignored in 'RStudio Server').}
+'RStudio Desktop' (ignored in 'RStudio Server'). Can be changed globally
+with \code{options(svDialogs.rstudio = TRUE|FALSE)}. \code{TRUE} by default.}
 }
 \value{
 The modified 'gui' object is returned invisibly. The text entered by

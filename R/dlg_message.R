@@ -131,7 +131,8 @@ dlgMessage.textCLI <- function(message, type = c("ok", "okcancel", "yesno",
 #' @export
 #' @rdname dlg_message
 dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
-"yesnocancel"), rstudio = TRUE, ..., gui = .GUI) {
+"yesnocancel"), rstudio = getOption("svDialogs.rstudio", TRUE), ...,
+gui = .GUI) {
   # The native version of the message box
   gui$setUI(widgets = "nativeGUI")
   # A simple message box

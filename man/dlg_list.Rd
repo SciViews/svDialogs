@@ -21,7 +21,8 @@ dlgList(choices, preselect = NULL, multiple = FALSE, title = NULL, ...,
   title = NULL, ..., gui = .GUI)
 
 \method{dlgList}{nativeGUI}(choices, preselect = NULL, multiple = FALSE,
-  title = NULL, rstudio = TRUE, ..., gui = .GUI)
+  title = NULL, rstudio = getOption("svDialogs.rstudio", TRUE), ...,
+  gui = .GUI)
 }
 \arguments{
 \item{choices}{The list of items. It is coerced to character strings.}
@@ -41,7 +42,8 @@ instead.}
 
 \item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
 if available? If \code{FALSE}, force using OS dialog boxes, but only in
-'RStudio Desktop' (ignored in 'RStudio Server').}
+'RStudio Desktop' (ignored in 'RStudio Server'). Can be changed globally
+with \code{options(svDialogs.rstudio = TRUE|FALSE)}. \code{TRUE} by default.}
 }
 \value{
 The modified 'gui' object is returned invisibly. A list with selected

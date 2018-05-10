@@ -29,7 +29,8 @@ dlgFilters
   filters = dlg_filters["All", ], ..., gui = .GUI)
 
 \method{dlgOpen}{nativeGUI}(default, title, multiple = FALSE,
-  filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI)
+  filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio",
+  TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
@@ -50,7 +51,8 @@ on MacOS and RStudio, since such kind of filter is defined differently there.}
 
 \item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
 if available? If \code{FALSE}, force using OS dialog boxes, but only in
-'RStudio Desktop' (ignored in 'RStudio Server').}
+'RStudio Desktop' (ignored in 'RStudio Server'). Can be changed globally
+with \code{options(svDialogs.rstudio = TRUE|FALSE)}. \code{TRUE} by default.}
 }
 \value{
 The modified 'gui' object is returned invisibly. The chosen file(s),

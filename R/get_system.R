@@ -8,16 +8,17 @@
 #'
 #' @param rstudio Logical. Should 'RStudio' dialog boxes automatically be used
 #'   if available? If `FALSE`, force using OS dialog boxes, but only in
-#'   'RStudio Desktop' (ignored in 'RStudio Server').
+#'   'RStudio Desktop' (ignored in 'RStudio Server'). Can be changed globally
+#'   with `options(svDialogs.rstudio = TRUE|FALSE)`. `TRUE` by default.
 #' @return A character scalar giving either "RStudio" or the result of
 #'   `Sys.info()["sysname"]`
 #' @keywords internal
-get_system <- function(rstudio = TRUE) {
+get_system <- function(rstudio = getOption("svDialogs.rstudio", TRUE)) {
   syst <- Sys.info()["sysname"][[1]]
   if (.is_rstudio()) {
     # One can switch to OS dialog boxes only in RStudio desktop
     # So, in all other case, we return 'RStudio'
-    if (rstudio || !.is_rstudio_desktop())
+    if (isTRUE(rstudio) || !.is_rstudio_desktop())
       syst <- "RStudio"
   }
 

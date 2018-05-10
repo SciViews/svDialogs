@@ -19,7 +19,7 @@ dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
   gui = .GUI)
 
 \method{dlgSave}{nativeGUI}(default, title, filters = dlg_filters["All", ],
-  rstudio = TRUE, ..., gui = .GUI)
+  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
@@ -41,7 +41,8 @@ confirmation is always asked!}
 
 \item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
 if available? If \code{FALSE}, force using OS dialog boxes, but only in
-'RStudio Desktop' (ignored in 'RStudio Server').}
+'RStudio Desktop' (ignored in 'RStudio Server'). Can be changed globally
+with \code{options(svDialogs.rstudio = TRUE|FALSE)}. \code{TRUE} by default.}
 }
 \description{
 Select an existing file, or create a new one to save data.

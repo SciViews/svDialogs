@@ -94,7 +94,7 @@ gui = .GUI) {
 #' @export
 #' @rdname dlg_input
 dlgInput.nativeGUI <- function(message = "Enter a value", default = "",
-rstudio = TRUE, ..., gui = .GUI) {
+rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
   # The native version of the input box
   gui$setUI(widgets = "nativeGUI")
   # A simple text input box using native window

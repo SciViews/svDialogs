@@ -122,7 +122,7 @@ title = NULL, ..., gui = .GUI) {
 #' @export
 #' @rdname dlg_list
 dlgList.nativeGUI <- function(choices, preselect = NULL, multiple = FALSE,
-title = NULL, rstudio = TRUE, ..., gui = .GUI) {
+title = NULL, rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
   # The native version of the list box
   gui$setUI(widgets = "nativeGUI")
   # This is a simple 'select in the list' dialog box
