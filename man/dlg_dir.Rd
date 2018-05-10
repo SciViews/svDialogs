@@ -29,8 +29,9 @@ current working directory).}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
 
-\item{rstudio}{Logical. Should RStudio dialog automatically be used if
-available?}
+\item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
+if available? If \code{FALSE}, force using OS dialog boxes, but only in
+'RStudio Desktop' (ignored in 'RStudio Server').}
 }
 \value{
 The modified 'gui' object is returned invisibly. Use its \code{gui$res}

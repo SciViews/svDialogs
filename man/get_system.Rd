@@ -7,14 +7,19 @@
 get_system(rstudio = TRUE)
 }
 \arguments{
-\item{rstudio}{Logical. Should RStudio dialog automatically be used if
-available?}
+\item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
+if available? If \code{FALSE}, force using OS dialog boxes, but only in
+'RStudio Desktop' (ignored in 'RStudio Server').}
 }
 \value{
 A character scalar giving either "RStudio" or the result of
 \code{Sys.info()["sysname"]}
 }
 \description{
-Determine the appropriate GUI to instantiate
+The native version of the dialog box displays different versions depending
+on the OS (Linux, Windows or MacOS). In the case of 'RStudio', its own dialog
+boxes are used, if they exist. However, in 'RStudio Desktop' only, and when
+the argument \code{rstudio = FALSE} is set, OS dialog boxes may be forced, and
+the function would return the OS instead of \code{RStudio}.
 }
 \keyword{internal}

@@ -1,7 +1,14 @@
 #' Determine the appropriate GUI to instantiate
 #'
-#' @param rstudio Logical. Should RStudio dialog automatically be used if
-#'   available?
+#' The native version of the dialog box displays different versions depending
+#' on the OS (Linux, Windows or MacOS). In the case of 'RStudio', its own dialog
+#' boxes are used, if they exist. However, in 'RStudio Desktop' only, and when
+#' the argument `rstudio = FALSE` is set, OS dialog boxes may be forced, and
+#' the function would return the OS instead of `RStudio`.
+#'
+#' @param rstudio Logical. Should 'RStudio' dialog boxes automatically be used
+#'   if available? If `FALSE`, force using OS dialog boxes, but only in
+#'   'RStudio Desktop' (ignored in 'RStudio Server').
 #' @return A character scalar giving either "RStudio" or the result of
 #'   `Sys.info()["sysname"]`
 #' @keywords internal

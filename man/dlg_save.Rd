@@ -39,8 +39,9 @@ or an empty string (if the "cancel" button was clicked or confirmation was
 cancelled) is placed in \code{gui$res} (see example). For existing files,
 confirmation is always asked!}
 
-\item{rstudio}{Logical. Should RStudio dialog automatically be used if
-available?}
+\item{rstudio}{Logical. Should 'RStudio' dialog boxes automatically be used
+if available? If \code{FALSE}, force using OS dialog boxes, but only in
+'RStudio Desktop' (ignored in 'RStudio Server').}
 }
 \description{
 Select an existing file, or create a new one to save data.
