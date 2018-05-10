@@ -186,7 +186,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   invisible(gui)
 }
 
-#' @inheritParams get_syst
+#' @inheritParams get_system
 #' @export
 #' @rdname dlg_open
 dlgOpen.nativeGUI <- function(default, title, multiple = FALSE,
@@ -198,8 +198,7 @@ filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI) {
   # This dialog box is always modal
   #
   # Replacement for choose.files(), tkgetOpenFile() & file.choose(new=FALSE)
-  syst <- get_syst(rstudio)
-  res <- switch(syst,
+  res <- switch(get_system(rstudio),
     RStudio = .rstudio_dlg_open(gui$args$default, gui$args$title,
       gui$args$multiple, gui$args$filters),
     Windows = .win_dlg_open(gui$args$default, gui$args$title,

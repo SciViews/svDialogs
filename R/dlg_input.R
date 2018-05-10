@@ -90,16 +90,16 @@ gui = .GUI) {
   invisible(gui)
 }
 
-#' @inheritParams get_syst
+#' @inheritParams get_system
 #' @export
 #' @rdname dlg_input
-dlgInput.nativeGUI <- function(message = "Enter a value", default = "", rstudio = TRUE, ..., gui = .GUI) {
+dlgInput.nativeGUI <- function(message = "Enter a value", default = "",
+rstudio = TRUE, ..., gui = .GUI) {
   # The native version of the input box
   gui$setUI(widgets = "nativeGUI")
   # A simple text input box using native window
   # Return either a string, or character(0) if 'Cancel' clicked
-  syst <- get_syst(rstudio)
-  res <- switch(syst,
+  res <- switch(get_system(rstudio),
     RStudio = .rstudio_dlg_input(gui$args$message, gui$args$default),
     Windows = .win_dlg_input(gui$args$message, gui$args$default),
     Darwin = .mac_dlg_input(gui$args$message, gui$args$default),

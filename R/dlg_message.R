@@ -127,7 +127,7 @@ dlgMessage.textCLI <- function(message, type = c("ok", "okcancel", "yesno",
   invisible(gui)
 }
 
-#' @inheritParams get_syst
+#' @inheritParams get_system
 #' @export
 #' @rdname dlg_message
 dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
@@ -138,8 +138,7 @@ dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
   # type can be 'ok' (info), 'okcancel', 'yesno', 'yesnocancel' (question)
   # This dialog box is always modal
   # Returns invisibly a character with the button that was pressed
-  syst <- get_syst(rstudio)
-  res <- switch(syst,
+  res <- switch(get_system(rstudio),
     RStudio = .rstudio_dlg_message(gui$args$message, gui$args$type),
     Windows = .win_dlg_message(gui$args$message, gui$args$type),
     Darwin = .mac_dlg_message(gui$args$message, gui$args$type),

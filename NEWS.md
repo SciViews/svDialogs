@@ -1,5 +1,11 @@
 # svDialogs News
 
+## Changes in svDialogs 1.0.1
+
+* Argument `rstudio=` to allow by-pass RStudio dialog boxes in native version
+  when RStudio Desktop is used (thanks to Paul Hibbins).
+
+
 ## Changes in svDialogs 1.0.0
 
 * Moved to a Github repository.

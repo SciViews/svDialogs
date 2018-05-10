@@ -24,6 +24,8 @@
 
 .is_rstudio <- function() rstudioapi::isAvailable()
 
+.is_rstudio_desktop <- function() rstudioapi::versionInfo()$mode == "desktop"
+
 # With yad or zenity, I cannot have double quotes inside strings: escape them
 .escape_quotes <- function(str) {
   # For yad messages, we need to escape double quotes **inside** messages

@@ -117,7 +117,7 @@ title = NULL, ..., gui = .GUI) {
   invisible(gui)
 }
 
-#' @inheritParams get_syst
+#' @inheritParams get_system
 #' @export
 #' @rdname dlg_list
 dlgList.nativeGUI <- function(choices, preselect = NULL, multiple = FALSE,
@@ -126,8 +126,7 @@ title = NULL, rstudio = TRUE, ..., gui = .GUI) {
   gui$setUI(widgets = "nativeGUI")
   # This is a simple 'select in the list' dialog box
   # It follows the syntax of the select.list() function
-  syst <- get_syst(rstudio)
-  res <- switch(syst,
+  res <- switch(get_system(rstudio),
     RStudio = .rstudio_dlg_list(gui$args$choices, gui$args$preselect,
       gui$args$multiple, gui$args$title),
     Windows = .win_dlg_list(gui$args$choices, gui$args$preselect,

@@ -104,10 +104,11 @@ dlgDir.textCLI <- function(default = getwd(), title, ..., gui = .GUI) {
   invisible(gui)
 }
 
-#' @inheritParams get_syst
+#' @inheritParams get_system
 #' @export
 #' @rdname dlg_dir
-dlgDir.nativeGUI <- function(default = getwd(), title, rstudio = TRUE, ..., gui = .GUI) {
+dlgDir.nativeGUI <- function(default = getwd(), title, rstudio = TRUE, ...,
+gui = .GUI) {
   # The native version of the dir select box
   gui$setUI(widgets = "nativeGUI")
   # A 'choose a directory' dialog box
@@ -115,8 +116,7 @@ dlgDir.nativeGUI <- function(default = getwd(), title, rstudio = TRUE, ..., gui 
   # The argument default indicates the initial directory
   # If cancelled, then return character(0)
   # This dialog box is always modal
-  syst <- get_syst(rstudio)
-  res <- switch(syst,
+  res <- switch(get_system(rstudio),
     RStudio = .rstudio_dlg_dir(gui$args$default, gui$args$title),
     Windows = .win_dlg_dir(gui$args$default, gui$args$title),
     Darwin  = .mac_dlg_dir(gui$args$default, gui$args$title),
