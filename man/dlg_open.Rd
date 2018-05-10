@@ -29,7 +29,7 @@ dlgFilters
   filters = dlg_filters["All", ], ..., gui = .GUI)
 
 \method{dlgOpen}{nativeGUI}(default, title, multiple = FALSE,
-  filters = dlg_filters["All", ], ..., gui = .GUI)
+  filters = dlg_filters["All", ], rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
@@ -47,6 +47,9 @@ on MacOS, since such kind of filter is defined differently there.}
 \item{...}{Pass further arguments to methods.}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
+
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \value{
 The modified 'gui' object is returned invisibly. The chosen file(s),

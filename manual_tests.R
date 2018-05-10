@@ -1,6 +1,6 @@
 # These are manual tests for svDialogs modal boxes.
 # They cannot be automated (yet) and should be run on Windows, MacOS & Linux
-# using various interfaces (RGui, R.app, JGR, RStudio Deskto & Server, terminal)
+# using various interfaces (RGui, R.app, JGR, RStudio Desktop & Server, terminal)
 # once in a while, and before submitting a new version of the package to CRAN.
 # Copyright (c) 2018, Ph. Grosjean <phgrosjean@sciviews.org>
 # License: see the license for the repo at https://github.com/SciViews/svDialogs

@@ -18,8 +18,8 @@ dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
 \method{dlgInput}{textCLI}(message = "Enter a value", default = "", ...,
   gui = .GUI)
 
-\method{dlgInput}{nativeGUI}(message = "Enter a value", default = "", ...,
-  gui = .GUI)
+\method{dlgInput}{nativeGUI}(message = "Enter a value", default = "",
+  rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for
@@ -30,6 +30,9 @@ line break, or provide a vector of character strings, one for each line.}
 \item{...}{Pass further arguments to methods.}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
+
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \value{
 The modified 'gui' object is returned invisibly. The text entered by

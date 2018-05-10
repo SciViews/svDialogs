@@ -19,7 +19,7 @@ dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
   gui = .GUI)
 
 \method{dlgSave}{nativeGUI}(default, title, filters = dlg_filters["All", ],
-  ..., gui = .GUI)
+  rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
@@ -38,6 +38,9 @@ on MacOS, since such kind of filter is defined differently there.}
 or an empty string (if the "cancel" button was clicked or confirmation was
 cancelled) is placed in \code{gui$res} (see example). For existing files,
 confirmation is always asked!}
+
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \description{
 Select an existing file, or create a new one to save data.

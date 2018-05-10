@@ -33,7 +33,7 @@ okCancelBox(message)
   "yesnocancel"), ..., gui = .GUI)
 
 \method{dlgMessage}{nativeGUI}(message, type = c("ok", "okcancel", "yesno",
-  "yesnocancel"), ..., gui = .GUI)
+  "yesnocancel"), rstudio = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for line
@@ -45,6 +45,9 @@ break, or provide a vector of character strings, one for each line.}
 \item{...}{Pass further arguments to methods.}
 
 \item{gui}{The 'gui' object concerned by this dialog box.}
+
+\item{rstudio}{Logical. Should RStudio dialog automatically be used if
+available?}
 }
 \value{
 The modified 'gui' object is returned invisibly. A string with the
