@@ -38,7 +38,7 @@ okCancelBox(message)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for line
-break, or provide a vector of character strings, one for each line.}
+break, or provide a vector of character strings, one for each line (except under RStudio where it is not possible to force line break inside the message string).}
 
 \item{type}{The type of dialog box: \code{'ok'}, \code{'okcancel'}, \code{'yesno'} or
 \code{'yesnocancel'}.}

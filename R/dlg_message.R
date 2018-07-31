@@ -3,7 +3,7 @@
 #' A message box with icon, text, and one to three buttons.
 #'
 #' @param message The message to display in the dialog box. Use `\\n` for line
-#' break, or provide a vector of character strings, one for each line.
+#' break, or provide a vector of character strings, one for each line (except under RStudio where it is not possible to force line break inside the message string).
 #' @param type The type of dialog box: `'ok'`, `'okcancel'`, `'yesno'` or
 #' `'yesnocancel'`.
 #' @param ... Pass further arguments to methods.
