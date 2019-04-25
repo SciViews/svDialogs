@@ -10,7 +10,7 @@ separator
 submenu=File
 
 	item=_Source R code...
-	cmd=sh -c 'Rfile=`zenity --file-selection --title="Select file to source" --file-filter="R files (*.R) | *.R *.r" --file-filter="S files (*.q, *.ssc, *.S) | *.q *.ssc *.S" --file-filter="All files (*.*) | *.*"` && xvkbd -xsendevent -text "source(\""$Rfile"\")\r"'
+	cmd=sh -c 'Rfile=`zenity --file-selection --title="Select file to source" --file-filter="R files (*.R) | *.R *.r" --file-filter="S files (*.q, *.ssc, *.S) | *.q *.ssc *.S" --file-filter="All files (*.*) | *.*"` && xvkbd -text "source(\""$Rfile"\")\r"'
 
 	item=_New script
 	cmd=gedit # Should be nice to set syntax highlighting to R directly, but how?
@@ -25,23 +25,23 @@ submenu=File
 	separator
 
 	item=_Load Workspace...
-	cmd=sh -c 'Rfile=`zenity --file-selection --title="Select image to load" --file-filter="R images (*.RData) | *.RData *.Rdata" --file-filter="R image - old extension (*.rda) | *.rda" --file-filter="All files (*.*) | *.*" filename=".RData"` && xvkbd -xsendevent -text "load(\""$Rfile"\")\r"'
+	cmd=sh -c 'Rfile=`zenity --file-selection --title="Select image to load" --file-filter="R images (*.RData) | *.RData *.Rdata" --file-filter="R image - old extension (*.rda) | *.rda" --file-filter="All files (*.*) | *.*" filename=".RData"` && xvkbd -text "load(\""$Rfile"\")\r"'
 
 	item=_Save Workspace...
-	cmd=sh -c 'File=`zenity --file-selection --title="Save image in" --save --confirm-overwrite --file-filter="R images (*.RData) | *.RData *.Rdata" --file-filter="All files (*.*) | *.*" --filename=".RData"` && xvkbd -xsendevent -text "save.image(\"$File\")\r"'
+	cmd=sh -c 'File=`zenity --file-selection --title="Save image in" --save --confirm-overwrite --file-filter="R images (*.RData) | *.RData *.Rdata" --file-filter="All files (*.*) | *.*" --filename=".RData"` && xvkbd -text "save.image(\"$File\")\r"'
 
 	separator
 
 	item=_Load History...
-	cmd=sh -c 'Rfile=`zenity --file-selection --title="Select history to load" --file-filter="All files (*.*) | *.*" --filename=".Rhistory"` && xvkbd -xsendevent -text "loadhistory(\""$Rfile"\")\r"'
+	cmd=sh -c 'Rfile=`zenity --file-selection --title="Select history to load" --file-filter="All files (*.*) | *.*" --filename=".Rhistory"` && xvkbd -text "loadhistory(\""$Rfile"\")\r"'
 
 	item=_Save History...
-	cmd=sh -c 'File=`zenity --file-selection --title="Save history in" --save --confirm-overwrite --file-filter="All files (*.*) | *.*" --filename=".Rhistory"` && xvkbd -xsendevent -text "savehistory(\"$File\")\r"'
+	cmd=sh -c 'File=`zenity --file-selection --title="Save history in" --save --confirm-overwrite --file-filter="All files (*.*) | *.*" --filename=".Rhistory"` && xvkbd -text "savehistory(\"$File\")\r"'
 
 	separator
 
 	item=_Change dir...
-	cmd=sh -c 'File=`zenity --file-selection --title="Change working dir to" --directory` && xvkbd -xsendevent -text ".odir <- setwd(\"$File\")\r"'
+	cmd=sh -c 'File=`zenity --file-selection --title="Change working dir to" --directory` && xvkbd -text ".odir <- setwd(\"$File\")\r"'
 
 	separator
 
@@ -54,41 +54,41 @@ submenu=File
 	separator
 
 	item=_Exit
-	cmd=sh -c 'zenity --question --title="Exit SciViews R" --text="Are you sure?" --ok-label=OK --cancel-label=Cancel && (zenity --question --title="Exit SciViews R" --text="Save workspace image?" && xvkbd -xsendevent -text "q(\"yes\")\r" || xvkbd -xsendevent -text "q(\"no\")\r")'
+	cmd=sh -c 'zenity --question --title="Exit SciViews R" --text="Are you sure?" --ok-label=OK --cancel-label=Cancel && (zenity --question --title="Exit SciViews R" --text="Save workspace image?" && xvkbd -text "q(\"yes\")\r" || xvkbd -text "q(\"no\")\r")'
 
 submenu=_Edit
 
 	item=Copy
-	cmd=xvkbd -xsendevent -text "\CC" @@@ Default shortcut in gnome-terminal is Ctrl-Shift-C
+	cmd=xvkbd -text "\CC" @@@ Default shortcut in gnome-terminal is Ctrl-Shift-C
 	@@@ Note: this will not work if shortcut is changed!
 
 	item=Paste
-	cmd=xvkbd -xsendevent -text "\CV" @@@ Default shortcut in gnome-terminal is Ctrl-Shift-V
+	cmd=xvkbd -text "\CV" @@@ Default shortcut in gnome-terminal is Ctrl-Shift-V
 	@@@ Note: this will not work if shortcut is changed!
 
 	item=Paste commands only
 	cmd=NULL
 
 	item=Copy and Paste
-	cmd=xvkbd -xsendevent -text "\CC\CV" @@@ Same note as for copy / paste
+	cmd=xvkbd -text "\CC\CV" @@@ Same note as for copy / paste
 
 	item=Select all
 	cmd=NULL
 
 	item=Clear console
-	cmd=xvkbd -xsendevent -text "system(\"clear\") # Or menu Terminal -> Reset and clear\r"
+	cmd=xvkbd -text "system(\"clear\") # Or menu Terminal -> Reset and clear\r"
 	@@@ Clear the console, but does not reset its content per se.
 	@@@ Use gnome-terminal menu entry Terminal -> Reset and Clear
 
 	separator
 
 	item=Data editor...
-	cmd=sh -c 'Data=`zenity --entry --title="R data editor" --text="Name of a data frame or matrix"` && xvkbd -xsendevent -text "Fix($Data)\r"'
+	cmd=sh -c 'Data=`zenity --entry --title="R data editor" --text="Name of a data frame or matrix"` && xvkbd -text "Fix($Data)\r"'
 
 submenu=_Misc
 
 	item=Stop current computation
-	cmd=xvkbd -xsendevent -text "\Cc"
+	cmd=xvkbd -text "\Cc"
 
 	item=Stop all computations
 	cmd=NULL
@@ -96,53 +96,53 @@ submenu=_Misc
 	separator
 
 	item=List objects
-	cmd=xvkbd -xsendevent -text "ls()\r"
+	cmd=xvkbd -text "ls()\r"
 
 	item=Remove all objects
-	cmd=sh -c 'zenity --question --title="Remove all objects" --text="Are you sure?" && xvkbd -xsendevent -text "rm(list = ls(all = TRUE))\r"'
+	cmd=sh -c 'zenity --question --title="Remove all objects" --text="Are you sure?" && xvkbd -text "rm(list = ls(all = TRUE))\r"'
 
 	item=List search path
-	cmd=xvkbd -xsendevent -text "search()\r"
+	cmd=xvkbd -text "search()\r"
 
 submenu=_Packages
 
 	item=Load package...
-	cmd=xvkbd -xsendevent -text "library(select.list(sort(.packages(all.available = TRUE)), graphics = TRUE, title = \"Load package\"), character.only = TRUE)\r"
+	cmd=xvkbd -text "library(select.list(sort(.packages(all.available = TRUE)), graphics = TRUE, title = \"Load package\"), character.only = TRUE)\r"
 
 	separator
 
 	item=Set CRAN mirror...
-	cmd=xvkbd -xsendevent -text "chooseCRANmirror()\r"
+	cmd=xvkbd -text "chooseCRANmirror()\r"
 
 	item=Select repositories...
-	cmd=xvkbd -xsendevent -text "setRepositories()\r"
+	cmd=xvkbd -text "setRepositories()\r"
 
 	item=Install package(s)...
-	cmd=xvkbd -xsendevent -text "install.packages()\r"
+	cmd=xvkbd -text "install.packages()\r"
 
 	item=Update packages...
-	cmd=xvkbd -xsendevent -text "update.packages(ask = 'graphics', checkBuild = TRUE)\r"
+	cmd=xvkbd -text "update.packages(ask = 'graphics', checkBuild = TRUE)\r"
 
 	separator
 
 	item=Install package from local file...
-	cmd=sh -c 'Rpackages=`zenity --file-selection --title="Select one R package" --file-filter="R package source (*.tar.gz) | *.tar.gz" file-filter="All files (*.*) | *.*"` && xvkbd -xsendevent -text "install.packages(\""$Rpackages"\", repos = NULL)\r"'
+	cmd=sh -c 'Rpackages=`zenity --file-selection --title="Select one R package" --file-filter="R package source (*.tar.gz) | *.tar.gz" file-filter="All files (*.*) | *.*"` && xvkbd -text "install.packages(\""$Rpackages"\", repos = NULL)\r"'
 
 submenu=_Windows
 
 	item=New graph
-	cmd=xvkbd -xsendevent -text "dev.new()\r"
+	cmd=xvkbd -text "dev.new()\r"
 
 	item=Activate next graph
-	cmd=xvkbd -xsendevent -text "dev.set()\r"
+	cmd=xvkbd -text "dev.set()\r"
 
 	item=Close all graphs
-	cmd=xvkbd -xsendevent -text "graphics.off()\r"
+	cmd=xvkbd -text "graphics.off()\r"
 
 submenu=_Help
 
 	item=Console
-	cmd=xvkbd -xsendevent -text "\[F1]"
+	cmd=xvkbd -text "\[F1]"
 
 	separator
 
@@ -178,29 +178,29 @@ submenu=_Help
 	separator
 
 	item=R functions (text)...
-	cmd=sh -c 'Topic=`zenity --entry --title="R help" --text="Show help for"` && xvkbd -xsendevent -text "help(\"$Topic\")\r"'
+	cmd=sh -c 'Topic=`zenity --entry --title="R help" --text="Show help for"` && xvkbd -text "help(\"$Topic\")\r"'
 
 	item=Html help
-	cmd=xvkbd -xsendevent -text "help.start()\r"
+	cmd=xvkbd -text "help.start()\r"
 
 	item=Search help...
-	cmd=sh -c 'Topic=`zenity --entry --title="Search help" --text="Expression to search for"` && xvkbd -xsendevent -text "help.search(\"$Topic\")\r"'
+	cmd=sh -c 'Topic=`zenity --entry --title="Search help" --text="Expression to search for"` && xvkbd -text "help.search(\"$Topic\")\r"'
 
 	item=search.r-project.org...
-	cmd=sh -c 'Topic=`zenity --entry --title="R Site Search" --text="Search for words in help list archives and documentation"` && xvkbd -xsendevent -text "RSiteSearch(\"$Topic\")\r"'
+	cmd=sh -c 'Topic=`zenity --entry --title="R Site Search" --text="Search for words in help list archives and documentation"` && xvkbd -text "RSiteSearch(\"$Topic\")\r"'
 
 	separator
 
 	item=Apropos...
-	cmd=sh -c 'Topic=`zenity --entry --title="Apropos" --text="Expression to search for"` && xvkbd -xsendevent -text "apropos(\"$Topic\")\r"'
+	cmd=sh -c 'Topic=`zenity --entry --title="Apropos" --text="Expression to search for"` && xvkbd -text "apropos(\"$Topic\")\r"'
 
 	separator
 
 	item=R project home page
-	cmd=xvkbd -xsendevent -text "browseURL(\"http://www.r-project.org\")\r"
+	cmd=xvkbd -text "browseURL(\"http://www.r-project.org\")\r"
 
 	item=CRAN home page
-	cmd=xvkbd -xsendevent -text "browseURL(\"http://cran.r-project.org\")\r"
+	cmd=xvkbd -text "browseURL(\"http://cran.r-project.org\")\r"
 
 	separator
 

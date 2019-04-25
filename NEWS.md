@@ -4,7 +4,7 @@
 
 * For unix menu items, we now use `xvkbd -text 'cmd\n'` instead of
   `xvkbd -xsendevent -text 'cmd\n'`, because the `-xsendevent` is ignored by
-  many recent apps.
+  many recent apps. Also, `\n` and `\t` are now supported inside menu commands.
 
 
 ## Changes in svDialogs 1.0.1

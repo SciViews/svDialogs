@@ -1014,6 +1014,9 @@ menuDelItem <- menu_del_item # Backward compatibility
             if (cmd == "none" || !is.null(attr(lst[[i]], "state"))) {
               cmd <- "NULL" # This is the "no cmd" or "disabled" for ctxmenu
             } else {
+              # Perform some substitution to commands
+              cmd <- gsub("\n", "\\n", cmd)
+              cmd <- gsub("\t", "\\t", cmd)
               cmd <- paste(cmd, "\\n", sep = "")
               cmd <- paste("xvkbd -text", shQuote(cmd))
             }
