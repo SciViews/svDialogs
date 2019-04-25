@@ -1,5 +1,12 @@
 # svDialogs News
 
+## Changes in svDialogs 1.0.2
+
+* For unix menu items, we now use `xvkbd -text 'cmd\n'` instead of
+  `xvkbd -xsendevent -text 'cmd\n'`, because the `-xsendevent` is ignored by
+  many recent apps.
+
+
 ## Changes in svDialogs 1.0.1
 
 * Argument `rstudio=` to allow by-pass RStudio dialog boxes in native version

@@ -1008,12 +1008,14 @@ menuDelItem <- menu_del_item # Backward compatibility
           } else {# Add an item in current menu
             ind <- rep("\t", indent)
             # Rework commands using xvkbd -xsendevent -text "cmd\r"
+            # In recent versions of xvkbd, -xsendevent is ignored by many apps
+            # So, use only xvkbd -text "cmd\r"
             cmd <- as.character(lst[[i]])[1]
             if (cmd == "none" || !is.null(attr(lst[[i]], "state"))) {
               cmd <- "NULL" # This is the "no cmd" or "disabled" for ctxmenu
             } else {
               cmd <- paste(cmd, "\\n", sep = "")
-              cmd <- paste("xvkbd -xsendevent -text", shQuote(cmd))
+              cmd <- paste("xvkbd -text", shQuote(cmd))
             }
             cat("\n", ind, "item=", item, "\n", ind, "cmd=", cmd,
               "\n", sep = "", file = file, append = TRUE)
