@@ -8,11 +8,11 @@
 \alias{dlgList.nativeGUI}
 \title{Modal dialog to select one or more items in a list.}
 \usage{
-dlg_list(choices, preselect = NULL, multiple = FALSE, title = NULL, ...,
-  gui = .GUI)
+dlg_list(choices, preselect = NULL, multiple = FALSE, title = NULL,
+  ..., gui = .GUI)
 
-dlgList(choices, preselect = NULL, multiple = FALSE, title = NULL, ...,
-  gui = .GUI)
+dlgList(choices, preselect = NULL, multiple = FALSE, title = NULL,
+  ..., gui = .GUI)
 
 \method{dlgList}{gui}(choices, preselect = NULL, multiple = FALSE,
   title = NULL, ..., gui = .GUI)
@@ -20,9 +20,9 @@ dlgList(choices, preselect = NULL, multiple = FALSE, title = NULL, ...,
 \method{dlgList}{textCLI}(choices, preselect = NULL, multiple = FALSE,
   title = NULL, ..., gui = .GUI)
 
-\method{dlgList}{nativeGUI}(choices, preselect = NULL, multiple = FALSE,
-  title = NULL, rstudio = getOption("svDialogs.rstudio", TRUE), ...,
-  gui = .GUI)
+\method{dlgList}{nativeGUI}(choices, preselect = NULL,
+  multiple = FALSE, title = NULL,
+  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{choices}{The list of items. It is coerced to character strings.}
@@ -85,7 +85,5 @@ if (!length(res)) {
 \seealso{
 \code{\link[=dlg_form]{dlg_form()}}, \code{\link[=dlg_input]{dlg_input()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{misc}

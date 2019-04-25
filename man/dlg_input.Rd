@@ -15,8 +15,8 @@ dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
 \method{dlgInput}{gui}(message = "Enter a value", default = "", ...,
   gui = .GUI)
 
-\method{dlgInput}{textCLI}(message = "Enter a value", default = "", ...,
-  gui = .GUI)
+\method{dlgInput}{textCLI}(message = "Enter a value", default = "",
+  ..., gui = .GUI)
 
 \method{dlgInput}{nativeGUI}(message = "Enter a value", default = "",
   rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
@@ -68,7 +68,5 @@ if (!length(user)) {# The user clicked the 'cancel' button
 \seealso{
 \code{\link[=dlg_list]{dlg_list()}}, \code{\link[=dlg_form]{dlg_form()}}, \code{\link[=dlg_message]{dlg_message()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{misc}

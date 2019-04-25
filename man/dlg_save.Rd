@@ -8,18 +8,20 @@
 \alias{dlgSave.nativeGUI}
 \title{Modal dialog to select a file to save to.}
 \usage{
-dlg_save(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
-
-dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
-
-\method{dlgSave}{gui}(default, title, filters = dlg_filters["All", ], ...,
+dlg_save(default, title, filters = dlg_filters["All", ], ...,
   gui = .GUI)
 
-\method{dlgSave}{textCLI}(default, title, filters = dlg_filters["All", ], ...,
+dlgSave(default, title, filters = dlg_filters["All", ], ...,
   gui = .GUI)
 
-\method{dlgSave}{nativeGUI}(default, title, filters = dlg_filters["All", ],
-  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
+\method{dlgSave}{gui}(default, title, filters = dlg_filters["All", ],
+  ..., gui = .GUI)
+
+\method{dlgSave}{textCLI}(default, title, filters = dlg_filters["All", ],
+  ..., gui = .GUI)
+
+\method{dlgSave}{nativeGUI}(default, title, filters = dlg_filters["All",
+  ], rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
@@ -62,7 +64,5 @@ dlg_save(title = "Save R script to", filters = dlg_filters[c("R", "All"), ])$res
 \seealso{
 \code{\link[=dlg_open]{dlg_open()}}, \code{\link[=dlg_dir]{dlg_dir()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{misc}

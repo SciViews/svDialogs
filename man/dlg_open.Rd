@@ -12,11 +12,11 @@
 \title{Modal dialog to select a file.}
 \format{An object of class \code{matrix} with 11 rows and 2 columns.}
 \usage{
-dlg_open(default, title, multiple = FALSE, filters = dlg_filters["All", ],
-  ..., gui = .GUI)
+dlg_open(default, title, multiple = FALSE, filters = dlg_filters["All",
+  ], ..., gui = .GUI)
 
-dlgOpen(default, title, multiple = FALSE, filters = dlg_filters["All", ],
-  ..., gui = .GUI)
+dlgOpen(default, title, multiple = FALSE, filters = dlg_filters["All",
+  ], ..., gui = .GUI)
 
 dlg_filters
 
@@ -29,8 +29,8 @@ dlgFilters
   filters = dlg_filters["All", ], ..., gui = .GUI)
 
 \method{dlgOpen}{nativeGUI}(default, title, multiple = FALSE,
-  filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio",
-  TRUE), ..., gui = .GUI)
+  filters = dlg_filters["All", ],
+  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
@@ -81,8 +81,6 @@ dlg_open(multiple = TRUE)$res
 \seealso{
 \code{\link[=dlg_save]{dlg_save()}}, \code{\link[=dlg_dir]{dlg_dir()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{datasets}
 \keyword{misc}

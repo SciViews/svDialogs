@@ -51,7 +51,5 @@ setwd(dlg_dir(default = getwd())$res)
 \seealso{
 \code{\link[=dlg_open]{dlg_open()}}, \code{\link[=dlg_save]{dlg_save()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{misc}

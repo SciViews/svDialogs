@@ -17,11 +17,11 @@ dlgForm(form, title = "Fill the form", message = NULL, columns = 1,
 \method{dlgForm}{gui}(form, title = "Fill the form", message = NULL,
   columns = 1, strip.type = TRUE, ..., gui = .GUI)
 
-\method{dlgForm}{textCLI}(form, title = "Fill the form", message = NULL,
-  columns = 1, strip.type = TRUE, ..., gui = .GUI)
+\method{dlgForm}{textCLI}(form, title = "Fill the form",
+  message = NULL, columns = 1, strip.type = TRUE, ..., gui = .GUI)
 
-\method{dlgForm}{nativeGUI}(form, title = "Fill the form", message = NULL,
-  columns = 1, strip.type = TRUE, ..., gui = .GUI)
+\method{dlgForm}{nativeGUI}(form, title = "Fill the form",
+  message = NULL, columns = 1, strip.type = TRUE, ..., gui = .GUI)
 }
 \arguments{
 \item{form}{Named list of default values, or list of possible items. Names
@@ -99,7 +99,5 @@ dlg_form(form, "My data")$res
 \seealso{
 \code{\link[=dlg_input]{dlg_input()}}, \code{\link[=dlg_list]{dlg_list()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{misc}

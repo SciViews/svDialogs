@@ -12,11 +12,11 @@
 \alias{dlgMessage.nativeGUI}
 \title{Display a modal message box.}
 \usage{
-dlg_message(message, type = c("ok", "okcancel", "yesno", "yesnocancel"), ...,
-  gui = .GUI)
+dlg_message(message, type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  ..., gui = .GUI)
 
-dlgMessage(message, type = c("ok", "okcancel", "yesno", "yesnocancel"), ...,
-  gui = .GUI)
+dlgMessage(message, type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  ..., gui = .GUI)
 
 msg_box(message)
 
@@ -32,9 +32,9 @@ okCancelBox(message)
 \method{dlgMessage}{textCLI}(message, type = c("ok", "okcancel", "yesno",
   "yesnocancel"), ..., gui = .GUI)
 
-\method{dlgMessage}{nativeGUI}(message, type = c("ok", "okcancel", "yesno",
-  "yesnocancel"), rstudio = getOption("svDialogs.rstudio", TRUE), ...,
-  gui = .GUI)
+\method{dlgMessage}{nativeGUI}(message, type = c("ok", "okcancel",
+  "yesno", "yesnocancel"), rstudio = getOption("svDialogs.rstudio",
+  TRUE), ..., gui = .GUI)
 }
 \arguments{
 \item{message}{The message to display in the dialog box. Use \code{\\n} for line
@@ -95,7 +95,5 @@ if (ok_cancel_box("Continue?")) cat("we continue\\n") else cat("stop it!\\n")
 \seealso{
 \code{\link[=dlg_list]{dlg_list()}}, \code{\link[=dlg_input]{dlg_input()}}
 }
-\concept{
-Modal dialog box
-}
+\concept{Modal dialog box}
 \keyword{misc}
