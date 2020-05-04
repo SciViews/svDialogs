@@ -1,5 +1,7 @@
 = svDialogs To Do list
 
+* The \n and \t in menu commands result into n or t, not \n or \t in xvkbd cmd.
+
 * Create as many tests (testthat) as possible, given most of the code is
   supposed to be used interactively, and thus, is not (easily) testable
   automatically.

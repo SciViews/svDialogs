@@ -1,11 +1,11 @@
 # svDialogs - Standard Dialog Boxes for R
 
-[![Linux & OSX Build Status](https://travis-ci.org/SciViews/svDialogs.svg )](https://travis-ci.org/SciViews/svDialogs)
-[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/SciViews/svDialogs?branch=master&svg=true)](http://ci.appveyor.com/project/phgrosjean/svDialogs)
+[![Linux & OSX Build Status](https://travis-ci.com/SciViews/svDialogs.svg )](https://travis-ci.com/SciViews/svDialogs)
+[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/SciViews/svDialogs?branch=master&svg=true)](https://ci.appveyor.com/project/phgrosjean/svDialogs)
 [![Coverage Status](https://img.shields.io/codecov/c/github/SciViews/svDialogs/master.svg)
 ](https://codecov.io/github/SciViews/svDialogs?branch=master)
-[![CRAN Status](http://www.r-pkg.org/badges/version/svDialogs)](http://cran.r-project.org/package=svDialogs)
-[![License](https://img.shields.io/badge/license-GPL-blue.svg)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![CRAN Status](https://www.r-pkg.org/badges/version/svDialogs)](https://cran.r-project.org/package=svDialogs)
+[![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 
 ## Installation
