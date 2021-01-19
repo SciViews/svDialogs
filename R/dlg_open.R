@@ -46,9 +46,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # always the first filter that is selected by default in the dialog box
   # To specify an initial dir, but no initial file, use /dir/*.*
 
-  #if (missing(default) || !length(default))
-  #  default <- character(0)
-  if (!length(default))
+  if (missing(default) || !length(default))
     default <- ""
   if (!gui$startUI("dlg_open", call = match.call(), default = default,
     msg = "Displaying a modal open file dialog box",
