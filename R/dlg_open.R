@@ -46,29 +46,33 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # always the first filter that is selected by default in the dialog box
   # To specify an initial dir, but no initial file, use /dir/*.*
 
-  if (missing(default) || !length(default))
-    default <- character(0)
+  #if (missing(default) || !length(default))
+  #  default <- character(0)
+  if (!length(default))
+    default <- ""
   if (!gui$startUI("dlg_open", call = match.call(), default = default,
     msg = "Displaying a modal open file dialog box",
     msg.no.ask = "A modal open file dialog box was by-passed"))
     return(invisible(gui))
 
   # Check and rework main arguments and place them in gui$args
-  if (missing(default) || !length(default))
-    default <- file.path(path.expand(getwd()), "*.*")
+  #if (missing(default) || !length(default))
+  #  default <- file.path(path.expand(getwd()), "*.*")
   default <- as.character(default)[1]
   # Under Windows, it uses \\ as separator, although .Platform$file.sep
   # is now / (tested in R 2.11.1) => replace it
   if (.Platform$OS.type == "windows")
     default <- gsub("\\\\", "/", default)
   # Check that dir and file already exists
-  dir <- dirname(default)
-  if (!file.exists(dir) || !file.info(dir)$isdir)
-    default <- file.path(getwd(), basename(default))
+
+  # No, we don't check!
+  #dir <- dirname(default)
+  #if (!file.exists(dir) || !file.info(dir)$isdir)
+  #  default <- file.path(getwd(), basename(default))
   # Check that file exists
-  file <- basename(default)
-  if (file != "*.*" && file != "*" && !file.exists(default))
-    default <- file.path(dirname(default), "*.*")
+  #file <- basename(default)
+  #if (file != "*.*" && file != "*" && !file.exists(default))
+  #  default <- file.path(dirname(default), "*.*")
   multiple <- isTRUE(as.logical(multiple))
   if (missing(title) || !length(title) || title == "") {
     if (multiple) {
@@ -242,10 +246,8 @@ filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio", TRUE),
         label = "Open", existing = TRUE)
     }
   } else {# Single file
-    # I cannot manage to understand how filter is used by selectFile(). So, I
-    # prefer **not** to use it for now!
     res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Open", existing = TRUE)
+      label = "Open", existing = TRUE, filter = filters)
   }
   if (is.null(res) || res == "") {
     res <- character(0)

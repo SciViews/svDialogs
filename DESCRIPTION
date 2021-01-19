@@ -1,6 +1,6 @@
 Package: svDialogs
 Type: Package
-Version: 1.0.2
+Version: 1.0.3
 Title: 'SciViews' - Standard Dialog Boxes for Windows, MacOS and Linuxes
 Description: Rapidly construct standard dialog boxes for your GUI, including 
   message boxes, input boxes, list, file or directory selection, ... In case R
@@ -16,7 +16,7 @@ Imports: svGUI (>= 1.0.0), utils, methods, rstudioapi (>= 0.7)
 Suggests: covr, knitr, testthat
 SystemRequirements: zenity, yad
 License: GPL-2
-URL: https://github.com/SciViews/svDialogs, http://www.sciviews.org/SciViews-R
+URL: https://github.com/SciViews/svDialogs, https://www.sciviews.org/SciViews-R/
 BugReports: https://github.com/SciViews/svDialogs/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0

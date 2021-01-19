@@ -175,7 +175,7 @@ rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
   # I don't understand how filter is used in selectFile(). So, I prefer **not**
   # to use it for now!
   res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Save", existing = FALSE)
+      label = "Save", existing = FALSE, filter = filters)
   if (is.null(res)) {
     res <- character(0)
   } else{

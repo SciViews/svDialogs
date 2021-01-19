@@ -1,5 +1,10 @@
 # svDialogs News
 
+## Changes in svDialogs 1.0.3
+
+* The `filters=` argument should be correctly handled now in `dlg_open()` & `dlg_save()` (bug corrected).
+
+
 ## Changes in svDialogs 1.0.2
 
 * For unix menu items, we now use `xvkbd -text 'cmd\n'` instead of
