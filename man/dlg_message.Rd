@@ -12,11 +12,19 @@
 \alias{dlgMessage.nativeGUI}
 \title{Display a modal message box.}
 \usage{
-dlg_message(message, type = c("ok", "okcancel", "yesno", "yesnocancel"),
-  ..., gui = .GUI)
+dlg_message(
+  message,
+  type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  ...,
+  gui = .GUI
+)
 
-dlgMessage(message, type = c("ok", "okcancel", "yesno", "yesnocancel"),
-  ..., gui = .GUI)
+dlgMessage(
+  message,
+  type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  ...,
+  gui = .GUI
+)
 
 msg_box(message)
 
@@ -26,18 +34,30 @@ ok_cancel_box(message)
 
 okCancelBox(message)
 
-\method{dlgMessage}{gui}(message, type = c("ok", "okcancel", "yesno",
-  "yesnocancel"), ..., gui = .GUI)
+\method{dlgMessage}{gui}(
+  message,
+  type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  ...,
+  gui = .GUI
+)
 
-\method{dlgMessage}{textCLI}(message, type = c("ok", "okcancel", "yesno",
-  "yesnocancel"), ..., gui = .GUI)
+\method{dlgMessage}{textCLI}(
+  message,
+  type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  ...,
+  gui = .GUI
+)
 
-\method{dlgMessage}{nativeGUI}(message, type = c("ok", "okcancel",
-  "yesno", "yesnocancel"), rstudio = getOption("svDialogs.rstudio",
-  TRUE), ..., gui = .GUI)
+\method{dlgMessage}{nativeGUI}(
+  message,
+  type = c("ok", "okcancel", "yesno", "yesnocancel"),
+  rstudio = getOption("svDialogs.rstudio", TRUE),
+  ...,
+  gui = .GUI
+)
 }
 \arguments{
-\item{message}{The message to display in the dialog box. Use \code{\\n} for line
+\item{message}{The message to display in the dialog box. Use \verb{\\\\n} for line
 break, or provide a vector of character strings, one for each line (except under RStudio where it is not possible to force line break inside the message string).}
 
 \item{type}{The type of dialog box: \code{'ok'}, \code{'okcancel'}, \code{'yesno'} or
@@ -85,11 +105,11 @@ dlg_message("Do you like apples?", "yesno")$res
 # Idem, but one can interrupt too
 res <- dlg_message("Do you like oranges?", "yesnocancel")$res
 if (res == "cancel")
-  cat("Ah, ah! You refuse to answer!\\n")
+  cat("Ah, ah! You refuse to answer!\n")
 
 # Simpler version with msgBox and okCancelBox
 msg_box("Information message") # Use this to interrupt script and inform user
-if (ok_cancel_box("Continue?")) cat("we continue\\n") else cat("stop it!\\n")
+if (ok_cancel_box("Continue?")) cat("we continue\n") else cat("stop it!\n")
 }
 }
 \seealso{

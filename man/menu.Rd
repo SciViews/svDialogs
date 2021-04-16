@@ -66,13 +66,13 @@ On Unix/Linux, under Gnome, you must install a little Gtk2 program called
 \code{ctxmenu}, as well as a few other utilities to manage the menu actions. You
 can download corresponding files (GPL-2 license) and get further instructions
 at the bottom of http://www.sciviews.org/SciViews-R/. The \R code in
-\strong{'svDialogs'} only creates menu configuration files in \code{~/.ctxmenu/tmp/} and
+\strong{'svDialogs'} only creates menu configuration files in \verb{~/.ctxmenu/tmp/} and
 only in interactive \R session and after the user agrees to do so (unless
 \code{options(svDialogs.tmpfiles = TRUE)}).
 Once you installed these files, you can access the menus by setting up
 keyboard shortcuts to activate main and context menus. The respective
 commands are \code{ctxmenu-main} and \code{ctxmenu-context} and you can use the
-preference panel to assign, e.g., \code{<shift-menu>} and \code{<ctrl-menu>}, or other
+preference panel to assign, e.g., \verb{<shift-menu>} and \verb{<ctrl-menu>}, or other
 keyboard shortcuts to these commands. Once everything is set up, you should
 see your menus appearing when a console where \R + \strong{'svDialogs'} runs is the
 active window and you hit these shortcuts (after you have defined at least
@@ -89,7 +89,7 @@ menu item is selected (merely as a placeholder for future menu actions). You
 can change the action of an existing menu by reissuing the command with a
 different action argument.
 
-If the \code{menuname=} parameter of \code{menu_add_item()} does not exists, it is
+If the \verb{menuname=} parameter of \code{menu_add_item()} does not exists, it is
 automatically created. For creating submenus, separate successive menu names
 with slashes. Use \code{"-"} as name for separation menus under Windows or
 Unix/Linux.

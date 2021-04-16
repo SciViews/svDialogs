@@ -8,23 +8,25 @@
 \alias{dlgSave.nativeGUI}
 \title{Modal dialog to select a file to save to.}
 \usage{
-dlg_save(default, title, filters = dlg_filters["All", ], ...,
-  gui = .GUI)
+dlg_save(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-dlgSave(default, title, filters = dlg_filters["All", ], ...,
-  gui = .GUI)
+dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-\method{dlgSave}{gui}(default, title, filters = dlg_filters["All", ],
-  ..., gui = .GUI)
+\method{dlgSave}{gui}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-\method{dlgSave}{textCLI}(default, title, filters = dlg_filters["All", ],
-  ..., gui = .GUI)
+\method{dlgSave}{textCLI}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-\method{dlgSave}{nativeGUI}(default, title, filters = dlg_filters["All",
-  ], rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
+\method{dlgSave}{nativeGUI}(
+  default,
+  title,
+  filters = dlg_filters["All", ],
+  rstudio = getOption("svDialogs.rstudio", TRUE),
+  ...,
+  gui = .GUI
+)
 }
 \arguments{
-\item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
+\item{default}{The default file to start with (use \verb{/dir/*} or \verb{/dir/*.*} to
 start in a given directory, but without predefined name).}
 
 \item{title}{A title to display on top of the dialog box.}
@@ -53,7 +55,7 @@ Select an existing file, or create a new one to save data.
 In case the file already exists, the user is prompted to confirm he
 wants to overwrite the existing file. If he clicks \code{'Cancel'}, then the
 return is an empty string. The 'RStudio' version of this dialog box currently
-ignores the \code{filters =} argument.
+ignores the \verb{filters =} argument.
 }
 \examples{
 \dontrun{

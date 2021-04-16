@@ -12,17 +12,20 @@ dlg_input(message = "Enter a value", default = "", ..., gui = .GUI)
 
 dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
 
-\method{dlgInput}{gui}(message = "Enter a value", default = "", ...,
-  gui = .GUI)
+\method{dlgInput}{gui}(message = "Enter a value", default = "", ..., gui = .GUI)
 
-\method{dlgInput}{textCLI}(message = "Enter a value", default = "",
-  ..., gui = .GUI)
+\method{dlgInput}{textCLI}(message = "Enter a value", default = "", ..., gui = .GUI)
 
-\method{dlgInput}{nativeGUI}(message = "Enter a value", default = "",
-  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
+\method{dlgInput}{nativeGUI}(
+  message = "Enter a value",
+  default = "",
+  rstudio = getOption("svDialogs.rstudio", TRUE),
+  ...,
+  gui = .GUI
+)
 }
 \arguments{
-\item{message}{The message to display in the dialog box. Use \code{\\n} for
+\item{message}{The message to display in the dialog box. Use \verb{\\\\n} for
 line break, or provide a vector of character strings, one for each line.}
 
 \item{default}{The default value in the text box. Single string or \code{NULL}.}
@@ -59,9 +62,9 @@ was working. Better solutions are welcome!
 # Ask something...
 user <- dlg_input("Who are you?", Sys.info()["user"])$res
 if (!length(user)) {# The user clicked the 'cancel' button
-  cat("OK, you prefer to stay anonymous!\\n")
+  cat("OK, you prefer to stay anonymous!\n")
 } else {
-  cat("Hello", user, "\\n")
+  cat("Hello", user, "\n")
 }
 }
 }

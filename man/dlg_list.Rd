@@ -8,21 +8,51 @@
 \alias{dlgList.nativeGUI}
 \title{Modal dialog to select one or more items in a list.}
 \usage{
-dlg_list(choices, preselect = NULL, multiple = FALSE, title = NULL,
-  ..., gui = .GUI)
+dlg_list(
+  choices,
+  preselect = NULL,
+  multiple = FALSE,
+  title = NULL,
+  ...,
+  gui = .GUI
+)
 
-dlgList(choices, preselect = NULL, multiple = FALSE, title = NULL,
-  ..., gui = .GUI)
+dlgList(
+  choices,
+  preselect = NULL,
+  multiple = FALSE,
+  title = NULL,
+  ...,
+  gui = .GUI
+)
 
-\method{dlgList}{gui}(choices, preselect = NULL, multiple = FALSE,
-  title = NULL, ..., gui = .GUI)
+\method{dlgList}{gui}(
+  choices,
+  preselect = NULL,
+  multiple = FALSE,
+  title = NULL,
+  ...,
+  gui = .GUI
+)
 
-\method{dlgList}{textCLI}(choices, preselect = NULL, multiple = FALSE,
-  title = NULL, ..., gui = .GUI)
+\method{dlgList}{textCLI}(
+  choices,
+  preselect = NULL,
+  multiple = FALSE,
+  title = NULL,
+  ...,
+  gui = .GUI
+)
 
-\method{dlgList}{nativeGUI}(choices, preselect = NULL,
-  multiple = FALSE, title = NULL,
-  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
+\method{dlgList}{nativeGUI}(
+  choices,
+  preselect = NULL,
+  multiple = FALSE,
+  title = NULL,
+  rstudio = getOption("svDialogs.rstudio", TRUE),
+  ...,
+  gui = .GUI
+)
 }
 \arguments{
 \item{choices}{The list of items. It is coerced to character strings.}
@@ -75,9 +105,9 @@ was working. Better solutions are welcome, of course!
 # Select one or several months
 res <- dlg_list(month.name, multiple = TRUE)$res
 if (!length(res)) {
-  cat("You cancelled the choice\\n")
+  cat("You cancelled the choice\n")
 } else {
-  cat("You selected:\\n")
+  cat("You selected:\n")
   print(res)
 }
 }

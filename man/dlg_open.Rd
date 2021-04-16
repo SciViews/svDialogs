@@ -10,30 +10,64 @@
 \alias{dlgOpen.textCLI}
 \alias{dlgOpen.nativeGUI}
 \title{Modal dialog to select a file.}
-\format{An object of class \code{matrix} with 11 rows and 2 columns.}
-\usage{
-dlg_open(default, title, multiple = FALSE, filters = dlg_filters["All",
-  ], ..., gui = .GUI)
+\format{
+An object of class \code{matrix} with 11 rows and 2 columns.
 
-dlgOpen(default, title, multiple = FALSE, filters = dlg_filters["All",
-  ], ..., gui = .GUI)
+An object of class \code{matrix} with 11 rows and 2 columns.
+}
+\usage{
+dlg_open(
+  default,
+  title,
+  multiple = FALSE,
+  filters = dlg_filters["All", ],
+  ...,
+  gui = .GUI
+)
+
+dlgOpen(
+  default,
+  title,
+  multiple = FALSE,
+  filters = dlg_filters["All", ],
+  ...,
+  gui = .GUI
+)
 
 dlg_filters
 
 dlgFilters
 
-\method{dlgOpen}{gui}(default, title, multiple = FALSE,
-  filters = dlg_filters["All", ], ..., gui = .GUI)
-
-\method{dlgOpen}{textCLI}(default, title, multiple = FALSE,
-  filters = dlg_filters["All", ], ..., gui = .GUI)
-
-\method{dlgOpen}{nativeGUI}(default, title, multiple = FALSE,
+\method{dlgOpen}{gui}(
+  default,
+  title,
+  multiple = FALSE,
   filters = dlg_filters["All", ],
-  rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI)
+  ...,
+  gui = .GUI
+)
+
+\method{dlgOpen}{textCLI}(
+  default,
+  title,
+  multiple = FALSE,
+  filters = dlg_filters["All", ],
+  ...,
+  gui = .GUI
+)
+
+\method{dlgOpen}{nativeGUI}(
+  default,
+  title,
+  multiple = FALSE,
+  filters = dlg_filters["All", ],
+  rstudio = getOption("svDialogs.rstudio", TRUE),
+  ...,
+  gui = .GUI
+)
 }
 \arguments{
-\item{default}{The default file to start with (use \code{/dir/*} or \code{/dir/*.*} to
+\item{default}{The default file to start with (use \verb{/dir/*} or \verb{/dir/*.*} to
 start in a given directory).}
 
 \item{title}{A title to display on top of the dialog box.}

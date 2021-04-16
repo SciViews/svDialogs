@@ -8,20 +8,55 @@
 \alias{dlgForm.nativeGUI}
 \title{Modal dialog to fill a series of different fields.}
 \usage{
-dlg_form(form, title = "Fill the form", message = NULL, columns = 1,
-  strip.type = TRUE, ..., gui = .GUI)
+dlg_form(
+  form,
+  title = "Fill the form",
+  message = NULL,
+  columns = 1,
+  strip.type = TRUE,
+  ...,
+  gui = .GUI
+)
 
-dlgForm(form, title = "Fill the form", message = NULL, columns = 1,
-  strip.type = TRUE, ..., gui = .GUI)
+dlgForm(
+  form,
+  title = "Fill the form",
+  message = NULL,
+  columns = 1,
+  strip.type = TRUE,
+  ...,
+  gui = .GUI
+)
 
-\method{dlgForm}{gui}(form, title = "Fill the form", message = NULL,
-  columns = 1, strip.type = TRUE, ..., gui = .GUI)
+\method{dlgForm}{gui}(
+  form,
+  title = "Fill the form",
+  message = NULL,
+  columns = 1,
+  strip.type = TRUE,
+  ...,
+  gui = .GUI
+)
 
-\method{dlgForm}{textCLI}(form, title = "Fill the form",
-  message = NULL, columns = 1, strip.type = TRUE, ..., gui = .GUI)
+\method{dlgForm}{textCLI}(
+  form,
+  title = "Fill the form",
+  message = NULL,
+  columns = 1,
+  strip.type = TRUE,
+  ...,
+  gui = .GUI
+)
 
-\method{dlgForm}{nativeGUI}(form, title = "Fill the form",
-  message = NULL, columns = 1, strip.type = TRUE, ..., gui = .GUI)
+\method{dlgForm}{nativeGUI}(
+  form,
+  title = "Fill the form",
+  message = NULL,
+  columns = 1,
+  strip.type = TRUE,
+  ...,
+  gui = .GUI
+)
 }
 \arguments{
 \item{form}{Named list of default values, or list of possible items. Names
@@ -31,7 +66,7 @@ indicator of the type of entry to place in the dialog box (see details).}
 \item{title}{The title of the form.}
 
 \item{message}{An optional message to display in the dialog box. Use
-\code{\\n} for line break, or provide a vector of character strings, one for
+\verb{\\\\n} for line break, or provide a vector of character strings, one for
 each line.}
 
 \item{columns}{Arrange the entries on this number of columns (by row).}
@@ -55,28 +90,28 @@ values, or a list of possible items, e.g., for the combobox. Names are labels
 displayed in front of each field in the form. Follow them by a code that
 represents the type of entry you want to use:
 \itemize{
-\item \code{:TXT} for simple (default) textual box,
-\item \code{:H} for hidden text (password),
-\item \code{:RO} for read-only text,
-\item \code{:NUM} for null of positive integers with up/down arrows,
-\item \code{:CHK} for checkbox: \code{TRUE} or \code{FALSE},
-\item \code{:CB} for read-only combobox,
-\item \code{:CBE} for editable combobox,
-\item \code{:FL} to select one existing file,
-\item \code{:MFL} to select multiple existing files,
-\item \code{:SFL} to select or create one file,
-\item \code{:DIR} to select a directory,
-\item \code{:CDIR} to select or create a directory,
-\item \code{:FN} to select font and font size,
-\item \code{:DT} to enter a date,
+\item \verb{:TXT} for simple (default) textual box,
+\item \verb{:H} for hidden text (password),
+\item \verb{:RO} for read-only text,
+\item \verb{:NUM} for null of positive integers with up/down arrows,
+\item \verb{:CHK} for checkbox: \code{TRUE} or \code{FALSE},
+\item \verb{:CB} for read-only combobox,
+\item \verb{:CBE} for editable combobox,
+\item \verb{:FL} to select one existing file,
+\item \verb{:MFL} to select multiple existing files,
+\item \verb{:SFL} to select or create one file,
+\item \verb{:DIR} to select a directory,
+\item \verb{:CDIR} to select or create a directory,
+\item \verb{:FN} to select font and font size,
+\item \verb{:DT} to enter a date,
 \item :CLR` to enter a RGB color,
 \item :BTN` to create a button that execute some code,
-\item \code{:LBL} to add a label.
+\item \verb{:LBL} to add a label.
 }
 
 For the moment, the form dialog box is only supported on Linux. You have to
 install \strong{yad} to get access to it. On Ubuntu, you do so by
-\code{sudo apt-get install yad}. For other system, look at the documentation.
+\verb{sudo apt-get install yad}. For other system, look at the documentation.
 }
 \note{
 \code{dlg_form()} can use strings with embedded quotes, but you have to
