@@ -15,12 +15,27 @@ branches:
   only:
     - master
 
+# This is used to compact and check size of vignettes
+addons:
+  apt:
+    update: true
+    packages:
+      - libgs-dev
+      - qpdf
+      - ghostscript
+
 # Be strict when checking our package, but don't build the manual
 warnings_are_errors: true
-# Note: can also add --no-build-vignettes to both
-r_build_args: --no-manual --no-resave-data
-r_check_args: --as-cran
+# Don't build vignettes on Mac OS X
+r_build_args: --no-manual --no-resave-data --compact-vignettes=gs+qpdf
+r_check_args: --no-manual --as-cran
 disable_homebrew: true
+
+#matrix:
+#  include:
+#    - os: osx
+#      r_build_args: --no-manual --no-build-vignettes --no-resave-data
+#      r_check_args: --no-manual --no-build-vignettes
 
 # Email notifications
 notifications:

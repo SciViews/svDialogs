@@ -33,7 +33,7 @@
 }
 
 # With MacOS, I cannot escape quotes: it does not work with dlg commands
-# So, I temporarilly replace them: U+2032 instead of ' and U+2033 for "
+# So, I temporarily replace them: U+2032 instead of ' and U+2033 for "
 .replace_quotes <- function(str) {
   # Need to force toward UTF8
   str <- enc2utf8(str)

@@ -1,4 +1,4 @@
-citHeader("To cite SciViews-R in publications use:")
+citHeader("To cite SciViews-R in publications, please use:")
 
 citEntry(entry="Manual",
          title = "SciViews-R",

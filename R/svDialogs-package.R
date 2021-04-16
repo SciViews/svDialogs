@@ -1,9 +1,6 @@
-#' SciViews - Standard Dialog Boxes for R
-#'
-#' Rapidly construct standard dialog boxes for your GUI, including
-#' message boxes, input boxes, list, file or dir selection, ... In case R cannot
-#' display GUI dialog boxes, a simpler command line version of these interactive
-#' elements is also provided as fallback solution.
+#' @details
+#' The dialog box function dispatch to specific dialog boxes depending on the OS
+#' and whether a GUI can be displayed or not.
 #'
 #' @section Important functions:
 #'
@@ -23,10 +20,14 @@
 #' GtkDialog mapped without a transient parent. This is discouraged." You do not
 #' get these inconveniences if you use 'yad' (default choice in case both
 #' programs are installed simultaneously).
-
-#' @docType package
-#' @name svDialogs-package
 #'
+#' @keywords internal
+"_PACKAGE"
+
+# The following block is used by usethis to automatically manage
+# roxygen namespace tags. Modify with care!
+## usethis namespace: start
+## usethis namespace: end
 #' @import utils
 #' @importFrom methods as
 #' @import rstudioapi

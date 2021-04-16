@@ -24,7 +24,7 @@
 #' respecify them in your feedback (limitation of
 #' `utils::select.list(graphics = FALSE)`).
 #' On MacOS, and outside of R(64).app, which has his own list selection dialog
-#' box, single and double quotes are temporarilly replaced by their slanted
+#' box, single and double quotes are temporarily replaced by their slanted
 #' versions (unicode characters u3032 and u2033, respectively) because the
 #' command that triggers the dialog box does not allow quotes inside strings.
 #' Regular quotes are reset on the output. This is the only hack we found that

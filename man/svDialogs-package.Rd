@@ -2,13 +2,18 @@
 % Please edit documentation in R/svDialogs-package.R
 \docType{package}
 \name{svDialogs-package}
+\alias{svDialogs}
 \alias{svDialogs-package}
-\title{SciViews - Standard Dialog Boxes for R}
+\title{svDialogs: SciViews - Standard Dialog Boxes for Windows, MacOS and Linuxes}
 \description{
-Rapidly construct standard dialog boxes for your GUI, including
-message boxes, input boxes, list, file or dir selection, ... In case R cannot
-display GUI dialog boxes, a simpler command line version of these interactive
-elements is also provided as fallback solution.
+Rapidly construct standard dialog boxes for your GUI, including 
+  message boxes, input boxes, list, file or directory selection, ... In case R
+  cannot display GUI dialog boxes, a simpler command line version of these
+  interactive elements is also provided as fallback solution.
+}
+\details{
+The dialog box function dispatch to specific dialog boxes depending on the OS
+and whether a GUI can be displayed or not.
 }
 \note{
 Under Linux, you should install \strong{'yad'} (preferably), or
@@ -33,3 +38,22 @@ checkboxes, comboboxes, font and size, color, etc.
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/SciViews/svDialogs}
+  \item \url{https://www.sciviews.org/svDialogs/}
+  \item Report bugs at \url{https://github.com/SciViews/svDialogs/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Philippe Grosjean \email{phgrosjean@sciviews.org} (\href{https://orcid.org/0000-0002-2694-9471}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Paul Hibbins \email{paulhibbing@gmail.com} [contributor]
+}
+
+}
+\keyword{internal}

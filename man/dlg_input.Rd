@@ -51,7 +51,7 @@ Prompt for some data in a modal dialog box.
 The 'RStudio' version of this dialog box does not allow for an empty
 string. So, for better portability, try never to expect an empty string from
 the user (the \code{'Cancel'} button is there to dismiss the dialog box).
-On MacOS, single and double quotes are temporarilly replaced by their slanted
+On MacOS, single and double quotes are temporarily replaced by their slanted
 versions (unicode characters u3032 and u2033, respectively) because the
 command that triggers the dialog box does not allow quotes inside strings.
 Regular quotes are reset on the output. This is the only hack we found that
