@@ -3,7 +3,7 @@ Type: Package
 Version: 1.0.3
 Date: 2021-04-16
 Title: SciViews - Standard Dialog Boxes for Windows, MacOS and Linuxes
-Description: Rapidly construct standard dialog boxes for your GUI, including 
+Description: Quickly construct standard dialog boxes for your GUI, including 
   message boxes, input boxes, list, file or directory selection, ... In case R
   cannot display GUI dialog boxes, a simpler command line version of these
   interactive elements is also provided as fallback solution.
