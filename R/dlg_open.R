@@ -33,8 +33,9 @@
 #' # Choose several files
 #' dlg_open(multiple = TRUE)$res
 #' }
-dlg_open <- function(default, title, multiple = FALSE,
-filters = dlg_filters["All", ], ..., gui = .GUI) {
+dlg_open <- function(default = "", title = if (multiple) "Select files" else
+"Select file", multiple = FALSE, filters = dlg_filters["All", ], ...,
+gui = .GUI) {
   # Define the S3 method
   # An 'open file(s)' dialog box
   # filters is a n x 2 matrix of characters with description and filter
@@ -46,8 +47,6 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   # always the first filter that is selected by default in the dialog box
   # To specify an initial dir, but no initial file, use /dir/*.*
 
-  if (missing(default) || !length(default))
-    default <- ""
   if (!gui$startUI("dlg_open", call = match.call(), default = default,
     msg = "Displaying a modal open file dialog box",
     msg.no.ask = "A modal open file dialog box was by-passed"))
@@ -72,13 +71,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
   #if (file != "*.*" && file != "*" && !file.exists(default))
   #  default <- file.path(dirname(default), "*.*")
   multiple <- isTRUE(as.logical(multiple))
-  if (missing(title) || !length(title) || title == "") {
-    if (multiple) {
-      title <- "Select files"
-    } else {
-      title <- "Select file"
-    }
-  } else title <- as.character(title)[1]
+  title <- as.character(title)[1]
   # Check that filter is a nx2 character matrix, or try reshape it as such
   if (is.matrix(filters)) {
     if (ncol(filters) != 2 || !is.character(filters))

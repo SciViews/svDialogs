@@ -20,7 +20,8 @@
 #' # A quick default directory changer
 #' setwd(dlg_dir(default = getwd())$res)
 #' }
-dlg_dir <- function(default = getwd(), title, ..., gui = .GUI) {
+dlg_dir <- function(default = getwd(), title = "Choose a directory", ...,
+gui = .GUI) {
   # Define the S3 method
   if (!gui$startUI("dlg_dir", call = match.call(), default = default,
     msg = "Displaying a modal dir selection dialog box",
@@ -37,11 +38,7 @@ dlg_dir <- function(default = getwd(), title, ..., gui = .GUI) {
     # is now / (tested in R 2.11.1) => replace it
     if (.Platform$OS.type == "windows")
       default <- gsub("\\\\", "/", default)
-    if (missing(title) || !length(title) || title == "") {
-      title <- "Choose a directory"
-    } else {
-      title <- paste(as.character(title), collapse = "\n")
-    }
+    title <- paste(as.character(title), collapse = "\n")
     gui$setUI(args = list(default = default, title = title))
 
     # ... and dispatch to the method

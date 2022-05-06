@@ -17,8 +17,8 @@ An object of class \code{matrix} (inherits from \code{array}) with 11 rows and 2
 }
 \usage{
 dlg_open(
-  default,
-  title,
+  default = "",
+  title = if (multiple) "Select files" else "Select file",
   multiple = FALSE,
   filters = dlg_filters["All", ],
   ...,
@@ -26,8 +26,8 @@ dlg_open(
 )
 
 dlgOpen(
-  default,
-  title,
+  default = "",
+  title = if (multiple) "Select files" else "Select file",
   multiple = FALSE,
   filters = dlg_filters["All", ],
   ...,

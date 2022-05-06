@@ -28,8 +28,8 @@
 #' # Choose one R filename to save some R script into it
 #' dlg_save(title = "Save R script to", filters = dlg_filters[c("R", "All"), ])$res
 #' }
-dlg_save <- function(default, title, filters = dlg_filters["All", ], ...,
-gui = .GUI) {
+dlg_save <- function(default = "untitled", title = "Save file as",
+filters = dlg_filters["All", ], ..., gui = .GUI) {
   # Define the S3 method
   # TODO: define default extension!!!
   # A 'save file' dialog box
@@ -40,8 +40,6 @@ gui = .GUI) {
   # for instance: "R or S files (*.R, *.q)"       "*.R;*.q"
   # It could be also an even number of character strings that will be
   # reorganized into a n x 2 matrix.
-  if (missing(default) || !length(default))
-    default <- "untitled"
   if (!gui$startUI("dlg_save", call = match.call(), default = default,
     msg = "Displaying a modal save file dialog box",
     msg.no.ask = "A modal save file dialog box was by-passed"))
@@ -64,11 +62,7 @@ gui = .GUI) {
     if (!file.exists(dir) || !file.info(dir)$isdir)
       default <- file.path(getwd(), basename(default))
   }
-  if (missing(title) || title == "") {
-    title <- "Save file as"
-  } else {
-    title <- as.character(title)[1]
-  }
+  title <- as.character(title)[1]
   # Check that filter is a nx2 character matrix, or try reshape it as such
   if (is.matrix(filters)) {
     if (ncol(filters) != 2 || !is.character(filters))

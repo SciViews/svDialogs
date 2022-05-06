@@ -8,9 +8,21 @@
 \alias{dlg_save.nativeGUI}
 \title{Modal dialog to select a file to save to.}
 \usage{
-dlg_save(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
+dlg_save(
+  default = "untitled",
+  title = "Save file as",
+  filters = dlg_filters["All", ],
+  ...,
+  gui = .GUI
+)
 
-dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
+dlgSave(
+  default = "untitled",
+  title = "Save file as",
+  filters = dlg_filters["All", ],
+  ...,
+  gui = .GUI
+)
 
 \method{dlg_save}{gui}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
