@@ -49,7 +49,7 @@
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -71,7 +71,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -86,7 +86,7 @@
   <a href="news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/svDialogs/">
+  <a href="https://github.com/SciViews/svDialogs/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -108,35 +108,34 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="svdialogs" class="section level1">
+<div class="section level1">
 
 <!-- badges: start -->
-
-<p>With {svDialogs}, you can rapidly construct standard dialog boxes for your GUI, including message boxes, input boxes, list, file or directory selection, … In case R cannot display GUI dialog boxes, a simpler command line version of these interactive elements is provided as fallback solution (E;G., in a terminal session).</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<!-- badges: end --><p>With {svDialogs}, you can rapidly construct standard dialog boxes for your GUI, including message boxes, input boxes, list, file or directory selection, … In case R cannot display GUI dialog boxes, a simpler command line version of these interactive elements is provided as fallback solution (e.g., in a terminal session).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install the released version of {svDialogs} from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"svDialogs"</span><span class="op">)</span></code></pre></div>
-<p>You can also install the latest developement version. Make sure you have the {devtools} R package installed:</p>
+<p>You can also install the latest development version. Make sure you have the {remotes} R package installed:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></code></pre></div>
 <p>Use <code>install_github()</code> to install the {svDialogs} package from GitHub (source from <strong>master</strong> branch will be recompiled on your machine):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SciViews/svDialogs"</span><span class="op">)</span></code></pre></div>
-<div id="latest-stable-version" class="section level3">
-<h3 class="hasAnchor">
-<a href="#latest-stable-version" class="anchor"></a>Latest stable version</h3>
-<p>The latest stable version of <strong>svDialogs</strong> can simply be installed from <a href="http://cran.r-project.org" class="external-link">CRAN</a>:</p>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SciViews/svDialogs"</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="latest-stable-version">Latest stable version<a class="anchor" aria-label="anchor" href="#latest-stable-version"></a>
+</h3>
+<p>The latest stable version of {svDialogs} can simply be installed from <a href="http://cran.r-project.org" class="external-link">CRAN</a>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"svGUI"</span>, svDialogs<span class="st">"))</span></span></code></pre></div>
 <p>R should install all required dependencies automatically, and then it should compile and install {svDialogs}.</p>
 <p>Latest devel version of {svDialogs} (source + Windows binaries for the latest stable version of R at the time of compilation) is also available from <a href="https://ci.appveyor.com/project/phgrosjean/svDialogs/build/artifacts" class="external-link">appveyor</a>.</p>
 </div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>You can get further help about this package this way: Make the {svDialogs} package available in your R session:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/SciViews/svDialogs" class="external-link">"svDialogs"</a></span><span class="op">)</span></code></pre></div>
@@ -145,16 +144,16 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span>help <span class="op">=</span> <span class="st">"svDialogs"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="st">"svDialogs-package"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"svDialogs"</span><span class="op">)</span> <span class="co"># None is installed with install_github()</span></code></pre></div>
-<p>For further instructions, please, refer to the help pages at https://www.sciviews.org/svDialogs/.</p>
+<p>For further instructions, please, refer to the help pages at <a href="https://www.sciviews.org/svDialogs/" class="uri">https://www.sciviews.org/svDialogs/</a>.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the svDialogs project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
-<div id="note-to-developers" class="section level2">
-<h2 class="hasAnchor">
-<a href="#note-to-developers" class="anchor"></a>Note to developers</h2>
+<div class="section level2">
+<h2 id="note-to-developers">Note to developers<a class="anchor" aria-label="anchor" href="#note-to-developers"></a>
+</h2>
 <p>This package used to be developed on R-Forge in the past. However, the latest <a href="https://r-forge.r-project.org/projects/sciviews/" class="external-link">R-Forge version</a> was moved to this GitHub repository on 2018-04-02 (SVN version 569). <strong>Please, do not use R-Forge anymore for SciViews development, use this GitHub repository instead.</strong></p>
 </div>
 </div>
@@ -164,12 +163,9 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=svDialogs">https://​cloud.r-project.org/​package=svDialogs</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/SciViews/svDialogs/">https://​github.com/​SciViews/​svDialogs/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/SciViews/svDialogs/issues">https://​github.com/​SciViews/​svDialogs/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=svDialogs" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/SciViews/svDialogs/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/SciViews/svDialogs/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -177,7 +173,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></small></li>
 </ul>
 </div>
 
@@ -191,22 +187,22 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing svDialogs</a></li>
+<li><a href="authors.html#citation">Citing svDialogs</a></li>
 </ul>
 </div>
 
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Philippe Grosjean <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2694-9471" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li>Philippe Grosjean <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2694-9471" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.com/SciViews/svDialogs" class="external-link"><img src="https://travis-ci.com/SciViews/svDialogs.svg" alt="Linux build status"></a></li>
+<li><a href="https://github.com/SciViews/svDialogs/actions" class="external-link"><img src="https://github.com/SciViews/svDialogs/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://ci.appveyor.com/project/phgrosjean/svDialogs" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/SciViews/svDialogs?branch=master&amp;svg=true" alt="Win build status"></a></li>
 <li><a href="https://codecov.io/github/SciViews/svDialogs?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/SciViews/svDialogs/master.svg" alt="Coverage status"></a></li>
 <li><a href="https://cran.r-project.org/package=svDialogs" class="external-link"><img src="https://www.r-pkg.org/badges/version/svDialogs" alt="CRAN status"></a></li>
@@ -230,19 +226,19 @@
                         <!-- social icon -->
                         <ul class="list-inline">
 <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -255,23 +251,23 @@
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links">
 <li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul>
@@ -281,23 +277,23 @@
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links">
 <li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul>
@@ -324,7 +320,7 @@
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right">
 <li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul>
