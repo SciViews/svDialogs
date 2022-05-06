@@ -3,20 +3,20 @@
 \name{dlg_save}
 \alias{dlg_save}
 \alias{dlgSave}
-\alias{dlgSave.gui}
-\alias{dlgSave.textCLI}
-\alias{dlgSave.nativeGUI}
+\alias{dlg_save.gui}
+\alias{dlg_save.textCLI}
+\alias{dlg_save.nativeGUI}
 \title{Modal dialog to select a file to save to.}
 \usage{
 dlg_save(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
 dlgSave(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-\method{dlgSave}{gui}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
+\method{dlg_save}{gui}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-\method{dlgSave}{textCLI}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
+\method{dlg_save}{textCLI}(default, title, filters = dlg_filters["All", ], ..., gui = .GUI)
 
-\method{dlgSave}{nativeGUI}(
+\method{dlg_save}{nativeGUI}(
   default,
   title,
   filters = dlg_filters["All", ],

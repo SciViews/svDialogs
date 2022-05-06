@@ -1,3 +1,7 @@
+# svDialogs 1.1.0
+
+-   The methods associated with the `dlg_xxx()` functions are now also `dlg_xxx()`. Previously, they were `dlgXxxx()`, for instance, `dlg_dir()`, *versus* `dlgDir()`. This change homogenizes the methods by using snake_case everywhere. It should not impact code and packages that use these dialog boxes, since `dlgDir()` remains a valid name for the same dialog box as `dlg_dir()`.
+
 # svDialogs 1.0.3
 
 -   The `filters=` argument should be correctly handled now in `dlg_open()` & `dlg_save()` (bug corrected).

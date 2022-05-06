@@ -124,7 +124,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
     columns = columns, strip.type = strip.type))
 
   # ... and dispatch to the method
-  UseMethod("dlgForm", gui)
+  UseMethod("dlg_form", gui)
 }
 
 #' @export
@@ -133,7 +133,7 @@ dlgForm <- dlg_form # Backward compatibility
 
 #' @export
 #' @rdname dlg_form
-dlgForm.gui <- function(form, title = "Fill the form", message = NULL,
+dlg_form.gui <- function(form, title = "Fill the form", message = NULL,
 columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
@@ -146,7 +146,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
 
 #' @export
 #' @rdname dlg_form
-dlgForm.textCLI <- function(form, title = "Fill the form", message = NULL,
+dlg_form.textCLI <- function(form, title = "Fill the form", message = NULL,
 columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
@@ -201,7 +201,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
 
 #' @export
 #' @rdname dlg_form
-dlgForm.nativeGUI <- function(form, title = "Fill the form", message = NULL,
+dlg_form.nativeGUI <- function(form, title = "Fill the form", message = NULL,
 columns = 1, strip.type = TRUE, ..., gui = .GUI) {
   # The native version of the input box
   gui$setUI(widgets = "nativeGUI")
@@ -218,7 +218,7 @@ columns = 1, strip.type = TRUE, ..., gui = .GUI) {
 
   # Do we need to further dispatch?
   if (is.null(res)) {
-    NextMethod("dlgForm", gui)
+    NextMethod("dlg_form", gui)
   } else {
     gui$setUI(res = res, status = NULL)
     invisible(gui)

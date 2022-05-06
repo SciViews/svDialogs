@@ -61,7 +61,7 @@ dlg_message <- function(message, type = c("ok", "okcancel", "yesno",
   gui$setUI(args = list(message = message, type = type))
 
   # ... and dispatch to the method
-  UseMethod("dlgMessage", gui)
+  UseMethod("dlg_message", gui)
 }
 
 #' @export
@@ -91,7 +91,7 @@ okCancelBox <- ok_cancel_box # Backward compatibility
 
 #' @export
 #' @rdname dlg_message
-dlgMessage.gui <- function(message, type = c("ok", "okcancel", "yesno",
+dlg_message.gui <- function(message, type = c("ok", "okcancel", "yesno",
 "yesnocancel"), ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
@@ -104,7 +104,7 @@ dlgMessage.gui <- function(message, type = c("ok", "okcancel", "yesno",
 
 #' @export
 #' @rdname dlg_message
-dlgMessage.textCLI <- function(message, type = c("ok", "okcancel", "yesno",
+dlg_message.textCLI <- function(message, type = c("ok", "okcancel", "yesno",
 "yesnocancel"), ..., gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
@@ -130,7 +130,7 @@ dlgMessage.textCLI <- function(message, type = c("ok", "okcancel", "yesno",
 #' @inheritParams get_system
 #' @export
 #' @rdname dlg_message
-dlgMessage.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
+dlg_message.nativeGUI <- function(message, type = c("ok", "okcancel", "yesno",
 "yesnocancel"), rstudio = getOption("svDialogs.rstudio", TRUE), ...,
 gui = .GUI) {
   # The native version of the message box
@@ -148,7 +148,7 @@ gui = .GUI) {
 
   # Do we need to further dispatch?
   if (is.null(res)) {
-    NextMethod("dlgMessage", gui)
+    NextMethod("dlg_message", gui)
   } else {
     gui$setUI(res = res, status = NULL)
     invisible(gui)

@@ -53,7 +53,7 @@ gui = .GUI) {
   gui$setUI(args = list(message = message, default = default))
 
   # ... and dispatch to the method
-  UseMethod("dlgInput", gui)
+  UseMethod("dlg_input", gui)
 }
 
 #' @export
@@ -62,7 +62,7 @@ dlgInput <- dlg_input # Backward compatibility
 
 #' @export
 #' @rdname dlg_input
-dlgInput.gui <- function(message = "Enter a value", default = "", ...,
+dlg_input.gui <- function(message = "Enter a value", default = "", ...,
 gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
@@ -75,7 +75,7 @@ gui = .GUI) {
 
 #' @export
 #' @rdname dlg_input
-dlgInput.textCLI <- function(message = "Enter a value", default = "", ...,
+dlg_input.textCLI <- function(message = "Enter a value", default = "", ...,
 gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
@@ -93,7 +93,7 @@ gui = .GUI) {
 #' @inheritParams get_system
 #' @export
 #' @rdname dlg_input
-dlgInput.nativeGUI <- function(message = "Enter a value", default = "",
+dlg_input.nativeGUI <- function(message = "Enter a value", default = "",
 rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
   # The native version of the input box
   gui$setUI(widgets = "nativeGUI")
@@ -108,7 +108,7 @@ rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
 
   # Do we need to further dispatch?
   if (is.null(res)) {
-    NextMethod("dlgInput", gui)
+    NextMethod("dlg_input", gui)
   } else {
     gui$setUI(res = res, status = NULL)
     invisible(gui)

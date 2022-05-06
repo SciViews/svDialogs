@@ -3,20 +3,20 @@
 \name{dlg_input}
 \alias{dlg_input}
 \alias{dlgInput}
-\alias{dlgInput.gui}
-\alias{dlgInput.textCLI}
-\alias{dlgInput.nativeGUI}
+\alias{dlg_input.gui}
+\alias{dlg_input.textCLI}
+\alias{dlg_input.nativeGUI}
 \title{Modal dialog to input a string or a value.}
 \usage{
 dlg_input(message = "Enter a value", default = "", ..., gui = .GUI)
 
 dlgInput(message = "Enter a value", default = "", ..., gui = .GUI)
 
-\method{dlgInput}{gui}(message = "Enter a value", default = "", ..., gui = .GUI)
+\method{dlg_input}{gui}(message = "Enter a value", default = "", ..., gui = .GUI)
 
-\method{dlgInput}{textCLI}(message = "Enter a value", default = "", ..., gui = .GUI)
+\method{dlg_input}{textCLI}(message = "Enter a value", default = "", ..., gui = .GUI)
 
-\method{dlgInput}{nativeGUI}(
+\method{dlg_input}{nativeGUI}(
   message = "Enter a value",
   default = "",
   rstudio = getOption("svDialogs.rstudio", TRUE),

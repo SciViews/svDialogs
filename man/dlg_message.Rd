@@ -7,9 +7,9 @@
 \alias{msgBox}
 \alias{ok_cancel_box}
 \alias{okCancelBox}
-\alias{dlgMessage.gui}
-\alias{dlgMessage.textCLI}
-\alias{dlgMessage.nativeGUI}
+\alias{dlg_message.gui}
+\alias{dlg_message.textCLI}
+\alias{dlg_message.nativeGUI}
 \title{Display a modal message box.}
 \usage{
 dlg_message(
@@ -34,21 +34,21 @@ ok_cancel_box(message)
 
 okCancelBox(message)
 
-\method{dlgMessage}{gui}(
+\method{dlg_message}{gui}(
   message,
   type = c("ok", "okcancel", "yesno", "yesnocancel"),
   ...,
   gui = .GUI
 )
 
-\method{dlgMessage}{textCLI}(
+\method{dlg_message}{textCLI}(
   message,
   type = c("ok", "okcancel", "yesno", "yesnocancel"),
   ...,
   gui = .GUI
 )
 
-\method{dlgMessage}{nativeGUI}(
+\method{dlg_message}{nativeGUI}(
   message,
   type = c("ok", "okcancel", "yesno", "yesnocancel"),
   rstudio = getOption("svDialogs.rstudio", TRUE),

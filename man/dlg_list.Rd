@@ -3,9 +3,9 @@
 \name{dlg_list}
 \alias{dlg_list}
 \alias{dlgList}
-\alias{dlgList.gui}
-\alias{dlgList.textCLI}
-\alias{dlgList.nativeGUI}
+\alias{dlg_list.gui}
+\alias{dlg_list.textCLI}
+\alias{dlg_list.nativeGUI}
 \title{Modal dialog to select one or more items in a list.}
 \usage{
 dlg_list(
@@ -26,7 +26,7 @@ dlgList(
   gui = .GUI
 )
 
-\method{dlgList}{gui}(
+\method{dlg_list}{gui}(
   choices,
   preselect = NULL,
   multiple = FALSE,
@@ -35,7 +35,7 @@ dlgList(
   gui = .GUI
 )
 
-\method{dlgList}{textCLI}(
+\method{dlg_list}{textCLI}(
   choices,
   preselect = NULL,
   multiple = FALSE,
@@ -44,7 +44,7 @@ dlgList(
   gui = .GUI
 )
 
-\method{dlgList}{nativeGUI}(
+\method{dlg_list}{nativeGUI}(
   choices,
   preselect = NULL,
   multiple = FALSE,

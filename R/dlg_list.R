@@ -73,7 +73,7 @@ dlg_list <- function(choices, preselect = NULL, multiple = FALSE, title = NULL,
     multiple = multiple, title = title))
 
   # ... and dispatch to the method
-  UseMethod("dlgList", gui)
+  UseMethod("dlg_list", gui)
 }
 
 #' @export
@@ -82,7 +82,7 @@ dlgList <- dlg_list # Backward compatibility
 
 #' @export
 #' @rdname dlg_list
-dlgList.gui <- function(choices, preselect = NULL, multiple = FALSE,
+dlg_list.gui <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL, ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for a usable method
   # in the current context
@@ -95,7 +95,7 @@ title = NULL, ..., gui = .GUI) {
 
 #' @export
 #' @rdname dlg_list
-dlgList.textCLI <- function(choices, preselect = NULL, multiple = FALSE,
+dlg_list.textCLI <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL, ..., gui = .GUI) {
   # The pure textual version used a fallback in case no GUI could be used
   gui$setUI(widgets = "textCLI")
@@ -121,7 +121,7 @@ title = NULL, ..., gui = .GUI) {
 #' @inheritParams get_system
 #' @export
 #' @rdname dlg_list
-dlgList.nativeGUI <- function(choices, preselect = NULL, multiple = FALSE,
+dlg_list.nativeGUI <- function(choices, preselect = NULL, multiple = FALSE,
 title = NULL, rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
   # The native version of the list box
   gui$setUI(widgets = "nativeGUI")
@@ -140,7 +140,7 @@ title = NULL, rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
 
   # Do we need to further dispatch?
   if (is.null(res)) {
-    NextMethod("dlgList", gui)
+    NextMethod("dlg_list", gui)
   } else {
     gui$setUI(res = res, status = NULL)
     invisible(gui)

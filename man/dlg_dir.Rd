@@ -3,20 +3,20 @@
 \name{dlg_dir}
 \alias{dlg_dir}
 \alias{dlgDir}
-\alias{dlgDir.gui}
-\alias{dlgDir.textCLI}
-\alias{dlgDir.nativeGUI}
+\alias{dlg_dir.gui}
+\alias{dlg_dir.textCLI}
+\alias{dlg_dir.nativeGUI}
 \title{Modal dialog to select a directory.}
 \usage{
 dlg_dir(default = getwd(), title, ..., gui = .GUI)
 
 dlgDir(default = getwd(), title, ..., gui = .GUI)
 
-\method{dlgDir}{gui}(default = getwd(), title, ..., gui = .GUI)
+\method{dlg_dir}{gui}(default = getwd(), title, ..., gui = .GUI)
 
-\method{dlgDir}{textCLI}(default = getwd(), title, ..., gui = .GUI)
+\method{dlg_dir}{textCLI}(default = getwd(), title, ..., gui = .GUI)
 
-\method{dlgDir}{nativeGUI}(
+\method{dlg_dir}{nativeGUI}(
   default = getwd(),
   title,
   rstudio = getOption("svDialogs.rstudio", TRUE),

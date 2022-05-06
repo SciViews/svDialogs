@@ -3,9 +3,9 @@
 \name{dlg_form}
 \alias{dlg_form}
 \alias{dlgForm}
-\alias{dlgForm.gui}
-\alias{dlgForm.textCLI}
-\alias{dlgForm.nativeGUI}
+\alias{dlg_form.gui}
+\alias{dlg_form.textCLI}
+\alias{dlg_form.nativeGUI}
 \title{Modal dialog to fill a series of different fields.}
 \usage{
 dlg_form(
@@ -28,7 +28,7 @@ dlgForm(
   gui = .GUI
 )
 
-\method{dlgForm}{gui}(
+\method{dlg_form}{gui}(
   form,
   title = "Fill the form",
   message = NULL,
@@ -38,7 +38,7 @@ dlgForm(
   gui = .GUI
 )
 
-\method{dlgForm}{textCLI}(
+\method{dlg_form}{textCLI}(
   form,
   title = "Fill the form",
   message = NULL,
@@ -48,7 +48,7 @@ dlgForm(
   gui = .GUI
 )
 
-\method{dlgForm}{nativeGUI}(
+\method{dlg_form}{nativeGUI}(
   form,
   title = "Fill the form",
   message = NULL,

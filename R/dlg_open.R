@@ -92,7 +92,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
     multiple = multiple, filters = filters))
 
   # ... and dispatch to the method
-  UseMethod("dlgOpen", gui)
+  UseMethod("dlg_open", gui)
 }
 
 #' @export
@@ -124,7 +124,7 @@ dlgFilters <- dlg_filters # Backward compatibility
 
 #' @export
 #' @rdname dlg_open
-dlgOpen.gui <- function(default, title, multiple = FALSE,
+dlg_open.gui <- function(default, title, multiple = FALSE,
 filters = dlg_filters["All", ], ..., gui = .GUI) {
   # Used to break the chain of NextMethod(), searching for an usable method
   # in the current context
@@ -137,7 +137,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
 
 #' @export
 #' @rdname dlg_open
-dlgOpen.textCLI <- function(default, title, multiple = FALSE,
+dlg_open.textCLI <- function(default, title, multiple = FALSE,
 filters = dlg_filters["All", ], ..., gui = .GUI) {
   # The pure textual version used as fallback in case no GUI could be used
   # TODO: there is a problem with /dir/*.* => return => use it as a default
@@ -191,7 +191,7 @@ filters = dlg_filters["All", ], ..., gui = .GUI) {
 #' @inheritParams get_system
 #' @export
 #' @rdname dlg_open
-dlgOpen.nativeGUI <- function(default, title, multiple = FALSE,
+dlg_open.nativeGUI <- function(default, title, multiple = FALSE,
 filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio", TRUE),
 ..., gui = .GUI) {
   # The native version of the file open box
@@ -214,7 +214,7 @@ filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio", TRUE),
 
   # Do we need to further dispatch?
   if (is.null(res)) {
-    NextMethod("dlgOpen", gui)
+    NextMethod("dlg_open", gui)
   } else {
     gui$setUI(res = res, status = NULL)
     invisible(gui)
