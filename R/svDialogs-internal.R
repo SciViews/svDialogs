@@ -14,11 +14,7 @@
 .onUnload <- function(libpath) {
   # Clear menus
   if (interactive()) try(.menu_clear())
-}
-
-.GUI <- .GUI # The default .GUI object should be created by svGUI
-
-.packageName <- "svDialogs"  # nocov end
+} # nocov end
 
 .is_jgr <- function() "package:JGR" %in% search()
 
