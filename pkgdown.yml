@@ -3,7 +3,7 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   Standard_dialog_boxes_for_everybody: Standard_dialog_boxes_for_everybody.html
-last_built: 2022-05-06T15:05Z
+last_built: 2022-05-06T17:43Z
 urls:
   reference: https://www.sciviews.org/svDialogs/reference
   article: https://www.sciviews.org/svDialogs/articles
