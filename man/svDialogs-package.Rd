@@ -4,9 +4,9 @@
 \name{svDialogs-package}
 \alias{svDialogs}
 \alias{svDialogs-package}
-\title{svDialogs: SciViews - Standard Dialog Boxes for Windows, MacOS and Linuxes}
+\title{svDialogs: 'SciViews' - Standard Dialog Boxes for Windows, MacOS and Linuxes}
 \description{
-Rapidly construct standard dialog boxes for your GUI, including 
+Quickly construct standard dialog boxes for your GUI, including 
   message boxes, input boxes, list, file or directory selection, ... In case R
   cannot display GUI dialog boxes, a simpler command line version of these
   interactive elements is also provided as fallback solution.

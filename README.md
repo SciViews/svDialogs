@@ -1,43 +1,38 @@
 # svDialogs
 
 <!-- badges: start -->
-[![Linux build status](https://travis-ci.com/SciViews/svDialogs.svg )](https://travis-ci.com/SciViews/svDialogs)
-[![Win build status](https://ci.appveyor.com/api/projects/status/github/SciViews/svDialogs?branch=master&svg=true)](https://ci.appveyor.com/project/phgrosjean/svDialogs)
-[![Coverage status](https://img.shields.io/codecov/c/github/SciViews/svDialogs/master.svg)
-](https://codecov.io/github/SciViews/svDialogs?branch=master)
-[![CRAN status](https://www.r-pkg.org/badges/version/svDialogs)](https://cran.r-project.org/package=svDialogs)
-[![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+[![R-CMD-check](https://github.com/SciViews/svDialogs/workflows/R-CMD-check/badge.svg)](https://github.com/SciViews/svDialogs/actions) [![Win build status](https://ci.appveyor.com/api/projects/status/github/SciViews/svDialogs?branch=master&svg=true)](https://ci.appveyor.com/project/phgrosjean/svDialogs) [![Coverage status](https://img.shields.io/codecov/c/github/SciViews/svDialogs/master.svg)](https://codecov.io/github/SciViews/svDialogs?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/svDialogs)](https://cran.r-project.org/package=svDialogs) [![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
 <!-- badges: end -->
 
-With {svDialogs}, you can rapidly construct standard dialog boxes for your GUI, including message boxes, input boxes, list, file or directory selection, ... In case R cannot display GUI dialog boxes, a simpler command line version of these interactive elements is provided as fallback solution (E;G., in a terminal session).
+With {svDialogs}, you can rapidly construct standard dialog boxes for your GUI, including message boxes, input boxes, list, file or directory selection, ... In case R cannot display GUI dialog boxes, a simpler command line version of these interactive elements is provided as fallback solution (e.g., in a terminal session).
 
 ## Installation
 
 You can install the released version of {svDialogs} from [CRAN](https://CRAN.R-project.org) with:
 
-```r
+``` r
 install.packages("svDialogs")
 ```
 
-You can also install the latest developement version. Make sure you have the {devtools} R package installed:
+You can also install the latest development version. Make sure you have the {remotes} R package installed:
 
-```r
-install.packages("devtools")
+``` r
+install.packages("remotes")
 ```
 
 Use `install_github()` to install the {svDialogs} package from GitHub (source from **master** branch will be recompiled on your machine):
 
-```r
-devtools::install_github("SciViews/svDialogs")
+``` r
+remotes::install_github("SciViews/svDialogs")
 ```
-
 
 ### Latest stable version
 
-The latest stable version of **svDialogs** can simply be installed from [CRAN](http://cran.r-project.org):
+The latest stable version of {svDialogs} can simply be installed from [CRAN](http://cran.r-project.org):
 
-```r
+``` r
 install.packages(c("svGUI", svDialogs"))
 ```
 
@@ -49,19 +44,19 @@ Latest devel version of {svDialogs} (source + Windows binaries for the latest st
 
 You can get further help about this package this way: Make the {svDialogs} package available in your R session:
 
-```r
+``` r
 library("svDialogs")
 ```
 
 Get help about this package:
 
-```r
+``` r
 library(help = "svDialogs")
 help("svDialogs-package")
 vignette("svDialogs") # None is installed with install_github()
 ```
 
-For further instructions, please, refer to the help pages at https://www.sciviews.org/svDialogs/.
+For further instructions, please, refer to the help pages at <https://www.sciviews.org/svDialogs/>.
 
 ## Code of Conduct
 

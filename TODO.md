@@ -1,27 +1,29 @@
 # svDialogs To Do list
 
-- The \n and \t in menu commands result into n or t, not \n or \t in xvkbd cmd.
+-   In GitHub actions, reimplement the travis after_success: Rscript -e 'covr::codecov()'
 
-- Create as many tests (testthat) as possible, given most of the code is supposed to be used interactively, and thus, is not (easily) testable automatically.
+-   The \n and \t in menu commands result into n or t, not \n or \t in xvkbd cmd.
 
-- A complete vignette, with rationate, explanation of mechanism to dispatch dialog boxes, example of input dialog box on all supported platforms, and further explanation for all supported dialog boxes.
+-   Create as many tests (testthat) as possible, given most of the code is supposed to be used interactively, and thus, is not (easily) testable automatically.
 
-- Reexpose useful svGUI functions.
+-   A complete vignette, with rationate, explanation of mechanism to dispatch dialog boxes, example of input dialog box on all supported platforms, and further explanation for all supported dialog boxes.
 
-- Find a solution for `dlg_open(multiple = TRUE)` on RStudio (not supported yet).
+-   Reexpose useful svGUI functions.
 
-- Find a better solution for textual `dlg_open(multiple = TRUE)`: allow for globbing and for folder indication followed by a list selector of files in that directory that match filters.
+-   Find a solution for `dlg_open(multiple = TRUE)` on RStudio (not supported yet).
 
-- Find a better solution for `dlg_message(type = "yesnocancel")` on RStudio (since I can only display two button, we first ask 'yes'/'no', then ask to confirm). This is the same with zenity, but since yad is advised on Linux, we don't care much.
+-   Find a better solution for textual `dlg_open(multiple = TRUE)`: allow for globbing and for folder indication followed by a list selector of files in that directory that match filters.
 
-- Menus for MacOS, RStudio, and RTerm.exe under Windows.
+-   Find a better solution for `dlg_message(type = "yesnocancel")` on RStudio (since I can only display two button, we first ask 'yes'/'no', then ask to confirm). This is the same with zenity, but since yad is advised on Linux, we don't care much.
 
-- `dlg_form()` for MacOS, Windows and RStudio, as well as, a better text version.
+-   Menus for MacOS, RStudio, and RTerm.exe under Windows.
 
-- For MacOS one can also use:
-  - osascript -e 'tell application "Terminal" to choose color default color
-  {12, 56, 78}' # Warning: 0-65535!
+-   `dlg_form()` for MacOS, Windows and RStudio, as well as, a better text version.
 
-- rstudioapi provides `askForPassword()` => implement it, including other versions (use a yad form in Linux).
+-   For MacOS one can also use:
 
-- Translation into different languages.
+    -   osascript -e 'tell application "Terminal" to choose color default color {12, 56, 78}' \# Warning: 0-65535!
+
+-   rstudioapi provides `askForPassword()` =\> implement it, including other versions (use a yad form in Linux).
+
+-   Translation into different languages.

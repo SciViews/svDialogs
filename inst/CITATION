@@ -1,22 +1,23 @@
-citHeader("To cite SciViews-R in publications, please use:")
+citHeader("To cite SciViews-R in publications use:")
 
-citEntry(entry="Manual",
-         title = "SciViews-R",
-         author = personList(as.person("Philippe Grosjean")),
-         organization = "UMONS",
-         address      = "MONS, Belgium",
-         year         = version$year,
-         url          = "https://www.sciviews.org/SciViews-R/",
+citEntry(
+  entry        = "Manual",
+  title        = "SciViews::R",
+  author       = personList(as.person("Philippe Grosjean")),
+  organization = "UMONS",
+  address      = "MONS, Belgium",
+  year         = version$year,
+  url          = "https://sciviews.r-universe.dev/",
 
-         textVersion =
-         paste("Grosjean, Ph. (", version$year, "). ",
-               "SciViews-R. ",
-               "UMONS, Mons, Belgium. ",
-               "URL https://www.sciviews.org/SciViews-R/.",
-               sep = "")
-         )
+  textVersion =
+    paste("Grosjean, Ph. (", version$year, "). ",
+      "SciViews::R. ",
+      "UMONS, Mons, Belgium. ",
+      "URL https://sciviews.r-universe.dev/.",
+      sep = "")
+)
 
 citFooter("We have invested a lot of time and effort in creating SciViews-R,",
-    "please cite it when using it together with R.",
-	"See also", sQuote("citation()"),
-	"for citing R.")
+  "please cite it when using it together with R.",
+  "See also", sQuote("citation()"),
+  "for citing R.")
