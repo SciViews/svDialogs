@@ -11,9 +11,9 @@
 \alias{dlg_open.nativeGUI}
 \title{Modal dialog to select a file.}
 \format{
-An object of class \code{matrix} (inherits from \code{array}) with 11 rows and 2 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 22 rows and 2 columns.
 
-An object of class \code{matrix} (inherits from \code{array}) with 11 rows and 2 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 22 rows and 2 columns.
 }
 \usage{
 dlg_open(

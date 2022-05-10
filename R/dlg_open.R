@@ -96,7 +96,7 @@ dlgOpen <- dlg_open # Backward compatibility
 #' @rdname dlg_open
 # Default filters for dlg_open() and dlg_save() boxes
 dlg_filters <- matrix(c(
-  "R or S files (*.R,*.q,*.ssc,*.S)", "*.R;*.q;*.ssc;*.S",
+  "R files (*.R)", "*.R",
   "Enhanced metafiles (*.emf)","*.emf",
   "Postscript files (*.ps)", "*.ps",
   "PDF files (*.pdf)", "*.pdf",
@@ -105,11 +105,23 @@ dlg_filters <- matrix(c(
   "Jpeg files (*.jpeg,*.jpg)", "*.jpeg;*.jpg",
   "Text files (*.txt)", "*.txt",
   "R images (*.RData,*.rda)", "*.RData;*.rda",
+  "R objects (*.rds)", "*.rds",
+  "R Markdown (*.Rmd)", "*.Rmd",
+  "Markdown (*.md)", "*.md",
+  "LaTeX files (*.tex)", "*.tex",
+  "CSV files (*.csv)", "*.csv",
+  "TSV files (*.tsv)", "*.tsv",
+  "Excel files (*.xlsx,*.xls)", "*.xlsx;*.xls",
+  "C files (*.c)", "*.c",
+  "Python files (*.py)", "*.py",
+  "YAML files (*.yml)", "*.yml",
   "Zip files (*.zip)", "*.zip",
+  "Tar-gz files (*.tar.gz)", "*.tar.gz",
   "All files (*.*)", "*.*" ), ncol = 2, byrow = TRUE)
 
 rownames(dlg_filters) <- c("R", "emf", "ps", "pdf", "png", "bmp", "jpeg",
-  "txt", "RData", "zip", "All")
+  "txt", "RData", "rds", "Rmd", "md", "tex", "csv", "tsv", "xls", "c", "py",
+  "yaml", "zip", "tar.gz", "All")
 
 #' @export
 #' @rdname dlg_open
@@ -238,7 +250,7 @@ filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio", TRUE),
     }
   } else {# Single file
     res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Open", existing = TRUE, filter = filters)
+      label = "Open", existing = TRUE) #, filter = filters) # Does not work: filters are specified differently in RStudio!
   }
   if (is.null(res) || res == "") {
     res <- character(0)
