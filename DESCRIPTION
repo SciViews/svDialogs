@@ -1,28 +1,39 @@
 Package: svDialogs
 Type: Package
-Version: 1.1.0
-Date: 2022-05-06
-Title: 'SciViews' - Standard Dialog Boxes for Windows, MacOS and Linuxes
+Version: 1.1.1
+Title: 'SciViews::R' - Standard Dialog Boxes for Windows, MacOS and Linuxes
 Description: Quickly construct standard dialog boxes for your GUI, including 
   message boxes, input boxes, list, file or directory selection, ... In case R
   cannot display GUI dialog boxes, a simpler command line version of these
   interactive elements is also provided as fallback solution.
 Authors@R: c(
   person("Philippe", "Grosjean", role = c("aut", "cre"),
-  email = "phgrosjean@sciviews.org",
-  comment = c(ORCID = "0000-0002-2694-9471")),
+    email = "phgrosjean@sciviews.org",
+    comment = c(ORCID = "0000-0002-2694-9471")),
   person("Paul", "Hibbins", role = "ctb",
-  email = "paulhibbing@gmail.com"))
+    email = "paulhibbing@gmail.com"))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
-Depends: R (>= 2.6.0)
-Imports: svGUI (>= 1.0.0), utils, methods, rstudioapi (>= 0.7)
-Suggests: covr, rmarkdown, knitr, testthat, spelling
+Depends:
+    R (>= 2.6.0)
+Imports:
+    methods (>= 2.6.0),
+    rstudioapi (>= 0.7),
+    svGUI (>= 1.0.0),
+    utils (>= 2.6.0)
+Suggests:
+    covr (>= 3.5.0),
+    knitr (>= 1.42),
+    rmarkdown (>= 2.21),
+    spelling (>= 2.2.1),
+    testthat (>= 3.0.0)
 SystemRequirements: zenity, yad
 License: GPL-2
-URL: https://github.com/SciViews/svDialogs, https://www.sciviews.org/svDialogs/
+URL: https://github.com/SciViews/svDialogs, https://www.sciviews.org/svDialogs/, https://sciviews.r-universe.dev/svDialogs
 BugReports: https://github.com/SciViews/svDialogs/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
+ByteCompile: yes
+Config/testthat/edition: 3

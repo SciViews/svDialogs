@@ -1,21 +1,20 @@
 ---
-title: "svDialogs - Standard dialog boxes for everybody"
+title: "'SciViews::R' - Standard Dialog Boxes for Windows, MacOS and Linuxes"
 author: "Philippe Grosjean(phgrosjean@sciviews.org)"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
     fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{svDialogs - Standard dialog boxes for everybody}
+  %\VignetteIndexEntry{'SciViews::R' - Standard Dialog Boxes for Windows, MacOS and Linuxes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
 Simple modal dialog boxes are available in R, but they are not implemented on all platforms the same way. In {svDialogs}, we provide functions that operate consistently through all the platforms supported by R, and a fallback mechanisms is also implemented in case no GUI is available (question or menu selection in a textual terminal window).

@@ -7,9 +7,9 @@ development:
 
 template:
   package: svPkgdown
-params:
-  bootswatch: spacelab
-mathjax: true
+  params:
+    bootswatch: spacelab
+    mathjax: true
 
 toc:
   depth: 3

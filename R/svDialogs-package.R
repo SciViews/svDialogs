@@ -1,4 +1,5 @@
-#' @details
+#' 'SciViews::R' - Standard Dialog Boxes for Windows, MacOS and Linuxes
+#'
 #' The dialog box function dispatch to specific dialog boxes depending on the OS
 #' and whether a GUI can be displayed or not.
 #'
@@ -20,16 +21,14 @@
 #' GtkDialog mapped without a transient parent. This is discouraged." You do not
 #' get these inconveniences if you use 'yad' (default choice in case both
 #' programs are installed simultaneously).
-#'
-#' @keywords internal
-"_PACKAGE"
 
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
-## usethis namespace: end
 #' @import utils
 #' @importFrom methods as
 #' @import rstudioapi
 #' @import svGUI
-NULL
+## usethis namespace: end
+
+"_PACKAGE"

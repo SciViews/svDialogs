@@ -4,14 +4,8 @@
 \name{svDialogs-package}
 \alias{svDialogs}
 \alias{svDialogs-package}
-\title{svDialogs: 'SciViews' - Standard Dialog Boxes for Windows, MacOS and Linuxes}
+\title{'SciViews::R' - Standard Dialog Boxes for Windows, MacOS and Linuxes}
 \description{
-Quickly construct standard dialog boxes for your GUI, including 
-  message boxes, input boxes, list, file or directory selection, ... In case R
-  cannot display GUI dialog boxes, a simpler command line version of these
-  interactive elements is also provided as fallback solution.
-}
-\details{
 The dialog box function dispatch to specific dialog boxes depending on the OS
 and whether a GUI can be displayed or not.
 }
@@ -43,6 +37,7 @@ Useful links:
 \itemize{
   \item \url{https://github.com/SciViews/svDialogs}
   \item \url{https://www.sciviews.org/svDialogs/}
+  \item \url{https://sciviews.r-universe.dev/svDialogs}
   \item Report bugs at \url{https://github.com/SciViews/svDialogs/issues}
 }
 
@@ -56,4 +51,3 @@ Other contributors:
 }
 
 }
-\keyword{internal}

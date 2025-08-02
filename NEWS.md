@@ -1,3 +1,7 @@
+# svDialogs 1.1.1
+
+-   Updated CITATION file to the new format.
+
 # svDialogs 1.1.0
 
 -   `dlg_filters()` now propose more file types.
