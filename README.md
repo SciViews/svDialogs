@@ -9,6 +9,8 @@
 [![codecov](https://codecov.io/gh/SciViews/svDialogs/graph/badge.svg?token=0d0w6SgDxq)](https://codecov.io/gh/SciViews/svDialogs)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/svDialogs)](https://cran.r-project.org/package=svDialogs)
+[![r-universe
+status](https://sciviews.r-universe.dev/badges/svDialogs)](https://sciviews.r-universe.dev/svDialogs)
 [![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
