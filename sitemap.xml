@@ -1,63 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/404.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/TODO.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/articles/Standard_dialog_boxes_for_everybody.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_dir.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_form.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_input.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_list.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_message.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_open.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/dlg_save.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/get_system.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/menu.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/svDialogs/reference/svDialogs-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://www.sciviews.org/svDialogs/404.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/LICENSE.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/TODO.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/articles/index.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/articles/svDialogs.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/authors.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/index.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/news/index.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_dir.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_form.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_input.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_list.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_message.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_open.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/dlg_save.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/get_system.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/index.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/menu.html</loc></url>
+<url><loc>https://www.sciviews.org/svDialogs/reference/svDialogs-package.html</loc></url>
 </urlset>
+
