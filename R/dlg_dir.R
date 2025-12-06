@@ -129,7 +129,14 @@ rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
 
 # RStudio version
 .rstudio_dlg_dir <- function(default = getwd(), title = "") {
-  res <- rstudioapi::selectDirectory(caption = title, path = default)
+  # Positron current (2025-11-06) fools rstudioapi, and it is recognized
+  # as RStudio (desktop). However, it does not implements
+  # rstudioapi::selectDirectory()
+  # Catch the error, and move to next implementation
+  res <- try(rstudioapi::selectDirectory(caption = title, path = default),
+    silent = TRUE)
+  if (inherits(res, "try-error"))
+    return(NULL)
   if (is.null(res)) {
     res <- character(0)
   } else{
@@ -140,13 +147,13 @@ rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
 
 # Windows version
 .win_dlg_dir <- function(default = getwd(), title = "") {
-	res <- choose.dir(default = default, caption = title)
+  res <- choose.dir(default = default, caption = title)
   if (is.na(res)) {
     res <- character(0)
   } else {
     res <-  path.expand(gsub("\\\\", "/", res))
   }
-	res
+  res
 }
 
 # MacOS version

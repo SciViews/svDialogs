@@ -249,10 +249,17 @@ filters = dlg_filters["All", ], rstudio = getOption("svDialogs.rstudio", TRUE),
         label = "Open", existing = TRUE)
     }
   } else {# Single file
-    res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Open", existing = TRUE) #, filter = filters) # Does not work: filters are specified differently in RStudio!
+    # Positron current (2025-11-06) fools rstudioapi, and it is recognized
+    # as RStudio (desktop). However, it does not implements
+    # rstudioapi::selectDirectory()
+    # Catch the error, and move to next implementation
+    res <- try(rstudioapi::selectFile(caption = title, path = default,
+      label = "Open", existing = TRUE), #, filter = filters) # Does not work: filters are specified differently in RStudio!
+      silent = TRUE)
+    if (inherits(res, "try-error"))
+      return(NULL)
   }
-  if (is.null(res) || res == "") {
+  if (is.null(res) || (length(res) == 1L && res == "")) {
     res <- character(0)
   } else{
     res <-  path.expand(gsub("\\\\", "/", res))

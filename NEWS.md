@@ -1,3 +1,7 @@
+# svDialogs 1.1.2
+
+-   Made compatible with Positron as much as possible (many RStudio dialog boxes are NOT implemented in Positron, resulting in a fallback to the console text version).
+
 # svDialogs 1.1.1
 
 -   Updated CITATION file to the new format.

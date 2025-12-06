@@ -119,8 +119,14 @@ rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
 .rstudio_dlg_input <- function(message, default) {
   if (rstudioapi::getVersion() < '1.1.67')
     return(NULL)
-  res <- rstudioapi::showPrompt(title = "R prompt", message = message,
-    default = default)
+  # Positron current (2025-11-06) fools rstudioapi, and it is recognized
+  # as RStudio (desktop). However, it does not implements
+  # rstudioapi::selectDirectory()
+  # Catch the error, and move to next implementation
+  res <- try(rstudioapi::showPrompt(title = "R prompt", message = message,
+    default = default), silent = TRUE)
+  if (inherits(res, "try-error"))
+    return(NULL)
   if (is.null(res)) {
     character(0)
   } else{

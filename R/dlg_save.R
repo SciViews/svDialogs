@@ -166,10 +166,18 @@ rstudio = getOption("svDialogs.rstudio", TRUE), ..., gui = .GUI) {
   title = "", filters = dlg_filters["All", ]) {
   if (rstudioapi::getVersion() < '1.1.287')
     return(NULL)
+  # Positron current (2025-11-06) fools rstudioapi, and it is recognized
+  # as RStudio (desktop). However, it does not implements
+  # rstudioapi::selectDirectory()
+  # Catch the error, and move to next implementation
+
   # I don't understand how filter is used in selectFile(). So, I prefer **not**
   # to use it for now!
-  res <- rstudioapi::selectFile(caption = title, path = default,
-      label = "Save", existing = FALSE) #, filter = filters) # Filter implemented differently on RStudio
+  res <- try(rstudioapi::selectFile(caption = title, path = default,
+      label = "Save", existing = FALSE), #, filter = filters) # Filter implemented differently on RStudio
+    silent = TRUE)
+  if (inherits(res, "try-error"))
+    return(NULL)
   if (is.null(res)) {
     res <- character(0)
   } else{

@@ -22,6 +22,12 @@
 
 .is_rstudio_desktop <- function() rstudioapi::versionInfo()$mode == "desktop"
 
+# Positron fools rstudioapi, letting it beleive it is RStudio
+# This trick is the only one I found to get Positron from rstudioapi
+# (but one could also seach for "tools:positron" on the search path)
+.is_positron <- function()
+  grepl("Positron", rstudioapi::versionInfo()$citation, fixed = TRUE)
+
 # With yad or zenity, I cannot have double quotes inside strings: escape them
 .escape_quotes <- function(str) {
   # For yad messages, we need to escape double quotes **inside** messages

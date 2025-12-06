@@ -1,6 +1,6 @@
 Package: svDialogs
 Type: Package
-Version: 1.1.1
+Version: 1.1.2
 Title: 'SciViews::R' - Standard Dialog Boxes for Windows, MacOS and Linuxes
 Description: Quickly construct standard dialog boxes for your GUI, including 
   message boxes, input boxes, list, file or directory selection, ... In case R
